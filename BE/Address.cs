@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Class1
+    struct Adress//struct that describes an address
     {
+        string _StreetName;
+        int _HouseNum;
+        string _CityName;
     }
 }
