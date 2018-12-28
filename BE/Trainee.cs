@@ -19,7 +19,7 @@ namespace BE
         public string _typeOfGearbox { get; set; }
         public string _schoolName { get; set; }
         public string _myTesterName { get; set; }
-        public string _countDrivingLessons { get; set; }
+        public string _passedTestsCount { get; set; }
         // more Additional features as needed
         //-----------------------------------
         // doing ovverload for ToString
