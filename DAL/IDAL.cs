@@ -7,7 +7,7 @@ using BE;
 
 namespace DAL
 {
-    public interface IDAL<T>
+    public interface IDAL
     {
         #region Tester functions (add, remove, update)
         void addTester(Tester tester);
@@ -28,9 +28,9 @@ namespace DAL
         #endregion
 
         #region Get lists (Testers, Trainees, Tests)
-        List<Tester> getTesters();
-        List<Trainee> getTrainee();
-        List<Test> getTest();
+        List<Tester> getTestersList();
+        List<Trainee> getTraineeList();
+        List<Test> getTestList();
         #endregion
 
     }
