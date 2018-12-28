@@ -27,7 +27,10 @@ namespace DAL
         void updateTest(Test test);
         #endregion
 
-        #region Get lists (Testers, Trainees, Tests)
+        #region Get lists
+        List<Tester> getTesters() {};
+        List<Trainee> geTrainee() { };
+        List<Test> getTest() { };
 
         #endregion
 
