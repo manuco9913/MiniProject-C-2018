@@ -18,7 +18,10 @@ namespace BE
         public string _experienceYears { get; set; }
         public string _maximumTestsPerWeek { get; set; }
         public string _whichCarUses { get; set; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38a33673b3fc3e9f0dfac0fafebcf0e941e4f2a1
 
     }
 }
