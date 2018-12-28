@@ -27,11 +27,18 @@ namespace DAL
         void updateTest(Test test);
         #endregion
 
+<<<<<<< HEAD
         #region Get lists
         List<Tester> getTesters() {};
         List<Trainee> geTrainee() { };
         List<Test> getTest() { };
 
+=======
+        #region Get lists (Testers, Trainees, Tests)
+        List<Tester> getTesters();
+        List<Trainee> getTrainee();
+        List<Test> getTest();
+>>>>>>> 6937037c5e10b511597d3e9c4cefd0e8135f0447
         #endregion
 
     }
