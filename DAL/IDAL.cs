@@ -28,7 +28,9 @@ namespace DAL
         #endregion
 
         #region Get lists (Testers, Trainees, Tests)
-
+        List<Tester> getTesters();
+        List<Trainee> getTrainee();
+        List<Test> getTest();
         #endregion
 
     }
