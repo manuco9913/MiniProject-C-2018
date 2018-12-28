@@ -20,10 +20,6 @@ namespace BE
         public string _schoolName { get; set; }
         public string _myTesterName { get; set; }
         public int _lessonsCount { get; set; }
-        // more Additional features as needed
-        //-----------------------------------
-        // doing ovverload for ToString
-
 
     }
 }
