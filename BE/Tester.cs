@@ -15,13 +15,19 @@ namespace BE
         public string _gender { get; set; }
         public string _phoneNum { get; set; }
         public string _address { get; set; }
-        public string _experienceYears { get; set; }
-        public string _maximumTestsPerWeek { get; set; }
+        public int _experienceYears { get; set; }
+        public int _maximumTestsPerWeek { get; set; }
         public string _whichCarUses { get; set; }
-<<<<<<< HEAD
-
-=======
->>>>>>> 38a33673b3fc3e9f0dfac0fafebcf0e941e4f2a1
+        public string _maxDistanceFromHome { get; set; }
+        //public string this[int x, int y]
+        //{
+        //    get { return this[x, y]; }
+        //    set { this[x, y] = value; }
+        //}
+        public override string ToString()
+        {
+            return _lastName + _firstName;
+        }
 
     }
 }

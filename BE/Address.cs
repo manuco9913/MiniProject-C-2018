@@ -7,8 +7,8 @@ namespace BE
 {
     struct Adress//struct that describes an address
     {
-        string _StreetName;
-        int _HouseNum;
-        string _CityName;
+        string _streetName;
+        int _houseNum;
+        string _cityName;
     }
 }
