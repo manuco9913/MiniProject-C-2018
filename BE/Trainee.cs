@@ -20,6 +20,16 @@ namespace BE
         public SchoolName _schoolName { get; set; }
         public string _myTesterName { get; set; }
         public int _lessonsCount { get; set; }
+        /* more prop as needed
+        {
+
+        }
+        */
+        public override string ToString() //need change this ToString
+        {
+            return _lastName + _firstName;
+        }
+
 
     }
 }

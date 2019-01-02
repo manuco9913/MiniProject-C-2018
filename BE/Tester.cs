@@ -18,6 +18,7 @@ namespace BE
         public int _experienceYears { get; set; }
         public int _maximumTestsPerWeek { get; set; }
         public TypeOfVehicle _whichCarUses { get; set; }
+        
         public string _maxDistanceFromHome { get; set; }
         //public string this[int x, int y]
         //{

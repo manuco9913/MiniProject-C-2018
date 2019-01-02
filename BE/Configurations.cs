@@ -12,6 +12,7 @@ namespace BE
         public static int _maximumTesterAge = 40;
         public static int _minimumTraineeAge = 18;
         public static int _minimumTimeBetweenTests = 7;
+        public static int _countTests=0;// מספר מזהה רץ עבור ה"ישות" מבחן
     }
 
 }

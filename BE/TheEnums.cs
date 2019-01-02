@@ -11,5 +11,5 @@ namespace BE
     public enum Gender { F, M }
     public enum GearBoxType { MANUAL, AUTOMATIC }
     public enum SchoolName { OZ, OR_YAROK, MAOF, RAMZOR, YUVALI, SCHREIBER }//שמות טמיתיים של בתי ספר לנהיגה
-
+    
 }
