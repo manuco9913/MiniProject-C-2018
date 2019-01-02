@@ -10,26 +10,26 @@ namespace BL
     public interface IBL
     {
         //--------------------------------------------checking functions---------------------------------------------------------------
-        bool check_TesterAge(Tester tester); 
-        bool check_TraineeAge(Trainee trainee);
-        bool check_PossibleAddTest(Trainee trainee ); //not possible to add test before pass 7 days from the last test , if there was one at all
-        bool check_LessonsCount(Trainee trainee); // not possible add a test if no examiner is available for this date, and even if the examiner is available on the same day, he must ensure that he does not have another test at the same time. if the system not found tester she give to student currect option
-        bool check_AddTest(Tester tester); // can add the tester just if he can, need check his calender
-        bool check_AddTesterToTest(Tester tester);
-        bool check_UpdateTest(Tester tester);//If the Tester did not fill all fields then the test could not be updated
+        bool check_TesterAge(Tester tester); //not possible to add a tester under 40 years old
+        bool check_TraineeAge(Trainee trainee);//not possible to add a trainee if under 18 years old
+        bool check_PossibleAddTest(Trainee trainee ); //not possible to add a test if 7 days didn't pass since the last one (if there ose one at all)
+        bool check_LessonsCount(Trainee trainee);//not possible to add a test if the trainee took less than 20 lessons
+        bool check_AddTest(Test test);  // not possible to add a test if no examiner is available for this date and time, and if he is, we must ensure that he does not have another test at the same time. if the system does not find an available tester, it gives the possible options to the student
+        bool check_AddTesterToTest(Tester tester);// not posssible to add a tester to the tes if he's not available
+        bool check_UpdateTest(Tester tester);//not possible to update a tes if the Tester did not fill all the fields
         bool check_SameHourTest(Test test);// if the tester/Trainee have a test in the same hour -> return true
-        bool check__finalGradeExists(Test test); //if the trainee already PASSED test -> return true , we need to ask if !check_FinalGrade...
-        bool check_IfSameVehicle(Tester tester, Trainee trainee);// if whice_car_uses is same in the tester and trainee -> return true
+        bool check_finalGradeExists(Test test); //if the trainee already PASSED the test -> return true; we need to ask if !check_FinalGrade...
+        bool check_IfSameVehicle(Tester tester, Trainee trainee);// checking if the trainee and the tester use the same type of vehicle; if whice_car_uses is the same in the tester and trainee -> return true
 
 
-        /*-------------------------------------FUNCTION----------------------------------------------------------------------------------*/
+        /*-----------------------------------------------FUNCTIONS---------------------------------------------------------------------------*/
 
-        List<Tester> testersAroundMe(string address);//funcs get address and returns all the Testers that live near it.
-        List<Tester> available_HoursOfTesters(string date);//check if tester work in this hour/date and if he Available in this hour/date.
-        List<Test> IfTest_returnTest(Predicate<Test> checkFunc);//function that checks if Tests Satisfy the condition
-        int numOfTests(Trainee trainee);//function get trainee and return num of test that he took.
-        bool passTheTest(Trainee trainee); // if trainee pass the test -> return true
-        List<Test> allTestTime(List<Test> testsList);//tests list it mean getTestList from IDAL
+        List<Tester> testersAroundMe(string address);//the function returns all the Testers that live near the address specified.
+        List<Tester> available_HoursOfTesters(string date);//check if the tester works in this hour/date and if he's Available in this hour/date.
+        List<Test> checkTestConditions(Predicate<Test> checkFunc);//function that checks if the Tests Satisfies the predicate condition
+        int numOfTests(Trainee trainee);//function that returns the number of tests that the trainee took.
+        bool passTheTest(Trainee trainee); // if the trainee passed the test -> return true
+        List<Test> getAllTestsTime(List<Test> testsList);//testsList it's the getTestList from IDAL
 
 
 
