@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EECB4B1B-5994-44FF-93D1-6F010ADC5BA3}</ProjectGuid>
+    <ProjectGuid>{DFA33432-0840-49DA-941F-9AACA2FCDD2C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BL</RootNamespace>
     <AssemblyName>BL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,18 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dept_BL.cs" />
+    <Compile Include="FactorySingletonBL.cs" />
     <Compile Include="IBL.cs" />
-    <Compile Include="IBL_function.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">
-      <Project>{05f293fc-1a5c-432c-9e5c-71147a5f810e}</Project>
+      <Project>{cf0a7303-fa2f-4b42-95e4-adc078e33749}</Project>
       <Name>BE</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{cda0d7d2-0145-4e27-91a4-bb0217d7d943}</Project>
+      <Project>{fe58a76f-1696-4b03-ac86-81056b6879d3}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\whatchamacallit\ToolsExtentions.csproj">
+      <Project>{65bbdbe6-cb2b-4c38-9118-b6772282c941}</Project>
+      <Name>ToolsExtentions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,16 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
-using Tools;
 
 namespace DAL
 {
-    internal class Dal_imp : Idal
+    class DummyDal : Idal
     {
-        public Dal_imp()
-        {
-            DS.DataSource.init();
-        }
         public bool AddDrivingTest(DrivingTest drivingTest)
         {
             DS.DataSource.DrivingtestsList.Add(drivingTest.Clone());
@@ -22,15 +17,7 @@ namespace DAL
 
         public bool AddTester(Tester tester)
         {
-            foreach (Tester item in DS.DataSource.TestersList)
-            {
-                if(item.ID == tester.ID)
-                {
-                    throw new Exception("Tester already exist");
-                 //   return false;
-                }
-            }
-            DS.DataSource.TestersList.Add(tester.Clone());
+            //  DS.DataSource.TestersList.Add(tester.Clone());
             return true;
         }
 
@@ -46,31 +33,17 @@ namespace DAL
 
         public List<Tester> GetTesters()
         {
-            // return
-            //(from item in DS.DataSource.TestersList
-            // select item.Clone()
-            //).ToList();
-                      
-            return DS.DataSource.TestersList.Select(item => item.Clone()).ToList();
+            return DS.DataSource.TestersList.ToList();
         }
-        // do not use Predicate<T> with Linq, instead use Func<T,bool>
-        // public List<Trainee> GetTrainees(Predicate<Trainee> p =null) 
-        public List<Trainee> GetTrainees(Func<Trainee,bool> p = null)
+
+        public List<Trainee> GetTrainees(Predicate<Trainee> p = null)
         {
-            IEnumerable<Trainee> result = null;
-           
-            if(p !=null)
-            {
-                result = from t in DS.DataSource.TraineesList
-                         where (p(t))
-                        select t.Clone();
-            }
-            else
-            {
-            result = from t in DS.DataSource.TraineesList
-                        select t.Clone();
-            }
-            return result.ToList();
+            throw new NotImplementedException();
+        }
+
+        public List<Trainee> GetTrainees(Func<Trainee, bool> p)
+        {
+            throw new NotImplementedException();
         }
 
         public bool RemoveDrivingTest(DrivingTest drivingTest)

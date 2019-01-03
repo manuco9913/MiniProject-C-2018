@@ -1,39 +1,28 @@
-﻿using System;
+﻿using BE;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BE;
-
 
 namespace DAL
 {
-    public interface IDAL
+    public interface Idal
     {
-        #region Tester functions (add, remove, update)
-        void addTester(Tester tester);
-        void removeTester(Tester tester);
-        void updateTester(Tester tester);
-        //Tester getTester(?);
-        #endregion
+        bool AddTester   (Tester tester);
+        bool RemoveTester(Tester tester);
+        bool UpdateTester(Tester tester);
 
-        #region Trainee functions (add, remove, update)
-        void addTrainee(Trainee trainee);
-        void removeTrainee(Trainee trainee);
-        void updateTrainee(Trainee trainee);
-        #endregion
+        bool AddTrainee(Trainee trainee);
+        bool RemoveTrainee(Trainee trainee);
+        bool UpdateTrainee(Trainee trainee);
 
-        #region Test functions (add, update)
-        void addTest(Test test);
-        void updateTest(Test test);
-        #endregion
+        bool AddDrivingTest(DrivingTest drivingTest);
+        bool RemoveDrivingTest(DrivingTest drivingTest);
+        bool UpdateDrivingTest(DrivingTest drivingTest);
 
-        #region Get lists (Testers, Trainees, Tests)
-        List<Tester> getTestersList();
-        List<Trainee> getTraineeList();
-        List<Test> getTestList();
-        #endregion
-
+        List<Tester> GetTesters();
+        List<Trainee> GetTrainees(Func<Trainee,bool> p);
+        List<DrivingTest> GetDrivingTests();
     }
 }
-

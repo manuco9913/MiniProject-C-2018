@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Testers>
+  <Tester xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>1111</ID>
+    <Name>
+      <FirstName>jojo</FirstName>
+      <LastName>chalass</LastName>
+    </Name>
+    <DayOfBirth>1974-01-03T01:11:59.1927735+02:00</DayOfBirth>
+    <Gender>MALE</Gender>
+    <Address>
+      <StreetName>havvad haleumi</StreetName>
+      <Number>21</Number>
+      <City>Jerusalem</City>
+    </Address>
+    <Luz>
+      <Data>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+      </Data>
+    </Luz>
+    <Expertise>Truck_Heavy</Expertise>
+    <Experience>10</Experience>
+    <MaxTestWeekly>1</MaxTestWeekly>
+    <MaxDistance>2</MaxDistance>
+  </Tester>
+</Testers>

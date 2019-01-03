@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CDA0D7D2-0145-4E27-91A4-BB0217D7D943}</ProjectGuid>
+    <ProjectGuid>{FE58A76F-1696-4B03-AC86-81056B6879D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DAL</RootNamespace>
     <AssemblyName>DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,18 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BE_Extentions.cs" />
     <Compile Include="Dal_imp.cs" />
-    <Compile Include="IDAL.cs" />
+    <Compile Include="Dal_XML.cs" />
+    <Compile Include="DummyDal.cs" />
+    <Compile Include="FactorySingletonDal.cs" />
+    <Compile Include="Idal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">
-      <Project>{05f293fc-1a5c-432c-9e5c-71147a5f810e}</Project>
+      <Project>{cf0a7303-fa2f-4b42-95e4-adc078e33749}</Project>
       <Name>BE</Name>
     </ProjectReference>
     <ProjectReference Include="..\DS\DS.csproj">
-      <Project>{276b65de-50c6-4248-bd8b-a30df61f7e0d}</Project>
+      <Project>{e366b4dc-02ab-44d9-a4ad-cc7d9fcae0a5}</Project>
       <Name>DS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\whatchamacallit\ToolsExtentions.csproj">
+      <Project>{65bbdbe6-cb2b-4c38-9118-b6772282c941}</Project>
+      <Name>ToolsExtentions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

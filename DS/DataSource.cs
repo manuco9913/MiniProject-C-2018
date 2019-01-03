@@ -1,42 +1,107 @@
-﻿using System;
+﻿using BE;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BE;
 
 namespace DS
 {
     public class DataSource
     {
-        static public List<Tester> testerInitList()
+        private static List<Tester> testersList = new List<Tester>();
+        private static List<Trainee> traineesList = new List<Trainee>();
+        private static List<DrivingTest> drivingtestsList = new List<DrivingTest>();
+
+        public static void init()
         {
-            return new List<Tester>
+            TestersList.Add(new Tester
             {
-            new Tester { _firstName = "Manu", _lastName = "Cohenca", _numId="12345678", _address = "havaad haleumi 21", _dateOfBirth = "13/06/1999", _experienceYears = 4, _gender=Gender.M, _maxDistanceFromHome="10 km", _maximumTestsPerWeek=5, _phoneNum="053-1234567", _whichCarUses= TypeOfVehicle.B },
-            new Tester { _firstName = "Aviad", _lastName = "Feig", _numId="23456789", _address = "havaad haleumi 22", _dateOfBirth = "13/06/1840", _experienceYears = 1, _gender=Gender.M, _maxDistanceFromHome="2 km", _maximumTestsPerWeek=1, _phoneNum="053-2345678", _whichCarUses=TypeOfVehicle.C  },
-            new Tester { _firstName = "Giovanna", _lastName = "Rossi", _numId="87654321", _address = "ben yehuda 2", _dateOfBirth = "13/06/1399", _experienceYears = 5, _gender=Gender.F, _maxDistanceFromHome="45 km", _maximumTestsPerWeek=4, _phoneNum="051-2345678", _whichCarUses=TypeOfVehicle.A }
-            };
+                ID = "1111",
+                Name = new Name { FirstName = "jojo", LastName = "chalass" },
+                Address = new Address
+                {
+                    City = "Jerusalem",
+                    Number = 21,
+                    StreetName = "havvad haleumi",
+                    //                  ZipCode = 91160
+                },
+                DayOfBirth = DateTime.Now.AddYears(-45),
+                Gender = Gender.MALE,
+                Experience = 10,
+                Expertise = CarType.Truck_Heavy,
+                MaxDistance = 2,
+                MaxTestWeekly = 1,
+                Luz  = new Schedule
+                {
+                    Data = new bool[5][]
+                     {
+                      new bool[6] { false, false, true, false, false, false},
+                      new bool[6] { false, false, false, false, false, false},
+                      new bool[6] { false, false, false, false, false, false},
+                      new bool[6] { false, false, true, false, false, false},
+                      new bool[6] { false, false, false, false, false, false}
+                      }
+                }
+            });
+
+            TraineesList.Add(new Trainee
+            {
+                ID = "9999",
+                Name = new Name { FirstName = "eran", LastName = "zehuze" },
+                Address = new Address
+                {
+                    City = "TLv",
+                    Number = 21,
+                    StreetName = "Jerusalem Bld",
+                    //                  ZipCode = 91160
+                },
+                DayOfBirth = DateTime.Now.AddYears(-21),
+                Gender = Gender.MALE,
+                CarTrained = CarType.TwoWheels,
+                DrivingSchool = "Machon Bli Lev",
+                GearType = GearType.Manual,
+                Instructor =  new Name { FirstName = "Martze", LastName = "bemivne netunim" },
+                LessonsNb = 134
+            }
+            );
+            TraineesList.Add(new Trainee
+            {
+                ID = "99910",
+                Name = new Name { FirstName = "Emanuel", LastName = "Macron" },
+                Address = new Address
+                {
+                    City = "Haifa",
+                    Number = 100,
+                    StreetName = "Hell Av.",
+                    //                  ZipCode = 91160
+                },
+                DayOfBirth = DateTime.Now.AddYears(-24),
+                Gender = Gender.MALE,
+                CarTrained = CarType.Private,
+                DrivingSchool = "Machon Bli Kishkes",
+                GearType = GearType.Manual,
+                Instructor = new Name { FirstName = "Super", LastName = "lo Kayam" },
+                LessonsNb = 12
+            }
+            );
+        }
+        public static List<DrivingTest> DrivingtestsList
+        {
+            get { return drivingtestsList; }
+  //          set { drivingtestsList = value; }
         }
 
-        static public List<Trainee> traineeInitList()
+        public static List<Tester> TestersList
         {
-            return new List<Trainee>
-            {
-            new Trainee { _firstName = "As", _lastName = "Er", _numId="02345678", _address = "havaad 21", _dateOfBirth = "13/07/1999", _gender=Gender.M, _phoneNum="053-1234567", _whichCarUsed=TypeOfVehicle.B,_lessonsCount=5, _myTesterName="Manu", _schoolName=SchoolName.OZ, _typeOfGearbox=GearBoxType.MANUAL},
-            new Trainee { _firstName = "Angus", _lastName = "Brother", _numId="03456789", _address = "via alciati 22", _dateOfBirth = "13/07/1840", _gender=Gender.M, _phoneNum="053-2345678", _whichCarUsed=TypeOfVehicle.C,_lessonsCount=4, _myTesterName="Aviad", _schoolName=SchoolName.OR_YAROK, _typeOfGearbox=GearBoxType.AUTOMATIC},
-            new Trainee { _firstName = "Rosa", _lastName = "Rossi", _numId="07654321", _address = "ben yehuda 2", _dateOfBirth = "13/07/1399",  _gender=Gender.F, _phoneNum="051-2345678", _whichCarUsed=TypeOfVehicle.A ,_lessonsCount=3, _myTesterName="Manu", _schoolName=SchoolName.YUVALI, _typeOfGearbox=GearBoxType.MANUAL}
-            };
+            get { return testersList; }
+ //           set { testersList = value; }
         }
 
-        static public List<Test> testInitList()
+        public static List<Trainee> TraineesList
         {
-            return new List<Test>
-            {
-                new Test {_testId="782" , _testerId="12345678", _traineeId="02345678" , _addressToStart="king george 4", _date="28/01/2019", _dateAndTime= "28/01/2019 13:00"},
-                new Test {_testId="23" , _testerId="23456789", _traineeId="03456789" , _addressToStart="king george 4", _date="28/01/2019", _dateAndTime= "28/01/2019 13:00"},
-                new Test {_testId="456" , _testerId="23456789", _traineeId="07654321" , _addressToStart="king george 4", _date="28/01/2019", _dateAndTime= "28/01/2019 13:00"}//here the tester doesnt match to the trainee
-            };
+            get { return traineesList; }
+//            set { traineesList = value; }
         }
     }
 }
