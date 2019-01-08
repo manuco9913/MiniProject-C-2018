@@ -9,7 +9,7 @@ namespace BE
 {
     public class Tester : Person
     {
-        public Schedule Luz { get; set; }
+        public Schedule Schedule { get; set; }
         public CarType Expertise { get; set; }
         public int Experience { get; set; }
         public int MaxTestWeekly { get; set; }

@@ -20,6 +20,18 @@
         </TextBox>
         <PasswordBox x:Name="Password_User" Grid.Row="1" Background="{x:Null}"  HorizontalAlignment="Left" Height="27.273" Margin="272.403,169.925,0,0"  VerticalAlignment="Top" Width="204.545" FontSize="22"/>
         <Button Content="Sign in" HorizontalAlignment="Left" Height="27.273" Margin="272.403,226.418,0,0" Grid.Row="1" VerticalAlignment="Top" Width="204.545" Click="ButtonClickTo_AddUser"/>
-
+      
+        <Label Name="label" Content="sign in" HorizontalAlignment="Left" Height="64.211" Margin="38,93.506,0,0" Grid.Row="1" VerticalAlignment="Top" Width="138" FontSize="20">
+            <Label.Style>
+                <Style TargetType="{x:Type Label}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style >
+        </Label>
+        
     </Grid>
 </Page>

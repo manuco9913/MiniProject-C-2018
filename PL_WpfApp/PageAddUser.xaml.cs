@@ -16,31 +16,23 @@ using System.Windows.Shapes;
 namespace PL_WpfApp
 {
     /// <summary>
-    /// Interaction logic for FirstPage.xaml
+    /// Interaction logic for PageAddUser.xaml
     /// </summary>
-    public partial class FirstPage : Page
+    public partial class PageAddUser : Page
     {
-        public FirstPage()
+        public PageAddUser()
         {
             InitializeComponent();
         }
 
-        
-
-        private void UsernameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void ButtonClick_AddTrainee(object sender, RoutedEventArgs e)
         {
-            TextBox tb = (TextBox)sender;
-            tb.Text = string.Empty;
-            tb.GotFocus -= UsernameTextBox_GotFocus;
-            tb.Foreground = Brushes.Black;
+            this.NavigationService.Navigate(new PageAddTrainee());
         }
 
-
-        private void ButtonClickTo_AddUser(object sender, RoutedEventArgs e)
+        private void ButtonClick_AddTester(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageAddUser());
+            this.NavigationService.Navigate(new PageAddTester());
         }
-
-       
     }
 }

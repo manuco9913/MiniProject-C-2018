@@ -70,7 +70,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddTraineePage.xaml">
+    <Page Include="PageAddTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageAddTrainee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageAddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -79,8 +87,14 @@
     <Compile Include="FirstPage.xaml.cs">
       <DependentUpon>FirstPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddTraineePage.xaml.cs">
-      <DependentUpon>AddTraineePage.xaml</DependentUpon>
+    <Compile Include="PageAddTester.xaml.cs">
+      <DependentUpon>PageAddTester.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageAddTrainee.xaml.cs">
+      <DependentUpon>PageAddTrainee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageAddUser.xaml.cs">
+      <DependentUpon>PageAddUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
