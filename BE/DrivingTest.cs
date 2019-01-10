@@ -25,10 +25,10 @@ namespace BE
         /// </summary>
         public String Tester_ID { get; set; }
 
-        public DateTime Date { get { return _date.Date; } set { _date = value.Date; } }
-        public TimeSpan Time { get { return Date.TimeOfDay; } set {_date.AddMilliseconds(value.TotalMilliseconds); } }
+        public DateTime Date { get => _date.Date; set => _date = value.Date; }
+        public TimeSpan Time { get => Date.TimeOfDay; set => _date.AddMilliseconds(value.TotalMilliseconds); }
         public Address StartingPoint { get; set; }
-        public List<String> Requirements { get { return _requirements; } set {_requirements = value; } }
+        public List<String> Requirements { get => _requirements; set => _requirements = value; }
         public bool Success { get; set; }
         public String Comment { get; set; }
 

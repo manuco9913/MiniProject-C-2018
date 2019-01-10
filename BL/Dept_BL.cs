@@ -31,24 +31,7 @@ namespace BL
         public bool RemoveTester(Tester tester) { return true; }
         public bool UpdateTester(Tester tester) { return true; }
 
-        public bool AddTrainee(Trainee trainee)
-        {
-            if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
-            {
-                throw new Exception("trainee under 18 years");
-                //  return false;
-            }
-            try
-            {
-                instance.AddTrainee(trainee);
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-            return true;
-
-        }
+        public bool AddTrainee(Trainee trainee) { return true; }
         public bool RemoveTrainee(Trainee trainee) { return true; }
         public bool UpdateTrainee(Trainee trainee) { return true; }
 

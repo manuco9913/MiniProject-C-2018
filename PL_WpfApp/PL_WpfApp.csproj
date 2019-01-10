@@ -82,10 +82,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageMainTester.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FirstPage.xaml.cs">
@@ -99,9 +95,6 @@
     </Compile>
     <Compile Include="PageAddUser.xaml.cs">
       <DependentUpon>PageAddUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageMainTester.xaml.cs">
-      <DependentUpon>PageMainTester.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -120,25 +113,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Properties\DataSources\App.datasource" />
-    <None Include="Properties\DataSources\BE.Address.datasource" />
-    <None Include="Properties\DataSources\BE.Configuration.datasource" />
-    <None Include="Properties\DataSources\BE.DrivingTest.datasource" />
-    <None Include="Properties\DataSources\BE.Name.datasource" />
-    <None Include="Properties\DataSources\BE.Person.datasource" />
-    <None Include="Properties\DataSources\BE.Schedule.datasource" />
-    <None Include="Properties\DataSources\BE.Tester.datasource" />
-    <None Include="Properties\DataSources\BE.Trainee.datasource" />
-    <None Include="Properties\DataSources\BL.FactorySingletonBL.datasource" />
-    <None Include="Properties\DataSources\BL.IBL.datasource" />
-    <None Include="Properties\DataSources\FirstPage.datasource" />
-    <None Include="Properties\DataSources\MainWindow.datasource" />
-    <None Include="Properties\DataSources\PageAddTester.datasource" />
-    <None Include="Properties\DataSources\PageAddTrainee.datasource" />
-    <None Include="Properties\DataSources\PageAddUser.datasource" />
-    <None Include="Properties\DataSources\PageMainTester.datasource" />
-    <None Include="Properties\DataSources\PL_WpfApp.Properties.Resources.datasource" />
-    <None Include="Properties\DataSources\PL_WpfApp.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

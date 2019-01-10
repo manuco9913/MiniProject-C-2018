@@ -16,13 +16,16 @@ using System.Windows.Shapes;
 namespace PL_WpfApp
 {
     /// <summary>
-    /// Interaction logic for PageMainTester.xaml
+    /// Interaction logic for PageAddTrainee.xaml
     /// </summary>
-    public partial class PageMainTester : Page
+    public partial class PageAddTrainee : Page
     {
-        public PageMainTester()
+        public PageAddTrainee()
         {
             InitializeComponent();
+
         }
+
+
     }
 }

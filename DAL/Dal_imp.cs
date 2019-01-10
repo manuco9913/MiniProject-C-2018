@@ -20,15 +20,13 @@ namespace DAL
             return true;
         }
 
-
-
         public bool AddTester(Tester tester)
         {
             foreach (Tester item in DS.DataSource.TestersList)
             {
                 if(item.ID == tester.ID)
                 {
-                    throw new Exception("Tester already exists");
+                    throw new Exception("Tester already exist");
                  //   return false;
                 }
             }
@@ -38,16 +36,7 @@ namespace DAL
 
         public bool AddTrainee(Trainee trainee)
         {
-            foreach (Trainee item in DS.DataSource.TraineesList)
-            {
-                if (item.ID == trainee.ID)
-                {
-                    throw new Exception("Trainee already exists");
-                    //   return false;
-                }
-            }
-            DS.DataSource.TraineesList.Add(trainee.Clone());
-            return true;
+            throw new NotImplementedException();
         }
 
         public List<DrivingTest> GetDrivingTests()
@@ -83,17 +72,6 @@ namespace DAL
             }
             return result.ToList();
         }
-        //-------------------------------------Grouping With tzuriel--------------------------------
-        /*
-         public List<Trainee> GetGroupByCity()
-        {
-            var results = from t in DS.DataSource.TraineesList
-                          group t by t.Address.City into g
-                          select new { City = g.Key, Traineers = g.ToList() };
-                          return (List<Trainee>)results;
-        }
-        */
-        //-------------------------------------Grouping With tzuriel--------------------------------
 
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
