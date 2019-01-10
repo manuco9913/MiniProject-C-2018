@@ -188,7 +188,7 @@ namespace DAL
                 Name = t.Name,
                 Experience = t.Experience,
                 MaxTestWeekly = t.MaxTestWeekly,
-                Luz = t.Luz.Clone()
+                Schedule = t.Schedule.Clone()
             };
             return result;
         }

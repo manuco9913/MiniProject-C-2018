@@ -39,10 +39,6 @@ namespace PL_WpfApp
         {
             // datagrid.ItemsSource = new ObservableCollection<Person>(myBl.GetAllPersons());
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new AddTraineePage();
-        }
+        
     }
 }

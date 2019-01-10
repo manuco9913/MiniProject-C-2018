@@ -1,4 +1,4 @@
-﻿<Page x:Class="PL_WpfApp.AddTraineePage"
+﻿<Page x:Class="PL_WpfApp.PageAddUser"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,6 +9,8 @@
       Title="Page3">
 
     <Grid>
-        
+        <Button Content="Sign in as a new trainee" HorizontalAlignment="Left" Height="63.948" Margin="85.263,277.105,0,0" VerticalAlignment="Top" Width="189.474" Click="ButtonClick_AddTrainee"/>
+        <Button Content="Sign in as a new tester" HorizontalAlignment="Left" Height="63.948" Margin="350.526,277.105,0,0" VerticalAlignment="Top" Width="220.263" Click="ButtonClick_AddTester"/>
+
     </Grid>
 </Page>
