@@ -24,17 +24,17 @@
         <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="10,273.396,0,0" TextWrapping="Wrap" Text="Day of birth:" VerticalAlignment="Top" Width="77"/>
         <TextBox HorizontalAlignment="Left" Height="22.075" Margin="100.189,391.283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.188"/>
         <TextBox HorizontalAlignment="Left" Height="22.075" Margin="630.523,123.962,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.188"/>
-        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,123.962,0,0" TextWrapping="Wrap" Text="Day of birth:" VerticalAlignment="Top" Width="77"/>
-        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,195.283,0,0" TextWrapping="Wrap" Text="Day of birth:" VerticalAlignment="Top" Width="77"/>
-        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,273.396,0,0" TextWrapping="Wrap" Text="Day of birth:" VerticalAlignment="Top" Width="77"/>
-        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,336.227,0,0" TextWrapping="Wrap" Text="Day of birth:" VerticalAlignment="Top" Width="77"/>
+        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,123.962,0,0" TextWrapping="Wrap" Text="Gear type:" VerticalAlignment="Top" Width="77"/>
+        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,195.283,0,0" TextWrapping="Wrap" Text="Driving school:" VerticalAlignment="Top" Width="81.667"/>
+        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,273.396,0,0" TextWrapping="Wrap" Text="Instructor:" VerticalAlignment="Top" Width="77"/>
+        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,336.227,0,0" TextWrapping="Wrap" Text="Lessons number:" VerticalAlignment="Top" Width="90.333"/>
         <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,391.283,0,0" TextWrapping="Wrap" Text="Day of birth:" VerticalAlignment="Top" Width="77"/>
         <TextBox HorizontalAlignment="Left" Height="22.075" Margin="630.523,195.283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.188"/>
         <TextBox HorizontalAlignment="Left" Height="22.075" Margin="630.523,273.396,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.188"/>
         <TextBox HorizontalAlignment="Left" Height="22.075" Margin="630.523,336.227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.188"/>
         <TextBox HorizontalAlignment="Left" Height="22.075" Margin="630.523,391.283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.188"/>
         <TextBox HorizontalAlignment="Left" Height="22.075" Margin="630.523,57.736,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.188"/>
-        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,57.736,0,0" TextWrapping="Wrap" Text="Day of birth:" VerticalAlignment="Top" Width="77"/>
+        <TextBlock HorizontalAlignment="Left" Height="22.075" Margin="502,57.736,0,0" TextWrapping="Wrap" Text="Car type:" VerticalAlignment="Top" Width="77"/>
 
     </Grid>
 </Page>
