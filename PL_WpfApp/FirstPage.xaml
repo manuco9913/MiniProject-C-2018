@@ -13,13 +13,11 @@
             <RowDefinition Height="25*"/>
             <RowDefinition Height="67*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Welcome to the new system of licensing tests" FontSize="36" TextAlignment="Center" Foreground="Black" Grid.Row="0" />
-        <TextBox x:Name="UsernameTextBox" Grid.Row="1" Foreground="DarkGray" Background="{x:Null}" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Margin="272.403,93.506,323.052,0" Height="43.284" FontSize="24" GotFocus="UsernameTextBox_GotFocus">
-            
-            
-        </TextBox>
+        <TextBlock Text="Welcome to the new system of licensing tests" FontSize="36" TextAlignment="Center" Foreground="Black" Grid.Row="0" FontWeight="Bold" FontFamily="Showcard Gothic" />
+        <TextBox x:Name="UsernameTextBox" Grid.Row="1" Foreground="DarkGray" Background="{x:Null}" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Margin="272.403,93.506,323.052,0" Height="43.284" FontSize="24" GotFocus="UsernameTextBox_GotFocus"/>
         <PasswordBox x:Name="Password_User" Grid.Row="1" Background="{x:Null}"  HorizontalAlignment="Left" Height="27.273" Margin="272.403,169.925,0,0"  VerticalAlignment="Top" Width="204.545" FontSize="22"/>
         <Button Content="Sign in" HorizontalAlignment="Left" Height="27.273" Margin="272.403,226.418,0,0" Grid.Row="1" VerticalAlignment="Top" Width="204.545" Click="ButtonClickTo_AddUser"/>
-
+    
     </Grid>
+    
 </Page>
