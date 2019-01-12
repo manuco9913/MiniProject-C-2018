@@ -7,7 +7,7 @@ using Tools;
 
 namespace BE
 {
-    public class Trainee:Person
+    public class Trainee: Person
     {
         public CarType CarTrained { get; set; }
         public GearType GearType { get; set; }

@@ -41,6 +41,5 @@ namespace PL_WpfApp
             this.NavigationService.Navigate(new PageAddUser());
         }
 
-       
     }
 }

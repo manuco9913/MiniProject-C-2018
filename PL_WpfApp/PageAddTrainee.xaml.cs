@@ -26,6 +26,11 @@ namespace PL_WpfApp
 
         }
 
+        private void Update_TraineeInformation(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageMainTrainee());
+        }
+
 
     }
 }

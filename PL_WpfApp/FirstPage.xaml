@@ -5,33 +5,37 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL_WpfApp"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="350" d:DesignWidth="720"
       Title="FirstPage">
 
-    <Grid>
+    <Grid Margin="-1.5,0,1.5,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="67*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Welcome to the new system of licensing tests" FontSize="36" TextAlignment="Center" Foreground="Black" Grid.Row="0" />
-        <TextBox x:Name="UsernameTextBox" Grid.Row="1" Foreground="DarkGray" Background="{x:Null}" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Margin="272.403,93.506,323.052,0" Height="43.284" FontSize="24" GotFocus="UsernameTextBox_GotFocus">
-            
-            
+        <TextBlock Text="Welcome to the new system of licensing tests" Margin="10,10,10,10" FontSize="34" TextAlignment="Center" Foreground="Black" Grid.Row="0" />
+        <TextBox x:Name="UsernameTextBox" Grid.Row="2" MinWidth="112" Foreground="DarkGray" Background="{x:Null}" TextWrapping="Wrap" Text="Username" HorizontalAlignment="Center" VerticalAlignment="Center" Height="44" FontSize="24" GotFocus="UsernameTextBox_GotFocus" Cursor="Hand">
+
+
         </TextBox>
-        <PasswordBox x:Name="Password_User" Grid.Row="1" Background="{x:Null}"  HorizontalAlignment="Left" Height="27.273" Margin="272.403,169.925,0,0"  VerticalAlignment="Top" Width="204.545" FontSize="22"/>
-        <Button Content="Sign in" HorizontalAlignment="Left" Height="27.273" Margin="272.403,226.418,0,0" Grid.Row="1" VerticalAlignment="Top" Width="204.545" Click="ButtonClickTo_AddUser"/>
-      
-        <Label Name="label" Content="sign in" HorizontalAlignment="Left" Height="64.211" Margin="38,93.506,0,0" Grid.Row="1" VerticalAlignment="Top" Width="138" FontSize="20">
-            <Label.Style>
-                <Style TargetType="{x:Type Label}">
+        <PasswordBox x:Name="Password_User" Grid.Row="3" Background="{x:Null}"  HorizontalAlignment="Center" Height="27.273" VerticalAlignment="Center" Width="204.545" FontSize="22"/>
+        <Button Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Center" Height="27.273" Grid.Row="4" Width="200" Click="ButtonClickTo_AddUser"/>
+
+
+    </Grid>
+</Page>
+
+<!--<TextBlock Name="label" Text="sign in" HorizontalAlignment="Left" Height="32.521" Margin="38,16.115,0,0" Grid.Row="3" VerticalAlignment="Top" Width="138" FontSize="20" MouseEnter="Underline_SignIn" MouseLeave="Ununderline_SignIn">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" Value="Red"/>
+                            <Setter Property="Foreground" Value="Blue"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
-            </Label.Style >
-        </Label>
-        
-    </Grid>
-</Page>
+            </TextBlock.Style >
+        </TextBlock>-->

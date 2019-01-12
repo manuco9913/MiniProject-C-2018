@@ -5,10 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL_WpfApp"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="350" d:DesignWidth="720"
       Title="PageAddTester">
-
-    <Grid>
-        
+    <Grid Height="350" Width="720">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button Click="Update_TesterInformation" Content="Finish" FontSize="20" Margin="10,10,10,10" Width="150" Grid.Row="6" HorizontalAlignment="Center" Grid.ColumnSpan="2" ></Button>
+        <TextBox Grid.Row="0" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <TextBox Grid.Row="1" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <TextBox Grid.Row="2" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <TextBox Grid.Row="3" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <!--we need to make it a radio button--><ComboBox Grid.Row="4" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" VerticalAlignment="Center" Width="100.188"/>
+        <DatePicker Grid.Row="5" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" VerticalAlignment="Center" Width="100.188"/>
+        <TextBlock Grid.Row="0" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Center" Width="77"/>
+        <TextBlock Grid.Row="1" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Address:" VerticalAlignment="Center" Width="77"/>
+        <TextBlock Grid.Row="2" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="First name:" VerticalAlignment="Center" Width="77"/>
+        <TextBlock Grid.Row="3" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Last name:" VerticalAlignment="Center" Width="77"/>
+        <TextBlock Grid.Row="4" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Gender:" VerticalAlignment="Center" Width="77"/>
+        <TextBlock Grid.Row="5" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Day of birth:" VerticalAlignment="Center" Width="77"/>
+        <TextBlock Grid.Row="0" Margin='20,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Schedule:" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="1" Margin='20,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Which car expertises:" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="2" Margin='20,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Maximum distance test:" VerticalAlignment="Center" Width="130"/>
+        <TextBox Grid.Row="0" Margin='170,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <ComboBox Grid.Row="1" Margin='170,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="22.075" VerticalAlignment="Center" Width="100.188"/>
+        <TextBox Grid.Row="2" Margin='170,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
     </Grid>
 </Page>

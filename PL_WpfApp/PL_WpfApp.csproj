@@ -70,6 +70,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageAddTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageAddTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -82,10 +86,33 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageMainTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageMainTrainee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageUpdateTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageUpdateTesterAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageUpdateTraineeAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FirstPage.xaml.cs">
       <DependentUpon>FirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageAddTest.xaml.cs">
+      <DependentUpon>PageAddTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageAddTester.xaml.cs">
       <DependentUpon>PageAddTester.xaml</DependentUpon>
@@ -95,6 +122,21 @@
     </Compile>
     <Compile Include="PageAddUser.xaml.cs">
       <DependentUpon>PageAddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageMainTester.xaml.cs">
+      <DependentUpon>PageMainTester.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageMainTrainee.xaml.cs">
+      <DependentUpon>PageMainTrainee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageUpdateTest.xaml.cs">
+      <DependentUpon>PageUpdateTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageUpdateTesterAccount.xaml.cs">
+      <DependentUpon>PageUpdateTesterAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageUpdateTraineeAccount.xaml.cs">
+      <DependentUpon>PageUpdateTraineeAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

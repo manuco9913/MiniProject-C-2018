@@ -29,8 +29,6 @@ namespace PL_WpfApp
             InitializeComponent();
             myBl = BL.FactorySingletonBL.getInstance();
             MainFrame.NavigationService.Navigate(new FirstPage());
-
-          
         }
 
 
