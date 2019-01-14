@@ -9,8 +9,12 @@
       Title="PageAddUser">
 
     <Grid>
-        <Button Content="Sign in as a new trainee" HorizontalAlignment="Left" Height="63.948" Margin="85.263,277.105,0,0" VerticalAlignment="Top" Width="189.474" Click="ButtonClick_AddTrainee"/>
-        <Button Content="Sign in as a new tester" HorizontalAlignment="Left" Height="63.948" Margin="350.526,277.105,0,0" VerticalAlignment="Top" Width="220.263" Click="ButtonClick_AddTester"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Sign in as a new trainee" HorizontalAlignment="Center" Height="63.948"  VerticalAlignment="Center" Width="200" Click="ButtonClick_AddTrainee"/>
+        <Button Content="Sign in as a new tester" HorizontalAlignment="Center" Height="63.948"  VerticalAlignment="Center" Width="200" Click="ButtonClick_AddTester" Grid.Column="1"/>
 
     </Grid>
 </Page>

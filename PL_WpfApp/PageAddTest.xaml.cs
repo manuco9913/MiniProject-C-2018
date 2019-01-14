@@ -24,5 +24,14 @@ namespace PL_WpfApp
         {
             InitializeComponent();
         }
+
+        private void NewTest_Added(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
+            else MessageBox.Show("Cannot go back from this page");
+        }
     }
 }

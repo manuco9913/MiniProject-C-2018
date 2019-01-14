@@ -24,6 +24,7 @@ namespace PL_WpfApp
         {
             InitializeComponent();
 
+            this.gearTypeComboBox.ItemsSource = Enum.GetValues(typeof(BE.GearType));
         }
 
         private void Update_TraineeInformation(object sender, RoutedEventArgs e)

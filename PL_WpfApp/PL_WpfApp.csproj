@@ -155,6 +155,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="BE.Address.datasource" />
+    <None Include="BE.Configuration.datasource" />
+    <None Include="BE.DrivingTest.datasource" />
+    <None Include="BE.Name.datasource" />
+    <None Include="BE.Person.datasource" />
+    <None Include="BE.Schedule.datasource" />
+    <None Include="BE.Tester.datasource" />
+    <None Include="BE.Trainee.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -172,6 +180,9 @@
       <Project>{dfa33432-0840-49da-941f-9aaca2fcdd2c}</Project>
       <Name>BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Trainee\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

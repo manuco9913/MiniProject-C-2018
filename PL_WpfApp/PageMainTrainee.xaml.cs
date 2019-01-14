@@ -37,7 +37,7 @@ namespace PL_WpfApp
 
         private void Update_Test(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageAddTest());
+            this.NavigationService.Navigate(new PageUpdateTest());
         }
     }
 }

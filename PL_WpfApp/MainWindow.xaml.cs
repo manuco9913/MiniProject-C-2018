@@ -37,6 +37,13 @@ namespace PL_WpfApp
         {
             // datagrid.ItemsSource = new ObservableCollection<Person>(myBl.GetAllPersons());
         }
-        
+
+        private void Go_BackPage(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+                MainFrame.GoBack();
+            else
+                MessageBox.Show("Cannot go back from here", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }

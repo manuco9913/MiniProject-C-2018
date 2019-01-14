@@ -12,13 +12,18 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,-692,-319">
-            <Frame x:Name="MainFrame" Margin="0,0,10,10" Content="Frame" NavigationUIVisibility="Hidden"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,-690,-317">
+            <Frame x:Name="MainFrame" Content="Frame" NavigationUIVisibility="Hidden"/>
         </Grid>
-        
+        <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="46" Height="31" FontSize="9" FontWeight="Bold" Click="Go_BackPage">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+
 
     </Grid>
 </Window>

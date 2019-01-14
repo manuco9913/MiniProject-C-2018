@@ -7,8 +7,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="720"
       Title="PageUpdateTest">
+    <Grid Height="350" Width="720">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Finish" FontSize="20" Margin="10,10,10,10" Width="150" Grid.Row="6" HorizontalAlignment="Center" Grid.ColumnSpan="2" Click="Test_Updated" ></Button>
+        <TextBlock Text="the id of the test (to do)" Grid.Row="0" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <TextBox Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="0" Margin='140,23.962,0,23.962' HorizontalAlignment="Left" Height="22.076" TextWrapping="Wrap" VerticalAlignment="Center" Width="317"/>
+        <TextBox Grid.Row="2" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <!--we need to make it a radio button-->
+        <TextBox Grid.Row="1" Grid.Column="1" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
+        <DatePicker Grid.Row="1" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" VerticalAlignment="Center" Width="100.188"/>
+        <TextBlock Grid.Row="0" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Center" Width="77"/>
+        <TextBlock Grid.Row="1" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Date of the test:" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="2" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Tester ID:" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Trainee ID:" VerticalAlignment="Center" Width="77"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Starting point address:" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Tester's comments:" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="3" Margin='0,0,100,0' Grid.Column="1" HorizontalAlignment="Right" Height="35" TextWrapping="Wrap" Text="Successed:" Foreground="Red" FontSize="24" VerticalAlignment="Center" Width="130"/>
+        <TextBlock Name="Succesed_TextBlock" Grid.Row="3" Margin='170,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" FontSize="24" VerticalAlignment="Center" Width="130"/>
 
-    <Grid>
-        
     </Grid>
 </Page>
