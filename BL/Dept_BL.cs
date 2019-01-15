@@ -9,6 +9,7 @@ namespace BL
 {
     internal class Dept_BL : IBL
     {
+
         private static DAL.Idal instance = DAL.FactorySingletonDal.getInstance();
 
         public bool AddTester(Tester tester)
@@ -28,8 +29,22 @@ namespace BL
             }
             return true;
         }
-        public bool RemoveTester(Tester tester) { return true; }
-        public bool UpdateTester(Tester tester) { return true; }
+        public bool RemoveTester(Tester tester) { return instance.RemoveTester(tester); } //it is good ?
+        public bool UpdateTester(Tester tester)
+        {
+            /*
+             --------------
+           if
+           {
+           (! (Here there will be several conditions that will ensure
+             that the examiner's update is possible in terms of the examiner's conditions))
+             throw  new "some exception";
+            }
+          retuen instance.UpdateTester(tester);
+             --------------
+             */
+            return true;
+        } //what we want update ?    
 
         public bool AddTrainee(Trainee trainee) { return true; }
         public bool RemoveTrainee(Trainee trainee) { return true; }
