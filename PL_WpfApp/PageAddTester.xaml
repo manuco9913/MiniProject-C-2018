@@ -40,8 +40,8 @@
             <TextBox x:Name="cityTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address.City, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Street Name:"/>
             <TextBox x:Name="streetNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address.StreetName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Day Of Birth:"/>
-            <DatePicker x:Name="dayOfBirthDatePicker" VerticalAlignment="Center" SelectedDate="{Binding DayOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Street Number:"/>
+            <TextBox x:Name="numberTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address.Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Gender:"/>
             <ComboBox x:Name="genderComboBox" Width="120" VerticalAlignment="Center" Grid.Row="6" Margin="3" ItemsSource="{Binding}" Height="Auto" HorizontalAlignment="Left" DisplayMemberPath="Gender" Grid.Column="1"/>
 
@@ -53,9 +53,10 @@
             <TextBox x:Name="maxDistanceTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MaxDistance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="3"/>
             <Label VerticalAlignment="Center" Grid.Row="3" Margin="3" HorizontalAlignment="Left" Grid.Column="2" Content="Max Test Weekly:"/>
             <TextBox x:Name="maxTestWeeklyTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MaxTestWeekly, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="3"/>
-            <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="2" Content="Number:"/>
-            <TextBox x:Name="numberTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address.Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="3"/>
+            <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="2" Content="Day Of Birth:"/>
+            <DatePicker x:Name="dayOfBirthDatePicker" VerticalAlignment="Center" SelectedDate="{Binding DayOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="3"/>
 
+           
             <Button Click="Update_TesterInformation" Content="Finish" FontSize="20" Margin="0,5,0,5" Width="150" Grid.Row="7" HorizontalAlignment="Center" Grid.Column="3"></Button>
 
         </Grid>
