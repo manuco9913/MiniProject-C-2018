@@ -146,17 +146,43 @@ namespace DAL
 
         public bool UpdateDrivingTest(DrivingTest drivingTest)
         {
-            throw new NotImplementedException();
+            {
+
+                int index = GetDrivingTests().FindIndex(s => s.ID == drivingTest.ID); // index = index of the tester we are looking for
+                if (index == -1)
+                {
+                    throw new Exception("Driving Test with the same id not found...");
+                }
+                GetDrivingTests()[index] = drivingTest;
+                return true;
+            }
         }
 
         public bool UpdateTester(Tester tester)
         {
-            throw new NotImplementedException();
+            {
+                
+                int index = GetTesters().FindIndex(s => s.ID == tester.ID); // index = index of the tester we are looking for
+                if (index == -1)
+                {
+                    throw new Exception("Tester with the same id not found...");
+                }
+                GetTesters()[index] = tester;
+                return true;
+            }
         }
-
         public bool UpdateTrainee(Trainee trainee)
         {
-            throw new NotImplementedException();
+            {
+                int index = GetTrainees().FindIndex(s => s.ID == trainee.ID); // index = index of the trainee we are looking for
+                if (index == -1)
+                {
+                    throw new Exception("Tester with the same id not found...");
+                }
+                GetTrainees()[index] = trainee;
+                return true;
+            }
         }
+
     }
 }
