@@ -29,7 +29,19 @@ namespace BL
             }
             return true;
         }
-        public bool RemoveTester(Tester tester) { return instance.RemoveTester(tester); } //it is good ?
+        public bool RemoveTester(Tester tester)
+        {
+            bool b = true;
+            try
+            {
+                b = instance.RemoveTester(tester);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return b;  
+        } 
         public bool UpdateTester(Tester tester)
         {
             /*

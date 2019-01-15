@@ -21,8 +21,8 @@ namespace DAL
         bool RemoveDrivingTest(DrivingTest drivingTest);
         bool UpdateDrivingTest(DrivingTest drivingTest);
 
-        List<Tester> GetTesters();
+        List<Tester> GetTesters(Func<Trainee, bool> p);
         List<Trainee> GetTrainees(Func<Trainee,bool> p);
-        List<DrivingTest> GetDrivingTests();
+        List<DrivingTest> GetDrivingTests(Func<Trainee, bool> p);
     }
 }

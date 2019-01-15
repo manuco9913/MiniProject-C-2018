@@ -36,33 +36,63 @@ namespace DAL
 
         public bool AddTrainee(Trainee trainee)
         {
-            throw new NotImplementedException();
+            foreach (Trainee item in DS.DataSource.TraineesList)
+            {
+                if (item.ID == trainee.ID)
+                {
+                    throw new Exception("Trainee already exist");
+                    //return false;
+                }
+            }
+            DS.DataSource.TraineesList.Add(trainee.Clone());
+            return true;
         }
 
-        public List<DrivingTest> GetDrivingTests()
+        public List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> predicate = null)
         {
-            throw new NotImplementedException();
+            IEnumerable<DrivingTest> result = null;
+
+            if (predicate != null)
+            {
+                result = from t in DS.DataSource.DrivingtestsList
+                         where (predicate(t))
+                         select t.Clone();
+            }
+            else
+            {
+                result = from t in DS.DataSource.DrivingtestsList
+                         select t.Clone();
+            }
+            return result.ToList();
         }
 
-        public List<Tester> GetTesters()
+        public List<Tester> GetTesters(Func<Tester,bool> predicate = null)
         {
-            // return
-            //(from item in DS.DataSource.TestersList
-            // select item.Clone()
-            //).ToList();
-                      
-            return DS.DataSource.TestersList.Select(item => item.Clone()).ToList();
+            IEnumerable<Tester> result = null;
+
+            if (predicate != null)
+            {
+                result = from t in DS.DataSource.TestersList
+                         where (predicate(t))
+                         select t.Clone();
+            }
+            else
+            {
+                result = from t in DS.DataSource.TestersList
+                         select t.Clone();
+            }
+            return result.ToList();
         }
         // do not use Predicate<T> with Linq, instead use Func<T,bool>
         // public List<Trainee> GetTrainees(Predicate<Trainee> p =null) 
-        public List<Trainee> GetTrainees(Func<Trainee,bool> p = null)
+        public List<Trainee> GetTrainees(Func<Trainee,bool> predicate = null)
         {
             IEnumerable<Trainee> result = null;
            
-            if(p !=null)
+            if(predicate != null)
             {
                 result = from t in DS.DataSource.TraineesList
-                         where (p(t))
+                         where (predicate(t))
                         select t.Clone();
             }
             else
@@ -75,17 +105,43 @@ namespace DAL
 
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
-            throw new NotImplementedException();
+            DrivingTest temp_test = GetDrivingTest(drivingTest.ID);
+            if (temp_test == null)
+                throw new Exception("Student with the same id not found...");
+            temp_test.Requirements.RemoveAll();
+            return GetDrivingTests().Remove(temp_test);
+        }
+
+        private DrivingTest GetDrivingTest(string id)
+        {
+            return GetDrivingTests().FirstOrDefault(tmp_drivingtes => tmp_drivingtes.ID == id);
         }
 
         public bool RemoveTester(Tester tester)
         {
-            throw new NotImplementedException();
+            Tester temp_tester = GetTester(tester.ID);
+            if (temp_tester == null)
+                throw new Exception("Tester with the same id not found...");
+            return GetTesters().Remove(temp_tester);
+           
+        }
+
+        private Tester GetTester(string id)
+        {
+            return GetTesters().FirstOrDefault(tmp_tes => tmp_tes.ID == id);
         }
 
         public bool RemoveTrainee(Trainee trainee)
         {
-            throw new NotImplementedException();
+            Trainee temp_trainee = GetTrainee(trainee.ID);
+            if (temp_trainee == null)
+                throw new Exception("Tester with the same id not found...");
+            return GetTrainees().Remove(temp_trainee);
+        }
+
+        private Trainee GetTrainee(string id)
+        {
+            return GetTrainees().FirstOrDefault(tmp_trainee =>tmp_trainee.ID == id);
         }
 
         public bool UpdateDrivingTest(DrivingTest drivingTest)
