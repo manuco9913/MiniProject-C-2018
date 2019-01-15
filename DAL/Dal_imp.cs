@@ -107,8 +107,8 @@ namespace DAL
         {
             DrivingTest temp_test = GetDrivingTest(drivingTest.ID);
             if (temp_test == null)
-                throw new Exception("Student with the same id not found...");
-            temp_test.Requirements.RemoveAll();
+                throw new Exception("Driving Test with the same id not found...");
+            temp_test.Requirements.Clear();
             return GetDrivingTests().Remove(temp_test);
         }
 
@@ -135,7 +135,7 @@ namespace DAL
         {
             Trainee temp_trainee = GetTrainee(trainee.ID);
             if (temp_trainee == null)
-                throw new Exception("Tester with the same id not found...");
+                throw new Exception("Trainee with the same id not found...");
             return GetTrainees().Remove(temp_trainee);
         }
 
