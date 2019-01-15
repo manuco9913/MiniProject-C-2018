@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 
+
 namespace BL
 {
     internal class Dept_BL : IBL
@@ -107,7 +108,10 @@ namespace BL
             return check;
         }
 
-        public bool AddDrivingTest(DrivingTest drivingTest) { return true; }
+        public bool AddDrivingTest(DrivingTest drivingTest)
+        {
+            return true;
+        }
         public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
         public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
 
@@ -115,11 +119,11 @@ namespace BL
         {
             return instance.GetTesters();
         }
-        public List<Trainee> GetTrainees() //Male only
+        public List<Trainee> GetTrainees()
         {
             try
             {
-                return instance.GetTrainees((Trainee t) => t.Gender == Gender.MALE);
+                return instance.GetTrainees();
             }
             catch (Exception exception)
             {
@@ -135,13 +139,7 @@ namespace BL
             IEnumerable<Person> result2 =(from p in instance.GetTesters()
                                  select p);
             return result1.Concat(result2);
-
-            //List<Person> list = new List<Person>();
-
-            //list.AddRange(GetTrainees());
-            //list.AddRange(GetTesters());
-
-            //return list;
+            
         }
         // private bool SelectMaleTrainee(Trainee t)
         // {

@@ -70,6 +70,12 @@ namespace DAL
             return result.ToList();
         }
 
+        public List<Tester> GetTesters()
+        {
+            var result = from t in DS.DataSource.TestersList
+                         select t.Clone();
+            return result.ToList();
+        }
         public List<Tester> GetTesters(Func<Tester,bool> predicate = null)
         {
             IEnumerable<Tester> result = null;
@@ -88,12 +94,7 @@ namespace DAL
 
             return result.ToList();
         }
-        public List<Tester> GetTesters()
-        {
-            var result = from t in DS.DataSource.TestersList
-                     select t.Clone();
-            return result.ToList();
-        }
+        
         // do not use Predicate<T> with Linq, instead use Func<T,bool>
         // public List<Trainee> GetTrainees(Predicate<Trainee> p =null) 
         public List<Trainee> GetTrainees(Func<Trainee,bool> predicate = null)
@@ -113,6 +114,7 @@ namespace DAL
             }
             return result.ToList();
         }
+
 
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
@@ -137,9 +139,9 @@ namespace DAL
            
         }
 
-        private Tester GetTester(string id)
+        private Tester GetTester(Tester tester)
         {
-            return GetTesters().FirstOrDefault(tmp_tes => tmp_tes.ID == id);
+            return GetTesters().FirstOrDefault(tmp_tes => tmp_tes.ID == tester.ID);
         }
 
         public bool RemoveTrainee(Trainee trainee)
@@ -150,10 +152,17 @@ namespace DAL
             return GetTrainees().Remove(temp_trainee);
         }
 
-        public Trainee GetTrainee(string id)
+        public Trainee GetTrainee(Trainee trainee)
         {
-            return GetTrainees().FirstOrDefault(tmp_trainee =>tmp_trainee.ID == id);
+            return GetTrainees().FirstOrDefault(tmp_trainee =>tmp_trainee.ID == trainee.ID);
         }
+        public List<Trainee> GetTrainees()
+        {
+            var result = from t in DS.DataSource.TraineesList
+                         select t.Clone();
+            return result.ToList();
+        } 
+        
 
         public bool UpdateDrivingTest(DrivingTest drivingTest)
         {

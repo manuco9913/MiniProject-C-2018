@@ -10,7 +10,7 @@ using BE;
 
 namespace DAL
 {
-    internal class Dal_XML : Idal
+    internal class Dal_XML
     {
 
         private void initTester()
