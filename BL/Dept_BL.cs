@@ -10,17 +10,17 @@ namespace BL
     internal class Dept_BL : IBL
     {
 
-        private static DAL.Idal instance = DAL.FactorySingletonDal.getInstance();
+        private static DAL.Idal instance = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
 
         public bool AddTester(Tester tester)
         {
-            if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
-            {
-                throw new Exception("tester under 40 years");
-                //  return false;
-            }
+
             try
             {
+                if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
+                {
+                    throw new Exception("Tester under 40 years");
+                }
                 instance.AddTester(tester);
             }
             catch (Exception exception)
@@ -44,23 +44,68 @@ namespace BL
         } 
         public bool UpdateTester(Tester tester)
         {
-            /*
-             --------------
-           if
-           {
-           (! (Here there will be several conditions that will ensure
-             that the examiner's update is possible in terms of the examiner's conditions))
-             throw  new "some exception";
+            bool check = true;
+            try
+            {
+                if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
+                {
+                    throw new Exception("tester under 40 years");
+                }
+                check =instance.UpdateTester(tester);
             }
-          retuen instance.UpdateTester(tester);
-             --------------
-             */
-            return true;
-        } //what we want update ?    
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+            return check ;
+        }
 
-        public bool AddTrainee(Trainee trainee) { return true; }
-        public bool RemoveTrainee(Trainee trainee) { return true; }
-        public bool UpdateTrainee(Trainee trainee) { return true; }
+        public bool AddTrainee(Trainee trainee)
+        {
+            try
+            {
+                if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
+                {
+                    throw new Exception("Trainee under 18 years");
+                }
+                instance.AddTrainee(trainee);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return true;
+        }
+        public bool RemoveTrainee(Trainee trainee)
+        {
+            bool b = true;
+            try
+            {
+                b = instance.RemoveTrainee(trainee);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return b;
+        }
+        public bool UpdateTrainee(Trainee trainee)
+        {
+            bool check = true;
+            try
+            {
+                if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
+                {
+                    throw new Exception("Trainee under 18 years");
+                }
+                check = instance.UpdateTrainee(trainee);
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+            return check;
+        }
 
         public bool AddDrivingTest(DrivingTest drivingTest) { return true; }
         public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }

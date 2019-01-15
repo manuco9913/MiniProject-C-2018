@@ -22,6 +22,10 @@ namespace DAL
 
         public bool AddTester(Tester tester)
         {
+            if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
+            {
+                throw new Exception("Tester under 40 years");
+            }
             foreach (Tester item in DS.DataSource.TestersList)
             {
                 if(item.ID == tester.ID)
@@ -81,6 +85,13 @@ namespace DAL
                 result = from t in DS.DataSource.TestersList
                          select t.Clone();
             }
+
+            return result.ToList();
+        }
+        public List<Tester> GetTesters()
+        {
+            var result = from t in DS.DataSource.TestersList
+                     select t.Clone();
             return result.ToList();
         }
         // do not use Predicate<T> with Linq, instead use Func<T,bool>
