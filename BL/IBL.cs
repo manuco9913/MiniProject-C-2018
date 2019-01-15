@@ -19,7 +19,9 @@ namespace BL
 
         List<DrivingTest> GetDrivingTests();
         List<Tester> GetTesters();
+        Tester GetTester(string id);
         List<Trainee> GetTrainees();
+        Trainee GetTrainee(string id);
         IEnumerable<Person> GetAllPersons();
 
 

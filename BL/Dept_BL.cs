@@ -108,10 +108,7 @@ namespace BL
             return check;
         }
 
-        public bool AddDrivingTest(DrivingTest drivingTest)
-        {
-            return true;
-        }
+        public bool AddDrivingTest(DrivingTest drivingTest) { return false; }
         public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
         public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
 

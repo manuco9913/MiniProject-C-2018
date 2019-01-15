@@ -13,7 +13,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Sign in as a new trainee" HorizontalAlignment="Center" Height="63.948"  VerticalAlignment="Center" Width="200" Click="ButtonClick_AddTrainee"/>
+        <Button Content="Sign in as a new trainee" HorizontalAlignment="Center" Height="63.948"  VerticalAlignment="Center" Width="200" Click="ButtonClick_AddTrainee" Cursor="Hand"/>
         <Button Content="Sign in as a new tester" HorizontalAlignment="Center" Height="63.948"  VerticalAlignment="Center" Width="200" Click="ButtonClick_AddTester" Grid.Column="1"/>
 
     </Grid>
