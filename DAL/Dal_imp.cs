@@ -139,7 +139,7 @@ namespace DAL
             return GetTrainees().Remove(temp_trainee);
         }
 
-        private Trainee GetTrainee(string id)
+        public Trainee GetTrainee(string id)
         {
             return GetTrainees().FirstOrDefault(tmp_trainee =>tmp_trainee.ID == id);
         }
