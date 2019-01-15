@@ -108,7 +108,7 @@ namespace DAL
             DrivingTest temp_test = GetDrivingTest(drivingTest.ID);
             if (temp_test == null)
                 throw new Exception("Student with the same id not found...");
-            temp_test.Requirements.RemoveAll();
+            //temp_test.Requirements.RemoveAll();
             return GetDrivingTests().Remove(temp_test);
         }
 

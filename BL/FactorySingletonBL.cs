@@ -8,17 +8,17 @@ namespace BL
 {
     public class FactorySingletonBL
     {
-           protected static IBL instance = null;
+        protected static IBL instance = null;
 
-            protected FactorySingletonBL() { }
+        protected FactorySingletonBL() { }
 
-            public static IBL getInstance()
+        public static IBL getInstance()
+        {
+            if (instance == null)
             {
-                if (instance == null)
-                {
-                    instance = new Dept_BL();
-                }
-                return instance;
+                instance = new Dept_BL();
             }
+            return instance;
         }
     }
+}
