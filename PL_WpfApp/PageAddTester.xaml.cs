@@ -20,9 +20,15 @@ namespace PL_WpfApp
     /// </summary>
     public partial class PageAddTester : Page
     {
+        BE.Tester tester;
+        BL.IBL instance;
+
         public PageAddTester()
         {
             InitializeComponent();
+            tester = new BE.Tester();
+            //this.grid1.DataContext = tester;
+            //instance = new BL.FactorySingletonBL.getInstance();
         }
 
         private void Update_TesterInformation(object sender, RoutedEventArgs e)
