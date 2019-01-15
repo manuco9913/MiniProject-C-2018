@@ -110,7 +110,22 @@ namespace BL
 
         public bool AddDrivingTest(DrivingTest drivingTest)
         {
-            return true;
+            /* 
+             drivingTest.Requirements
+             try
+             {
+                 if ()
+                 {
+                     throw new Exception("Trainee under 18 years");
+                 }
+                 instance.AddTrainee(trainee);
+             }
+             catch (Exception exception)
+             {
+                 throw exception;
+             }
+             return true;
+             */
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
         public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
