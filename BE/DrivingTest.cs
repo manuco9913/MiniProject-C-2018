@@ -19,6 +19,7 @@ namespace BE
         /// <summary>
         /// get set the Trainee ID
         /// </summary>
+        public string ID { get; set; }
         public String Trainee_ID { get; set; }
         /// <summary>
         /// get set the Tester ID
