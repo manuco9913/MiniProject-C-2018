@@ -19,9 +19,9 @@ namespace BL
 
         List<DrivingTest> GetDrivingTests();
         List<Tester> GetTesters();
-        Tester GetTester(string id);
+        Tester GetTester(string id);//not sure we need this
         List<Trainee> GetTrainees();
-        Trainee GetTrainee(string id);
+        Trainee GetTrainee(string id);//not sure we need this
         IEnumerable<Person> GetAllPersons();
 
 

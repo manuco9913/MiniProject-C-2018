@@ -81,7 +81,7 @@ namespace DAL
                          select t.Clone();
             return result.ToList();
         }
-        private Tester GetTester(string id)
+        public Tester GetTester(string id)
         {
             return GetTesters().FirstOrDefault(tmp_tes => tmp_tes.ID == id);
         }
