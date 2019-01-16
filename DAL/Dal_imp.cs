@@ -51,7 +51,7 @@ namespace DAL
         }
         public bool RemoveTester(Tester tester)
         {
-            Tester temp_tester = GetTester(tester);
+            Tester temp_tester = GetTester(tester.ID);
             if (temp_tester == null)
                 throw new Exception("Tester with the same id not found...");
             return GetTesters().Remove(temp_tester);
@@ -121,7 +121,7 @@ namespace DAL
         }
         public bool RemoveTrainee(Trainee trainee)
         {
-            Trainee temp_trainee = GetTrainee(trainee);
+            Trainee temp_trainee = GetTrainee(trainee.ID);
             if (temp_trainee == null)
                 throw new Exception("Trainee with the same id not found...");
             return GetTrainees().Remove(temp_trainee);
