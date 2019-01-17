@@ -115,12 +115,17 @@ namespace BL
             {
                 if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
                     throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-                //if (!testedRecently(drivingTest.Trainee_ID))
-                //    throw new Exception("The trainee cannot take the test since he was tested recently");
+                if (!testedRecently(drivingTest.Trainee_ID))
+                    throw new Exception("The trainee cannot take the test since he was tested recently");
+                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
+                    throw new Exception("Tester and trainee do not use the same type of car");
                 if (!testerMaxTestWeekly(drivingTest.Tester_ID))
-                    throw new Exception("Taster reached his maximum number of tests");
+                    throw new Exception("Tester reached his maximum number of tests");
                 if (!testerAvailableTesting(drivingTest.Tester_ID))
                     throw new Exception("The tester is not available during these hours");
+
+                    
+                
 
                 instance.AddDrivingTest(drivingTest);
             }
@@ -142,6 +147,15 @@ namespace BL
             return true;
         }
 
+        private bool testerAndTraineeUseSameCarType(string tester_ID, string trainee_ID)
+        {
+            return GetTester(tester_ID).Expertise == GetTrainee(trainee_ID).CarTrained;
+        }
+
+        private bool testedRecently(string trainee_ID)
+        {
+            return true;
+        }
 
         private bool overMinLessonsTrainee(string trainee_ID)
         {
