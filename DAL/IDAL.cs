@@ -9,7 +9,7 @@ namespace DAL
 {
     public interface Idal
     {
-        bool AddTester   (Tester tester);
+        bool AddTester(Tester tester);
         bool RemoveTester(Tester tester);
         bool UpdateTester(Tester tester);
 
