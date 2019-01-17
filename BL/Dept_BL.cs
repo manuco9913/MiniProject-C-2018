@@ -113,15 +113,15 @@ namespace BL
         {
             try
             {
-                if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
+                if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
                     throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-                if (!testedRecently(drivingTest.Trainee_ID))
+                if (!testedRecently(drivingTest.Trainee_ID)) // need to do
                     throw new Exception("The trainee cannot take the test since he was tested recently");
-                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
+                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
                     throw new Exception("Tester and trainee do not use the same type of car");
-                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+                if (!testerMaxTestWeekly(drivingTest.Tester_ID))// need to do
                     throw new Exception("Tester reached his maximum number of tests");
-                if (!testerAvailableTesting(drivingTest.Tester_ID))
+                if (!testerAvailableTesting(drivingTest.Tester_ID))// need to do
                     throw new Exception("The tester is not available during these hours");
 
                     
@@ -165,7 +165,29 @@ namespace BL
         }
 
         public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
-        public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
+        public bool UpdateDrivingTest(DrivingTest drivingTest)
+        {
+            bool check = true;
+            try
+            {
+                if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
+                    throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
+                if (!testedRecently(drivingTest.Trainee_ID))
+                    throw new Exception("The trainee cannot take the test since he was tested recently");
+                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
+                    throw new Exception("Tester and trainee do not use the same type of car");
+                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+                    throw new Exception("Tester reached his maximum number of tests");
+                if (!testerAvailableTesting(drivingTest.Tester_ID))
+                    throw new Exception("The tester is not available during these hours");
+                check = instance.UpdateDrivingTest(drivingTest);
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+            return check;
+        }
 
     
 
