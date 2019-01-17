@@ -109,7 +109,39 @@ namespace BL
             return check;
         }
 
-        public bool AddDrivingTest(DrivingTest drivingTest) { return false; }
+        public bool AddDrivingTest(DrivingTest drivingTest)
+        {
+            try
+            {
+                if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
+                    throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
+                //if (!testedRecently(drivingTest.Trainee_ID))
+                //    throw new Exception("The trainee cannot take the test since he was tested recently");
+                
+
+                instance.AddDrivingTest(drivingTest);
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
+            return true;
+        }
+
+        //private bool testedRecently(string trainee_ID)
+        //{
+        //    if(instance.GetDrivingTests(item => i)
+        //    { }
+        //}
+
+        private bool overMinLessonsTrainee(string trainee_ID)
+        {
+            if (GetTrainee(trainee_ID).LessonsNb < Configuration.MIN_LESSONS)
+                return false;
+            return true;
+        }
+
         public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
         public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
 
