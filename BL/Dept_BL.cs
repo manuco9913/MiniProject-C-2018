@@ -142,11 +142,6 @@ namespace BL
             return true;
         }
 
-        //private bool testedRecently(string trainee_ID)
-        //{
-        //    if(instance.GetDrivingTests(item => i)
-        //    { }
-        //}
 
         private bool overMinLessonsTrainee(string trainee_ID)
         {
