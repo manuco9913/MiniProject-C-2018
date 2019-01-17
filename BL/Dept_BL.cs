@@ -119,6 +119,11 @@ namespace BL
                     throw new Exception("The trainee cannot take the test since he was tested recently");
                 if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
                     throw new Exception("Tester and trainee do not use the same type of car");
+                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+                    throw new Exception("Tester reached his maximum number of tests");
+                if (!testerAvailableTesting(drivingTest.Tester_ID))
+                    throw new Exception("The tester is not available during these hours");
+
                     
                 
 
@@ -129,6 +134,16 @@ namespace BL
                 throw e;
 
             }
+            return true;
+        }
+
+        private bool testerAvailableTesting(string tester_ID)
+        {
+            return true;
+        }
+
+        private bool testerMaxTestWeekly(string tester_ID)
+        {
             return true;
         }
 
