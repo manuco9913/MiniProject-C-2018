@@ -163,16 +163,13 @@ namespace DAL
         }
         public bool UpdateDrivingTest(DrivingTest drivingTest)
         {
+            int index = GetDrivingTests().FindIndex(s => s.ID == drivingTest.ID); // index = index of the tester we are looking for
+            if (index == -1)
             {
-
-                int index = GetDrivingTests().FindIndex(s => s.ID == drivingTest.ID); // index = index of the tester we are looking for
-                if (index == -1)
-                {
-                    throw new Exception("Driving Test with the same id not found...");
-                }
-                GetDrivingTests()[index] = drivingTest;
-                return true;
+                throw new Exception("Driving Test with the same id not found...");
             }
+            GetDrivingTests()[index] = drivingTest;
+            return true;
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
