@@ -117,7 +117,10 @@ namespace BL
                     throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
                 //if (!testedRecently(drivingTest.Trainee_ID))
                 //    throw new Exception("The trainee cannot take the test since he was tested recently");
-                
+                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+                    throw new Exception("Taster reached his maximum number of tests");
+                if (!testerAvailableTesting(drivingTest.Tester_ID))
+                    throw new Exception("The tester is not available during these hours");
 
                 instance.AddDrivingTest(drivingTest);
             }
@@ -126,6 +129,16 @@ namespace BL
                 throw e;
 
             }
+            return true;
+        }
+
+        private bool testerAvailableTesting(string tester_ID)
+        {
+            return true;
+        }
+
+        private bool testerMaxTestWeekly(string tester_ID)
+        {
             return true;
         }
 
