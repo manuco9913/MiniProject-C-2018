@@ -150,7 +150,7 @@ namespace BL
             return GetTester(tester_ID).Expertise == GetTrainee(trainee_ID).CarTrained;
         }
         private bool testedRecently(string trainee_ID)
-        {
+        { 
             return true;
         }
         private bool overMinLessonsTrainee(string trainee_ID)
@@ -175,7 +175,10 @@ namespace BL
         }
         public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
 
-    
+        //We need to implement this
+        public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
+        //We need to implement this
+        public List<DrivingTest> GetAllDrivingTestsThat(Func<DrivingTest,bool> predicate) { return null; }
 
         public List<Tester> GetTesters()
         {
@@ -203,7 +206,7 @@ namespace BL
         }
         public Trainee GetTrainee(string id) { return new Trainee(); }//not sure we need this
 
-        public List<DrivingTest> GetDrivingTests() { return null; }
+        public List<DrivingTest> GetAllDrivingTests() { return null; }
 
         public IEnumerable<Person> GetAllPersons()
         {

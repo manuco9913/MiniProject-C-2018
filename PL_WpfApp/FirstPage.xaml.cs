@@ -41,5 +41,19 @@ namespace PL_WpfApp
             this.NavigationService.Navigate(new PageAddUser());
         }
 
+        private void ClickAddTester(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageAddTester());
+        }
+
+        private void ClickAddTest(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageAddTest());
+        }
+
+        private void ClickAddTrainee(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageAddTrainee());
+        }
     }
 }

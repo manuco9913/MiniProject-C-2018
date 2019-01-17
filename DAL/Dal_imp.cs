@@ -18,34 +18,22 @@ namespace DAL
         #region Tester
         public bool AddTester(Tester tester)
         {
-            if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
-            {
-                throw new Exception("Tester under 40 years");
-            }
-            foreach (Tester item in DS.DataSource.TestersList)
-            {
-                if(item.ID == tester.ID)
-                {
-                    throw new Exception("Tester already exist");
-                 //   return false;
-                }
-            }
-            DS.DataSource.TestersList.Add(tester.Clone());
+            DS.DataSource.TestersList.Add(tester);
             return true;
         }
         public bool UpdateTester(Tester tester)
         {
+            //    int index = GetTesters().FindIndex(s => s.ID == tester.ID); // index = index of the tester we are looking for
+            //    if (index == -1)
+            //    {
+            //        throw new Exception("Tester with the same id not found...");
+            //    }
+            //    GetTesters()[index] = tester;
 
-            if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
-            {
-                throw new Exception("Tester under 40 years");
-            }
-            int index = GetTesters().FindIndex(s => s.ID == tester.ID); // index = index of the tester we are looking for
-            if (index == -1)
-            {
-                throw new Exception("Tester with the same id not found...");
-            }
-            GetTesters()[index] = tester;
+            Tester result = (from item1 in DS.DataSource.TestersList
+                             where item1.ID == tester.ID
+                             select item1).FirstOrDefault();
+
             return true;
 
         }

@@ -17,7 +17,7 @@ namespace BL
         bool UpdateTester(Tester tester);
         bool UpdateTrainee(Trainee trainee);
 
-        List<DrivingTest> GetDrivingTests();
+        List<DrivingTest> GetAllDrivingTests();
         List<Tester> GetTesters();
         Tester GetTester(string id);//not sure we need this
         List<Trainee> GetTrainees();
