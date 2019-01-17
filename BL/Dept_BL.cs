@@ -110,6 +110,7 @@ namespace BL
 
         public bool AddDrivingTest(DrivingTest drivingTest)
         {
+            GetTesters(drivingTest.Tester_ID);
             /* 
              drivingTest.Requirements
              try
