@@ -141,22 +141,18 @@ namespace BL
         {
             return true;
         }
-
         private bool testerMaxTestWeekly(string tester_ID)
         {
             return true;
         }
-
         private bool testerAndTraineeUseSameCarType(string tester_ID, string trainee_ID)
         {
             return GetTester(tester_ID).Expertise == GetTrainee(trainee_ID).CarTrained;
         }
-
         private bool testedRecently(string trainee_ID)
         {
             return true;
         }
-
         private bool overMinLessonsTrainee(string trainee_ID)
         {
             if (GetTrainee(trainee_ID).LessonsNb < Configuration.MIN_LESSONS)
@@ -164,7 +160,19 @@ namespace BL
             return true;
         }
 
-        public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
+        public bool RemoveDrivingTest(DrivingTest drivingTest)
+        {
+            bool b = true;
+            try
+            {
+                b = instance.RemoveDrivingTest(drivingTest);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return b;
+        }
         public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
 
     
