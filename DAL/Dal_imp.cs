@@ -182,14 +182,14 @@ namespace DAL
             temp_test.Requirements.Clear();
             return GetDrivingTests().Remove(temp_test);
         }
-        public List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> predicate = null)
+        public List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> predicate1 = null)
         {
             IEnumerable<DrivingTest> result = null;
 
-            if (predicate != null)
+            if (predicate1 != null)
             {
                 result = from t in DS.DataSource.DrivingtestsList
-                         where (predicate(t))
+                         where (predicate1(t))
                          select t.Clone();
             }
             else
