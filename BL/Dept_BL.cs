@@ -113,15 +113,15 @@ namespace BL
         {
             try
             {
-                if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
+                if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
                     throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-                if (!testedRecently(drivingTest.Trainee_ID))
+                if (!testedRecently(drivingTest.Trainee_ID)) // need to do
                     throw new Exception("The trainee cannot take the test since he was tested recently");
-                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
+                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
                     throw new Exception("Tester and trainee do not use the same type of car");
-                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+                if (!testerMaxTestWeekly(drivingTest.Tester_ID))// need to do
                     throw new Exception("Tester reached his maximum number of tests");
-                if (!testerAvailableTesting(drivingTest.Tester_ID))
+                if (!testerAvailableTesting(drivingTest.Tester_ID))// need to do
                     throw new Exception("The tester is not available during these hours");
 
                     
@@ -141,18 +141,22 @@ namespace BL
         {
             return true;
         }
+
         private bool testerMaxTestWeekly(string tester_ID)
         {
             return true;
         }
+
         private bool testerAndTraineeUseSameCarType(string tester_ID, string trainee_ID)
         {
             return GetTester(tester_ID).Expertise == GetTrainee(trainee_ID).CarTrained;
         }
+
         private bool testedRecently(string trainee_ID)
         { 
             return true;
         }
+
         private bool overMinLessonsTrainee(string trainee_ID)
         {
             if (GetTrainee(trainee_ID).LessonsNb < Configuration.MIN_LESSONS)
@@ -160,20 +164,30 @@ namespace BL
             return true;
         }
 
-        public bool RemoveDrivingTest(DrivingTest drivingTest)
+        public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
+        public bool UpdateDrivingTest(DrivingTest drivingTest)
         {
-            bool b = true;
+            bool check = true;
             try
             {
-                b = instance.RemoveDrivingTest(drivingTest);
+                if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
+                    throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
+                if (!testedRecently(drivingTest.Trainee_ID))
+                    throw new Exception("The trainee cannot take the test since he was tested recently");
+                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
+                    throw new Exception("Tester and trainee do not use the same type of car");
+                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+                    throw new Exception("Tester reached his maximum number of tests");
+                if (!testerAvailableTesting(drivingTest.Tester_ID))
+                    throw new Exception("The tester is not available during these hours");
+                check = instance.UpdateDrivingTest(drivingTest);
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
-                throw e;
+                throw exp;
             }
-            return b;
+            return check;
         }
-        public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
 
         //We need to implement this
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
