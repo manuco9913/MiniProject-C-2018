@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PL_WpfApp"
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="720"
-      Title="FirstPage">
+      Title="MainWindow">
 
     <Grid Margin="-1.5,0,1.5,0">
         <Grid.RowDefinitions>

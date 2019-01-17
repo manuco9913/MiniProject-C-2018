@@ -22,9 +22,11 @@ namespace DAL
         bool UpdateDrivingTest(DrivingTest drivingTest);
 
         List<Tester> GetTesters(Func<Tester, bool> p);
-        List<Tester> GetTesters(); 
+        List<Tester> GetTesters();
+        Tester GetTester(string id);
         List<Trainee> GetTrainees(Func<Trainee,bool> p);
         List<Trainee> GetTrainees();
+        Trainee GetTrainee(string id);
         List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> p);
     }
 }

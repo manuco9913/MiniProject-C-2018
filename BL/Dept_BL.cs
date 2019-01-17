@@ -18,15 +18,16 @@ namespace BL
 
             try
             {
-                if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
+                if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)//checking tester age
                 {
                     throw new Exception("Tester under 40 years");
                 }
+                else
                 instance.AddTester(tester);
             }
             catch (Exception exception)
             {
-                throw exception;
+                throw exception;//if the DAL sent an exception, throw it to the UI/PL
             }
             return true;
         }
@@ -37,12 +38,12 @@ namespace BL
             {
                 b = instance.RemoveTester(tester);
             }
-            catch (Exception e)
+            catch (Exception e)//if this tester doesn't exist, the DAL  will throw an exception
             {
                 throw e;
             }
             return b;  
-        } 
+        }
         public bool UpdateTester(Tester tester)
         {
             bool check = true;
@@ -50,15 +51,15 @@ namespace BL
             {
                 if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
                 {
-                    throw new Exception("tester under 40 years");
+                    throw new Exception("Tester under 40 years");
                 }
-                check =instance.UpdateTester(tester);
+                check = instance.UpdateTester(tester);
             }
             catch (Exception exp)
             {
                 throw exp;
             }
-            return check ;
+            return check;
         }
 
         public bool AddTrainee(Trainee trainee)
@@ -108,33 +109,23 @@ namespace BL
             return check;
         }
 
-        public bool AddDrivingTest(DrivingTest drivingTest)
-        {
-            GetTesters(drivingTest.Tester_ID);
-            /* 
-             drivingTest.Requirements
-             try
-             {
-                 if ()
-                 {
-                     throw new Exception("Trainee under 18 years");
-                 }
-                 instance.AddTrainee(trainee);
-             }
-             catch (Exception exception)
-             {
-                 throw exception;
-             }
-             return true;
-             */
-        }
+        public bool AddDrivingTest(DrivingTest drivingTest) { return false; }
         public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
         public bool UpdateDrivingTest(DrivingTest drivingTest) { return true; }
 
         public List<Tester> GetTesters()
         {
-            return instance.GetTesters();
+            try
+            {
+                return instance.GetTesters();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
+        public Tester GetTester(string id) { return new Tester(); }//not sure we need this
+
         public List<Trainee> GetTrainees()
         {
             try
@@ -146,6 +137,8 @@ namespace BL
                 throw exception;
             }
         }
+        public Trainee GetTrainee(string id) { return new Trainee(); }//not sure we need this
+
         public List<DrivingTest> GetDrivingTests() { return null; }
 
         public IEnumerable<Person> GetAllPersons()
