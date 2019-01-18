@@ -25,15 +25,15 @@ namespace PL_WpfApp
 
         public PageAddTester()
         {
-            bl = BL.FactorySingletonBL.getInstance();
             InitializeComponent();
+            this.grid1.DataContext = tester;
+            bl = BL.FactorySingletonBL.getInstance();
             tester = new BE.Tester();
             tester.Address = new BE.Address();
             tester.Name = new BE.Name();
             tester.Schedule = new BE.Schedule();
             this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
 
-            this.grid1.DataContext = tester;
             this.firstNameTextBox.Text = tester.Name.FirstName;
         }
 
