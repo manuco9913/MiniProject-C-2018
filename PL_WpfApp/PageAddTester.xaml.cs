@@ -33,8 +33,8 @@ namespace PL_WpfApp
             tester.Schedule = new BE.Schedule();
             this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
 
-            this.grid1.DataContext = tester;
-            this.firstNameTextBox.Text = tester.Name.FirstName;
+            //this.grid1.DataContext = tester;
+            //this.firstNameTextBox.Text = tester.Name.FirstName;
         }
 
         private void Update_TesterInformation(object sender, RoutedEventArgs e)
