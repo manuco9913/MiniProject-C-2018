@@ -9,6 +9,11 @@
       Title="MainWindow">
 
     <Grid Margin="-1.5,0,1.5,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -16,13 +21,16 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Welcome to the new system of licensing tests" Margin="10,10,10,10" FontSize="34" TextAlignment="Center" Foreground="Black" Grid.Row="0" />
-        <TextBox x:Name="UsernameTextBox" Grid.Row="2" MinWidth="112" Foreground="DarkGray" Background="{x:Null}" TextWrapping="Wrap" Text="Username" HorizontalAlignment="Center" VerticalAlignment="Center" Height="44" FontSize="24" GotFocus="UsernameTextBox_GotFocus" Cursor="Hand">
+        <TextBlock Text="Welcome to the new system of licensing tests" Margin="10,10,10,10" FontSize="34" TextAlignment="Center" Foreground="Black" Grid.Row="0" Grid.ColumnSpan="3" />
+        <TextBox x:Name="UsernameTextBox" Grid.Row="2" MinWidth="112" Foreground="DarkGray" Background="{x:Null}" TextWrapping="Wrap" Text="Username" HorizontalAlignment="Center" VerticalAlignment="Center" Height="44" FontSize="24" GotFocus="UsernameTextBox_GotFocus" Cursor="Hand" Grid.Column="1">
 
 
         </TextBox>
-        <PasswordBox x:Name="Password_User" Grid.Row="3" Background="{x:Null}"  HorizontalAlignment="Center" Height="27.273" VerticalAlignment="Center" Width="204.545" FontSize="22"/>
-        <Button Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Center" Height="27.273" Grid.Row="4" Width="200" Click="ButtonClickTo_AddUser"/>
+        <PasswordBox x:Name="Password_User" Grid.Row="3" Background="{x:Null}"  HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="204" FontSize="22" Grid.Column="1" />
+        <Button Content="Add Trainee" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" Margin="10,10,10,10" Click="ClickAddTrainee" />
+        <Button Content="Add Tester" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="10,10,10,10" Click="ClickAddTester" />
+        <Button Content="Add Test" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="10,10,10,10" Click="ClickAddTest" />
+        <Button Content="Sign in" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Grid.Row="4" Click="ButtonClickTo_AddUser" Grid.Column="1" Margin="10,10,10,10" />
 
 
     </Grid>

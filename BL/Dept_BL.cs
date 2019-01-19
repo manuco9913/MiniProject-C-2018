@@ -153,7 +153,7 @@ namespace BL
         }
 
         private bool testedRecently(string trainee_ID)
-        {
+        { 
             return true;
         }
 
@@ -189,27 +189,11 @@ namespace BL
             return check;
         }
 
+        //We need to implement this
+        public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
+        //We need to implement this
+        public List<DrivingTest> GetAllDrivingTestsThat(Func<DrivingTest,bool> predicate) { return null; }
 
-        //public void DIstanceBeetweenTowns()
-        //{
-        //    /*
-        //     namespace distance
-        // { 
-        //     public partial class mainwindow:Window
-        //    {
-        //     string API_KEY = @"dghdgh";
-        //     backgroundWorker=backgroundworker;
-        //     BE.Adress adressA = new BA.Adress;
-        //     BE.Adress adressB = new BA.Adress;
-        //    } 
-        //    public MainWindow()
-        //    adressA.City = "ירושלים" ;
-        //    adressB.StreetName = "בורלא" ;
-
-        // }
-
-        //         */
-        //}
         public List<Tester> GetTesters()
         {
             try
@@ -236,7 +220,7 @@ namespace BL
         }
         public Trainee GetTrainee(string id) { return new Trainee(); }//not sure we need this
 
-        public List<DrivingTest> GetDrivingTests() { return null; }
+        public List<DrivingTest> GetAllDrivingTests() { return null; }
 
         public IEnumerable<Person> GetAllPersons()
         {
