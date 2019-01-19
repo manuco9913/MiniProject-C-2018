@@ -189,8 +189,27 @@ namespace BL
             return check;
         }
 
-    
 
+        //public void DIstanceBeetweenTowns()
+        //{
+        //    /*
+        //     namespace distance
+        // { 
+        //     public partial class mainwindow:Window
+        //    {
+        //     string API_KEY = @"dghdgh";
+        //     backgroundWorker=backgroundworker;
+        //     BE.Adress adressA = new BA.Adress;
+        //     BE.Adress adressB = new BA.Adress;
+        //    } 
+        //    public MainWindow()
+        //    adressA.City = "ירושלים" ;
+        //    adressB.StreetName = "בורלא" ;
+
+        // }
+
+        //         */
+        //}
         public List<Tester> GetTesters()
         {
             try
