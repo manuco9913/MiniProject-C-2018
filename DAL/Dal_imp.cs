@@ -70,7 +70,6 @@ namespace DAL
         public void AddTrainee(Trainee trainee)
         {
             DS.DataSource.TraineesList.Add(trainee);
-            return true;
         }
         public bool RemoveTrainee(Trainee trainee)
         {
@@ -88,7 +87,6 @@ namespace DAL
             result.GearType = trainee.GearType;
             result.Instructor = trainee.Instructor;
             result.LessonsNb = trainee.LessonsNb;
-            return true;
         }
         public bool TraineeExist(Trainee trainee)
         {

@@ -50,7 +50,7 @@ namespace BL
             return instance.TesterExist(tester);
         }
 
-        public bool AddTrainee(Trainee trainee)
+        public void AddTrainee(Trainee trainee)
         {
             if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
                 throw new Exception("Trainee under 18 years");
@@ -58,7 +58,6 @@ namespace BL
                 throw new Exception("This trainee already exists");
 
             instance.AddTrainee(trainee);
-            return true;
         }
         public bool RemoveTrainee(Trainee trainee)
         {
@@ -73,22 +72,12 @@ namespace BL
             }
             return b;
         }
-        public bool UpdateTrainee(Trainee trainee)
+        public void UpdateTrainee(Trainee trainee)
         {
-            bool check = true;
-            try
-            {
-                if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
-                {
-                    throw new Exception("Trainee under 18 years");
-                }
-                check = instance.UpdateTrainee(trainee);
-            }
-            catch (Exception exp)
-            {
-                throw exp;
-            }
-            return check;
+            if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
+                throw new Exception("Trainee under 18 years");
+
+            instance.UpdateTrainee(trainee);
         }
         public bool TraineeExist(Trainee trainee)
         {

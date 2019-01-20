@@ -7,7 +7,7 @@ namespace BL
     {
         void AddDrivingTest(DrivingTest drivingTest);
         void AddTester(Tester tester);
-        bool AddTrainee(Trainee trainee);
+        void AddTrainee(Trainee trainee);
 
         bool TesterExist(Tester tester);
         bool TraineeExist(Trainee trainee);
@@ -19,7 +19,7 @@ namespace BL
 
         void UpdateDrivingTest(DrivingTest drivingTest);
         void UpdateTester(Tester tester);
-        bool UpdateTrainee(Trainee trainee);
+        void UpdateTrainee(Trainee trainee);
 
         List<DrivingTest> GetAllDrivingTests();
         List<Tester> GetTesters();
