@@ -16,7 +16,6 @@ namespace BL
 
         public bool AddTester(Tester tester)
         {
-
             try
             {
                 if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)//checking tester age

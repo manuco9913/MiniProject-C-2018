@@ -28,6 +28,7 @@ namespace PL_WpfApp
             InitializeComponent();
             this.grid1.DataContext = tester;
             bl = BL.FactorySingletonBL.getInstance();
+
             tester = new BE.Tester();
             tester.Address = new BE.Address();
             tester.Name = new BE.Name();
