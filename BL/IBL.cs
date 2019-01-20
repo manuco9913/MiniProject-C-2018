@@ -3,18 +3,22 @@ using BE;
 
 namespace BL
 {
-    public interface IBL
+    public interface IBL//מה יותר יפה? כל האדדים והרמובים וכו' ביחד? או כמו באיידל לפי ישות
     {
-        bool AddDrivingTest(DrivingTest drivingTest);
-        bool AddTester(Tester tester);
+        void AddDrivingTest(DrivingTest drivingTest);
+        void AddTester(Tester tester);
         bool AddTrainee(Trainee trainee);
 
+        bool TesterExist(Tester tester);
+        bool TraineeExist(Tester tester);
+        bool DrivingTestExist(Tester tester);
+
         bool RemoveDrivingTest(DrivingTest drivingTest);
-        bool RemoveTester(Tester tester);
+        void RemoveTester(Tester tester);
         bool RemoveTrainee(Trainee trainee);
 
-        bool UpdateDrivingTest(DrivingTest drivingTest);
-        bool UpdateTester(Tester tester);
+        void UpdateDrivingTest(DrivingTest drivingTest);
+        void UpdateTester(Tester tester);
         bool UpdateTrainee(Trainee trainee);
 
         List<DrivingTest> GetAllDrivingTests();

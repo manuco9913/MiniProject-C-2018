@@ -9,24 +9,29 @@ namespace DAL
 {
     public interface Idal
     {
-        bool AddTester(Tester tester);
+        void AddTester(Tester tester);
         bool RemoveTester(Tester tester);
-        bool UpdateTester(Tester tester);
+        void UpdateTester(Tester tester);
         bool TesterExist(Tester tester);
 
-        bool AddTrainee(Trainee trainee);
+        void AddTrainee(Trainee trainee);
         bool RemoveTrainee(Trainee trainee);
-        bool UpdateTrainee(Trainee trainee);
+        void UpdateTrainee(Trainee trainee);
+        bool TraineeExist(Trainee trainee);
 
-        bool AddDrivingTest(DrivingTest drivingTest);
+
+        void AddDrivingTest(DrivingTest drivingTest);
         bool RemoveDrivingTest(DrivingTest drivingTest);
-        bool UpdateDrivingTest(DrivingTest drivingTest);
+        void UpdateDrivingTest(DrivingTest drivingTest);
+        bool DrivingTestExist(DrivingTest test);
 
-        List<Tester> GetTesters(Func<Tester, bool> p);
+        List<Tester> GetTesters(Func<Tester, bool> p = null);
         Tester GetTester(string id);
-        List<Trainee> GetTrainees(Func<Trainee,bool> p);
+
+        List<Trainee> GetTrainees(Func<Trainee, bool> p = null);
         List<Trainee> GetTrainees();
+
         Trainee GetTrainee(string id);
-        List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> p);
+        List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> p = null);
     }
 }

@@ -16,12 +16,15 @@ namespace DAL
         }
 
         #region Tester
-        public bool AddTester(Tester tester)
+        public void AddTester(Tester tester)
         {
             DS.DataSource.TestersList.Add(tester);
-            return true;
         }
-        public bool UpdateTester(Tester tester)
+        public bool RemoveTester(Tester tester)
+        {
+            return GetTesters().Remove(tester);
+        }
+        public void UpdateTester(Tester tester)
         {
             Tester result = (from item1 in DS.DataSource.TestersList
                              where item1.ID == tester.ID
@@ -32,14 +35,12 @@ namespace DAL
             result.Experience = tester.Experience;
             result.Expertise = tester.Expertise;
             result.MaxDistance = tester.MaxDistance;
-            return true;
-
         }
-        public bool RemoveTester(Tester tester)
+        public bool TesterExist(Tester tester)
         {
-            Tester temp_tester = GetTester(tester.ID);
-            return GetTesters().Remove(temp_tester);
-
+            if (GetTesters().Exists(tstr => tstr.ID == tester.ID))
+                return true;
+            return false;
         }
         public List<Tester> GetTesters(Func<Tester, bool> predicate = null)//to get either all the testers or the one that the predicate return true for
         {
@@ -66,39 +67,34 @@ namespace DAL
         #endregion
 
         #region Trainee
-        public bool AddTrainee(Trainee trainee)
+        public void AddTrainee(Trainee trainee)
         {
-            foreach (Trainee item in DS.DataSource.TraineesList)
-            {
-                if (item.ID == trainee.ID)
-                {
-                    throw new Exception("Trainee already exist");
-                }
-            }
             DS.DataSource.TraineesList.Add(trainee);
             return true;
         }
-        public bool UpdateTrainee(Trainee trainee)
-        {
-            if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
-            {
-                throw new Exception("Trainee under 18");
-            }
-            int index = GetTrainees().FindIndex(s => s.ID == trainee.ID); // index = index of the trainee we are looking for
-            if (index == -1)
-            {
-                throw new Exception("Tester with the same id not found...");
-            }
-            GetTrainees()[index] = trainee;
-            return true;
-
-        }
         public bool RemoveTrainee(Trainee trainee)
         {
-            Trainee temp_trainee = GetTrainee(trainee.ID);
-            if (temp_trainee == null)
-                throw new Exception("Trainee with the same id not found...");
-            return GetTrainees().Remove(temp_trainee);
+            return GetTrainees().Remove(trainee);
+        }
+        public void UpdateTrainee(Trainee trainee)
+        {
+            var result = (from item in GetTrainees()
+                          where item.ID == trainee.ID
+                          select item).FirstOrDefault();
+            result.Address.City = trainee.Address.City;
+            result.Address.StreetName = trainee.Address.StreetName;
+            result.Address.Number = trainee.Address.Number;
+            result.DrivingSchool = trainee.DrivingSchool;
+            result.GearType = trainee.GearType;
+            result.Instructor = trainee.Instructor;
+            result.LessonsNb = trainee.LessonsNb;
+            return true;
+        }
+        public bool TraineeExist(Trainee trainee)
+        {
+            if (GetTrainees().Exists(item => item.ID == trainee.ID))
+                return true;
+            return false;
         }
         public List<Trainee> GetTrainees(Func<Trainee, bool> predicate = null)
         {
@@ -108,50 +104,61 @@ namespace DAL
             {
                 result = from t in DS.DataSource.TraineesList
                          where (predicate(t))
-                         select t.Clone();
+                         select t;
             }
             else
             {
                 result = from t in DS.DataSource.TraineesList
-                         select t.Clone();
+                         select t;
             }
             return result.ToList();
         }
         public List<Trainee> GetTrainees()
         {
             var result = from t in DS.DataSource.TraineesList
-                         select t.Clone();
+                         select t;
             return result.ToList();
         }
         public Trainee GetTrainee(string id)
         {
             return GetTrainees().FirstOrDefault(tmp_trainee => tmp_trainee.ID == id);
         }
+
         #endregion
 
         #region DrivingTest
-        public bool AddDrivingTest(DrivingTest drivingTest)
+        public void AddDrivingTest(DrivingTest drivingTest)
         {
-            DS.DataSource.DrivingtestsList.Add(drivingTest.Clone());
-            return true;
-        }
-        public bool UpdateDrivingTest(DrivingTest drivingTest)
-        {
-            int index = GetDrivingTests().FindIndex(s => s.ID == drivingTest.ID); // index = index of the tester we are looking for
-            if (index == -1)
-            {
-                throw new Exception("Driving Test with the same id not found...");
-            }
-            GetDrivingTests()[index] = drivingTest;
-            return true;
+            DS.DataSource.DrivingtestsList.Add(drivingTest);
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
             DrivingTest temp_test = GetDrivingTest(drivingTest);
-            if (temp_test == null)
-                throw new Exception("Driving Test with the same id not found...");
             temp_test.Requirements.Clear();
             return GetDrivingTests().Remove(temp_test);
+        }
+        public void UpdateDrivingTest(DrivingTest drivingTest)
+        {
+            //int index = GetDrivingTests().FindIndex(s => s.ID == drivingTest.ID); // index = index of the tester we are looking for
+            //if (index == -1)
+            //{
+            //    throw new Exception("Driving Test with the same id not found...");
+            //}
+            //GetDrivingTests()[index] = drivingTest;
+            //return true;
+            var result = (from item in DS.DataSource.DrivingtestsList
+                          where item.ID == drivingTest.ID
+                          select item).FirstOrDefault();
+            result.StartingPoint.City = drivingTest.StartingPoint.City;
+            result.Success = drivingTest.Success;
+            result.Tester_ID = drivingTest.Tester_ID;
+            result.Time = drivingTest.Time;
+        }
+        public bool DrivingTestExist(DrivingTest test)
+        {
+            if (GetDrivingTests().Exists(item => item.ID == test.ID))
+                return true;
+            return false;
         }
         public List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> predicate1 = null)
         {
@@ -161,12 +168,12 @@ namespace DAL
             {
                 result = from t in DS.DataSource.DrivingtestsList
                          where (predicate1(t))
-                         select t.Clone();
+                         select t;
             }
             else
             {
                 result = from t in DS.DataSource.DrivingtestsList
-                         select t.Clone();
+                         select t;
             }
             return result.ToList();
         }

@@ -14,52 +14,29 @@ namespace BL
 
         private static DAL.Idal instance = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
 
-        public bool AddTester(Tester tester)
+        public void AddTester(Tester tester)
         {
-            try
+            if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)//checking tester age
             {
-                if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)//checking tester age
-                {
-                    throw new Exception("Tester under 40 years");
-                }
-                else
+                throw new Exception("Tester under 40 years");
+            }
+            else
                 instance.AddTester(tester);
-            }
-            catch (Exception exception)
-            {
-                throw exception;//if the DAL sent an exception, throw it to the UI/PL
-            }
-            return true;
         }
-        public bool RemoveTester(Tester tester)
+        public void RemoveTester(Tester tester)
         {
-            bool b = true;
-            try
-            {
-                b = instance.RemoveTester(tester);
-            }
-            catch (Exception e)//if this tester doesn't exist, the DAL  will throw an exception
-            {
-                throw e;
-            }
-            return b;  
+            bool b = instance.TesterExist(tester);
+            instance.RemoveTester(tester);
+
         }
-        public bool UpdateTester(Tester tester)
+        public void UpdateTester(Tester tester)
         {
-            bool check = true;
-            try
-            {
-                if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
-                {
-                    throw new Exception("Tester under 40 years");
-                }
-                check = instance.UpdateTester(tester);
-            }
-            catch (Exception exp)
-            {
-                throw exp;
-            }
-            return check;
+            if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
+                throw new Exception("Tester under 40 years");
+            if (!instance.TesterExist(tester))
+                throw new Exception("This tester doesn't exist");
+            else
+                instance.UpdateTester(tester);
         }
 
         public bool AddTrainee(Trainee trainee)
@@ -109,7 +86,7 @@ namespace BL
             return check;
         }
 
-        public bool AddDrivingTest(DrivingTest drivingTest)
+        public void AddDrivingTest(DrivingTest drivingTest)
         {
             try
             {
@@ -121,11 +98,11 @@ namespace BL
                     throw new Exception("Tester and trainee do not use the same type of car");
                 if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester do more tests in week than the max he can do
                     throw new Exception("Tester reached his maximum number of tests");
-                if (!testerAvailableTesting(drivingTest.Tester_ID,drivingTest.Date))//If the tester is available then you can set a test but if it is not available then you cant
+                if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if it is not available then you cant
                     throw new Exception("The tester is not available during these hours");
 
-                    
-                
+
+
 
                 instance.AddDrivingTest(drivingTest);
             }
@@ -134,27 +111,26 @@ namespace BL
                 throw e;
 
             }
-            return true;
         }
 
-        private bool testerAvailableTesting(string tester_ID,DateTime date)
+        private bool testerAvailableTesting(string tester_ID, DateTime date)
         {
             if (date.Hour > 14 || date.Hour < 9)
                 return false;
-                List<DrivingTest> res = GetAllDrivingTestsThat(temp_dt => temp_dt.Tester_ID == tester_ID);
+            List<DrivingTest> res = GetAllDrivingTestsThat(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
             IEnumerable<DrivingTest> result = null;
-            if (res == null)
+            if (res == null)//if there's no tester with that id it means that the tester we are trying to add to the test is available because he has no tests at all
                 return true;
             else
             {
                 result = from t in res
-                         where (date.Subtract(t.Date).Hours >= 1) //Checks that the difference between the time Trainee wants to set the test and the time the tester is working and makes sure it is at least an hour
+                         where (date.Subtract(t.Date).Hours >= 1) //Checks that the difference between the time the Trainee wants to set the test at, and the time the tester is working at. and makes sure it is at least an hour
                          select t;
-                if (result == null) //if we found that the is tester not available in any hour so we said that the tester is not available
+                if (result == null) //result==null => found that this tester is not available in any hour
                 {
                     return false;
                 }
-                return true; // if we found the tester is avaiable for least 1 hour so we can set a test with this tester
+                return true; // if we found that the tester is avaiable for least 1 hour, we can set a test with this tester!!
             }
 
             //-------------------------------IMPORTANT--------------------------------
@@ -163,20 +139,20 @@ namespace BL
             /// tester from the list of testers that is available
             //------------------------------------------------------------------------
         }
-        private bool AreFallingInSameWeek(DateTime date1, DateTime date2) // check if 2 dates in the same week
+        private bool AreFallingInSameWeek(DateTime date1, DateTime date2) // check if 2 dates are in the same week
         {
             return date1.AddDays(-(int)date1.DayOfWeek) == date2.AddDays(-(int)date2.DayOfWeek);
         }
         private bool testerMaxTestWeekly(string tester_ID)
         {
-            List<DrivingTest> res = GetAllDrivingTestsThat(temp_dt => temp_dt.Tester_ID == tester_ID);
+            List<DrivingTest> res = GetAllDrivingTestsThat(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
             IEnumerable<DrivingTest> result = null;
             if (res == null)
                 return false;
             else
             {
                 result = from t in res
-                         where (AreFallingInSameWeek(t.Date,DateTime.Now) )
+                         where (AreFallingInSameWeek(t.Date, DateTime.Now))
                          select t;
                 if (result == null)
                 {
@@ -192,12 +168,10 @@ namespace BL
                 }
             }
         }
-
         private bool testerAndTraineeUseSameCarType(string tester_ID, string trainee_ID)
         {
             return GetTester(tester_ID).Expertise == GetTrainee(trainee_ID).CarTrained;
         }
-
         private bool testedRecently(string trainee_ID)
         {
             // DrivingTest temp = new DrivingTest();
@@ -221,7 +195,6 @@ namespace BL
                 }
             }
         }
-
         private bool overMinLessonsTrainee(string trainee_ID)
         {
             if (GetTrainee(trainee_ID).LessonsNb < Configuration.MIN_LESSONS)
@@ -229,10 +202,12 @@ namespace BL
             return true;
         }
 
-        public bool RemoveDrivingTest(DrivingTest drivingTest) { return true; }
-        public bool UpdateDrivingTest(DrivingTest drivingTest)
+        public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
-            bool check = true;
+            return instance.RemoveDrivingTest(drivingTest);
+        }
+        public void UpdateDrivingTest(DrivingTest drivingTest)
+        {
             try
             {
                 if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
@@ -243,65 +218,55 @@ namespace BL
                     throw new Exception("Tester and trainee do not use the same type of car");
                 if (!testerMaxTestWeekly(drivingTest.Tester_ID))
                     throw new Exception("Tester reached his maximum number of tests");
-                if (!testerAvailableTesting(drivingTest.Tester_ID,drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
+                if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
                     throw new Exception("The tester is not available during these hours");
-                check = instance.UpdateDrivingTest(drivingTest);
+                instance.UpdateDrivingTest(drivingTest);
             }
             catch (Exception exp)
             {
                 throw exp;
             }
-            return check;
         }
 
         //We need to implement this
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
-        //We need to implement this
-        public List<DrivingTest> GetAllDrivingTestsThat(Func<DrivingTest,bool> predicate)
+        public List<DrivingTest> GetAllDrivingTestsThat(Func<DrivingTest, bool> predicate)
         {
             return instance.GetDrivingTests(predicate);//use GetDrivingTests in class Dal_imp
         }
 
         public List<Tester> GetTesters()
-        {
-            try
-            {
-                return instance.GetTesters();
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+        {//try and catch????
+            return instance.GetTesters();
         }
-        public Tester GetTester(string id) { return new Tester(); }//not sure we need this
+        public Tester GetTester(string id)
+        {
+            return instance.GetTester(id);
+        }
 
         public List<Trainee> GetTrainees()
-        {
-            try
-            {
-                return instance.GetTrainees();
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+        { //try and catch????
+            return instance.GetTrainees();
         }
-        public Trainee GetTrainee(string id) { return new Trainee(); }//not sure we need this
 
-        public List<DrivingTest> GetAllDrivingTests() { return null; }
+        public Trainee GetTrainee(string id)
+        {
+            return instance.GetTrainee(id);
+        }
+
+        public List<DrivingTest> GetAllDrivingTests()
+        {
+            return instance.GetDrivingTests();
+        }
 
         public IEnumerable<Person> GetAllPersons()
         {
-            IEnumerable<Person> result1 = (from p in instance.GetTrainees(null)
+            IEnumerable<Person> result1 = (from p in instance.GetTrainees()
                                           select p);
             IEnumerable<Person> result2 =(from p in instance.GetTesters()
                                  select p);
             return result1.Concat(result2);
             
         }
-        // private bool SelectMaleTrainee(Trainee t)
-        // {
-        //       return (t.Gender==Gender.MALE);
-        // }
     }
 }
