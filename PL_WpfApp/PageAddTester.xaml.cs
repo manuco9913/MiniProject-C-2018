@@ -26,21 +26,32 @@ namespace PL_WpfApp
         public PageAddTester()
         {
             InitializeComponent();
+
+            tester = new BE.Tester();
             this.grid1.DataContext = tester;
             bl = BL.FactorySingletonBL.getInstance();
 
-            tester = new BE.Tester();
             tester.Address = new BE.Address();
             tester.Name = new BE.Name();
             tester.Schedule = new BE.Schedule();
             this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
+            this.expertiseComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
 
             this.firstNameTextBox.Text = tester.Name.FirstName;
         }
 
         private void Update_TesterInformation(object sender, RoutedEventArgs e)
         {
-            bl.AddTester(tester);
+            try
+            {
+                bl.AddTester(tester);
+                tester = new BE.Tester();
+                this.grid1.DataContext = tester;
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
             this.NavigationService.Navigate(new PageMainTester());
         }
     }

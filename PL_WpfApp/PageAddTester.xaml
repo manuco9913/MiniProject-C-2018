@@ -8,12 +8,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="720"
       Title="PageAddTester">
-    <Page.Resources>
+    <!--<Page.Resources>
         <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
-    </Page.Resources>
+    </Page.Resources>-->
     <Grid Height="350" Width="720">
 
-        <Grid x:Name="grid1"  DataContext="{StaticResource testerViewSource}">
+        <Grid x:Name="grid1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>

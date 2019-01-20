@@ -9,14 +9,14 @@
       d:DesignHeight="350" d:DesignWidth="720"
       Title="PageUpdateTesterAccount">
 
-    <Page.Resources>
+    <!--<Page.Resources>
         <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
-    </Page.Resources>
+    </Page.Resources>-->
 
     <Grid Height="350" Width="720">
 
 
-        <Grid x:Name="grid1"  DataContext="{StaticResource testerViewSource}">
+        <Grid x:Name="grid1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="ID:"/>
-            <TextBlock x:Name="iDTextBox" Width="120" VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <TextBlock x:Name="iDTextBox" Width="120" VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="First Name:"/>
             <TextBox x:Name="firstNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Name.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Last Name:"/>
@@ -60,7 +60,7 @@
             <DatePicker x:Name="dayOfBirthDatePicker" VerticalAlignment="Center" SelectedDate="{Binding DayOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="3"/>
 
 
-            <!--<Button Click="Update_TesterInformation" Content="Finish" FontSize="20" Margin="0,5,0,5" Width="150" Grid.Row="7" HorizontalAlignment="Center" Grid.Column="3"></Button>-->
+            <Button Content="Finish" FontSize="20" Margin="0,5,0,5" Width="150" Grid.Row="7" HorizontalAlignment="Center" Grid.Column="3" Click="Click_GoBackToMainTester"/>
 
         </Grid>
 

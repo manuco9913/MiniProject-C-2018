@@ -20,9 +20,38 @@ namespace PL_WpfApp
     /// </summary>
     public partial class PageUpdateTesterAccount : Page
     {
+        BE.Tester tester;
+        BL.IBL bl;
+
         public PageUpdateTesterAccount()
         {
             InitializeComponent();
+
+            tester = new BE.Tester();
+            this.grid1.DataContext = tester;
+            bl = BL.FactorySingletonBL.getInstance();
+
+            tester.Address = new BE.Address();
+            tester.Name = new BE.Name();
+            tester.Schedule = new BE.Schedule();
+            this.expertiseComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
+
+            this.firstNameTextBox.Text = tester.Name.FirstName;
+        }
+
+        private void Click_GoBackToMainTester(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateTester(tester);
+                tester = new BE.Tester();
+                this.grid1.DataContext = tester;
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            this.NavigationService.Navigate(new PageMainTester());
         }
     }
 }
