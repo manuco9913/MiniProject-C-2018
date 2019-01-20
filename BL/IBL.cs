@@ -10,8 +10,8 @@ namespace BL
         bool AddTrainee(Trainee trainee);
 
         bool TesterExist(Tester tester);
-        bool TraineeExist(Tester tester);
-        bool DrivingTestExist(Tester tester);
+        bool TraineeExist(Trainee trainee);
+        bool DrivingTestExist(DrivingTest drivingTest);
 
         bool RemoveDrivingTest(DrivingTest drivingTest);
         void RemoveTester(Tester tester);

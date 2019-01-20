@@ -38,6 +38,10 @@ namespace BL
             else
                 instance.UpdateTester(tester);
         }
+        public bool TesterExist(Tester tester)
+        {
+            return instance.TesterExist(tester);
+        }
 
         public bool AddTrainee(Trainee trainee)
         {
@@ -85,6 +89,11 @@ namespace BL
             }
             return check;
         }
+        public bool TraineeExist(Trainee trainee)
+        {
+            return instance.TraineeExist(trainee);
+        }
+
 
         public void AddDrivingTest(DrivingTest drivingTest)
         {
@@ -112,7 +121,82 @@ namespace BL
 
             }
         }
+        public bool RemoveDrivingTest(DrivingTest drivingTest)
+        {
+            return instance.RemoveDrivingTest(drivingTest);
+        }
+        public void UpdateDrivingTest(DrivingTest drivingTest)
+        {
+            try
+            {
+                if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
+                    throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
+                if (!testedRecently(drivingTest.Trainee_ID))
+                    throw new Exception("The trainee cannot take the test since he was tested recently");
+                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
+                    throw new Exception("Tester and trainee do not use the same type of car");
+                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+                    throw new Exception("Tester reached his maximum number of tests");
+                if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
+                    throw new Exception("The tester is not available during these hours");
+                instance.UpdateDrivingTest(drivingTest);
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+        }
+        public bool DrivingTestExist(DrivingTest drivingTest)
+        {
+            return instance.DrivingTestExist(drivingTest);
+        }
 
+        //We need to implement this
+        public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
+        public IEnumerable<Person> GetAllPersons()
+        {
+            IEnumerable<Person> result1 = (from p in instance.GetTrainees()
+                                           select p);
+            IEnumerable<Person> result2 = (from p in instance.GetTesters()
+                                           select p);
+            return result1.Concat(result2);
+
+        }
+
+
+        public List<Tester> GetTesters()
+        {//try and catch????
+            return instance.GetTesters();
+        }
+        public Tester GetTester(string id)
+        {
+            return instance.GetTester(id);
+        }
+
+        public List<Trainee> GetTrainees()
+        { //try and catch????
+            return instance.GetTrainees();
+        }
+        public Trainee GetTrainee(string id)
+        {
+            return instance.GetTrainee(id);
+        }
+
+        public List<DrivingTest> GetAllDrivingTests()
+        {
+            return instance.GetDrivingTests();
+        }
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        //we can simply do this with predicate = null and we will have only one function
+        public List<DrivingTest> GetAllDrivingTestsThat(Func<DrivingTest, bool> predicate)
+        {
+            return instance.GetDrivingTests(predicate);//use GetDrivingTests in class Dal_imp
+        }
+
+
+
+
+        //-------------------Test requirments------------------------------------------------------------------------------------------
         private bool testerAvailableTesting(string tester_ID, DateTime date)
         {
             if (date.Hour > 14 || date.Hour < 9)
@@ -200,73 +284,6 @@ namespace BL
             if (GetTrainee(trainee_ID).LessonsNb < Configuration.MIN_LESSONS)
                 return false;
             return true;
-        }
-
-        public bool RemoveDrivingTest(DrivingTest drivingTest)
-        {
-            return instance.RemoveDrivingTest(drivingTest);
-        }
-        public void UpdateDrivingTest(DrivingTest drivingTest)
-        {
-            try
-            {
-                if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
-                    throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-                if (!testedRecently(drivingTest.Trainee_ID))
-                    throw new Exception("The trainee cannot take the test since he was tested recently");
-                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
-                    throw new Exception("Tester and trainee do not use the same type of car");
-                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
-                    throw new Exception("Tester reached his maximum number of tests");
-                if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
-                    throw new Exception("The tester is not available during these hours");
-                instance.UpdateDrivingTest(drivingTest);
-            }
-            catch (Exception exp)
-            {
-                throw exp;
-            }
-        }
-
-        //We need to implement this
-        public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
-        public List<DrivingTest> GetAllDrivingTestsThat(Func<DrivingTest, bool> predicate)
-        {
-            return instance.GetDrivingTests(predicate);//use GetDrivingTests in class Dal_imp
-        }
-
-        public List<Tester> GetTesters()
-        {//try and catch????
-            return instance.GetTesters();
-        }
-        public Tester GetTester(string id)
-        {
-            return instance.GetTester(id);
-        }
-
-        public List<Trainee> GetTrainees()
-        { //try and catch????
-            return instance.GetTrainees();
-        }
-
-        public Trainee GetTrainee(string id)
-        {
-            return instance.GetTrainee(id);
-        }
-
-        public List<DrivingTest> GetAllDrivingTests()
-        {
-            return instance.GetDrivingTests();
-        }
-
-        public IEnumerable<Person> GetAllPersons()
-        {
-            IEnumerable<Person> result1 = (from p in instance.GetTrainees()
-                                          select p);
-            IEnumerable<Person> result2 =(from p in instance.GetTesters()
-                                 select p);
-            return result1.Concat(result2);
-            
         }
     }
 }
