@@ -23,13 +23,6 @@ namespace DAL
         }
         public bool UpdateTester(Tester tester)
         {
-            //    int index = GetTesters().FindIndex(s => s.ID == tester.ID); // index = index of the tester we are looking for
-            //    if (index == -1)
-            //    {
-            //        throw new Exception("Tester with the same id not found...");
-            //    }
-            //    GetTesters()[index] = tester;
-
             Tester result = (from item1 in DS.DataSource.TestersList
                              where item1.ID == tester.ID
                              select item1).FirstOrDefault();
@@ -39,19 +32,16 @@ namespace DAL
             result.Experience = tester.Experience;
             result.Expertise = tester.Expertise;
             result.MaxDistance = tester.MaxDistance;
-            result.MaxTestWeekly
             return true;
 
         }
         public bool RemoveTester(Tester tester)
         {
             Tester temp_tester = GetTester(tester.ID);
-            //if (temp_tester == null)
-            //    throw new Exception("Tester with the same id not found...");
             return GetTesters().Remove(temp_tester);
 
         }
-        public List<Tester> GetTesters(Func<Tester, bool> predicate = null)
+        public List<Tester> GetTesters(Func<Tester, bool> predicate = null)//to get either all the testers or the one that the predicate return true for
         {
             IEnumerable<Tester> result = null;
 
@@ -67,12 +57,6 @@ namespace DAL
                          select t;
             }
 
-            return result.ToList();
-        }
-        public List<Tester> GetTesters()
-        {
-            var result = from t in DS.DataSource.TestersList
-                         select t;
             return result.ToList();
         }
         public Tester GetTester(string id)

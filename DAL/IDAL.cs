@@ -12,6 +12,7 @@ namespace DAL
         bool AddTester(Tester tester);
         bool RemoveTester(Tester tester);
         bool UpdateTester(Tester tester);
+        bool TesterExist(Tester tester);
 
         bool AddTrainee(Trainee trainee);
         bool RemoveTrainee(Trainee trainee);
@@ -22,7 +23,6 @@ namespace DAL
         bool UpdateDrivingTest(DrivingTest drivingTest);
 
         List<Tester> GetTesters(Func<Tester, bool> p);
-        List<Tester> GetTesters();
         Tester GetTester(string id);
         List<Trainee> GetTrainees(Func<Trainee,bool> p);
         List<Trainee> GetTrainees();
