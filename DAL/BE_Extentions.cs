@@ -187,7 +187,7 @@ namespace DAL
                 MaxDistance = t.MaxDistance,
                 Name = t.Name,
                 Experience = t.Experience,
-                MaxTestWeekly = t.MaxTestWeekly,
+                // MaxTestWeekly = t.MaxTestWeekly,
                 Schedule = t.Schedule.Clone()
             };
             return result;

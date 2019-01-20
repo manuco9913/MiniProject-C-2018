@@ -12,7 +12,7 @@ namespace BE
         public Schedule Schedule { get; set; }
         public CarType Expertise { get; set; }
         public int Experience { get; set; }
-        public int MaxTestWeekly { get; set; }
+      //  public int MaxTestWeekly { get; set; }
         public int MaxDistance { get; set; }
 
         public override string ToString()

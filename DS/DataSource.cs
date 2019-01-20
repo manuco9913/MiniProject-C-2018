@@ -31,7 +31,7 @@ namespace DS
                 Experience = 10,
                 Expertise = CarType.Truck_Heavy,
                 MaxDistance = 2,
-                MaxTestWeekly = 1,
+              
                 Schedule = new Schedule
                 {
                     Data = new bool[5][]
