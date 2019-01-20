@@ -14,7 +14,7 @@ namespace BL
         bool DrivingTestExist(DrivingTest drivingTest);
 
         bool RemoveDrivingTest(DrivingTest drivingTest);
-        void RemoveTester(Tester tester);
+        bool RemoveTester(Tester tester);
         bool RemoveTrainee(Trainee trainee);
 
         void UpdateDrivingTest(DrivingTest drivingTest);

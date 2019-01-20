@@ -17,26 +17,33 @@ namespace BL
         public void AddTester(Tester tester)
         {
             if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)//checking tester age
-            {
                 throw new Exception("Tester under 40 years");
-            }
+            if (TesterExist(tester))
+                throw new Exception("This tester already exists");
             else
                 instance.AddTester(tester);
         }
-        public void RemoveTester(Tester tester)
+        public bool RemoveTester(Tester tester)
         {
-            bool b = instance.TesterExist(tester);
-            instance.RemoveTester(tester);
-
+            if (TesterExist(tester))
+            {
+                instance.RemoveTester(tester);
+                return true;
+            }
+            else
+            {
+                throw new Exception("You can't remove a tester that doesn't exist");
+                return false;
+            }
         }
         public void UpdateTester(Tester tester)
         {
             if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
                 throw new Exception("Tester under 40 years");
-            if (!instance.TesterExist(tester))
-                throw new Exception("This tester doesn't exist");
-            else
+            if (TesterExist(tester))
                 instance.UpdateTester(tester);
+            else
+                throw new Exception("This tester doesn't exist");
         }
         public bool TesterExist(Tester tester)
         {
@@ -45,18 +52,12 @@ namespace BL
 
         public bool AddTrainee(Trainee trainee)
         {
-            try
-            {
-                if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
-                {
-                    throw new Exception("Trainee under 18 years");
-                }
-                instance.AddTrainee(trainee);
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
+                throw new Exception("Trainee under 18 years");
+            if (TraineeExist(trainee))
+                throw new Exception("This trainee already exists");
+
+            instance.AddTrainee(trainee);
             return true;
         }
         public bool RemoveTrainee(Trainee trainee)
@@ -97,60 +98,50 @@ namespace BL
 
         public void AddDrivingTest(DrivingTest drivingTest)
         {
-            try
-            {
-                if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
-                    throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-                if (testedRecently(drivingTest.Trainee_ID)) // if he did test in the last 7 days
-                    throw new Exception("The trainee cannot take the test since he was tested recently");
-                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
-                    throw new Exception("Tester and trainee do not use the same type of car");
-                if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester do more tests in week than the max he can do
-                    throw new Exception("Tester reached his maximum number of tests");
-                if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if it is not available then you cant
-                    throw new Exception("The tester is not available during these hours");
+            if (!DrivingTestExist(drivingTest))
+                throw new Exception("This driving test doesn't exist");
+            if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
+                throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
+            if (testedRecently(drivingTest.Trainee_ID)) // if he did test in the last 7 days
+                throw new Exception("The trainee cannot take the test since he was tested recently");
+            if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
+                throw new Exception("Tester and trainee do not use the same type of car");
+            if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester do more tests in week than the max he can do
+                throw new Exception("Tester reached his maximum number of tests");
+            if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if it is not available then you cant
+                throw new Exception("The tester is not available during these hours");
 
-
-
-
-                instance.AddDrivingTest(drivingTest);
-            }
-            catch (Exception e)
-            {
-                throw e;
-
-            }
+            instance.AddDrivingTest(drivingTest);
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
-            return instance.RemoveDrivingTest(drivingTest);
+            if (DrivingTestExist(drivingTest))
+                return instance.RemoveDrivingTest(drivingTest);
+            else
+                throw new Exception("Cannot remove a test that doesn't exist");
         }
         public void UpdateDrivingTest(DrivingTest drivingTest)
         {
-            try
-            {
-                if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
-                    throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-                if (!testedRecently(drivingTest.Trainee_ID))
-                    throw new Exception("The trainee cannot take the test since he was tested recently");
-                if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
-                    throw new Exception("Tester and trainee do not use the same type of car");
-                if (!testerMaxTestWeekly(drivingTest.Tester_ID))
-                    throw new Exception("Tester reached his maximum number of tests");
-                if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
-                    throw new Exception("The tester is not available during these hours");
-                instance.UpdateDrivingTest(drivingTest);
-            }
-            catch (Exception exp)
-            {
-                throw exp;
-            }
+            if (!DrivingTestExist(drivingTest))
+                throw new Exception("This driving test doesn't exist");
+            if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
+                throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
+            if (!testedRecently(drivingTest.Trainee_ID))
+                throw new Exception("The trainee cannot take the test since he was tested recently");
+            if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
+                throw new Exception("Tester and trainee do not use the same type of car");
+            if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+                throw new Exception("Tester reached his maximum number of tests");
+            if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
+                throw new Exception("The tester is not available during these hours");
+
+            instance.UpdateDrivingTest(drivingTest);
         }
         public bool DrivingTestExist(DrivingTest drivingTest)
         {
             return instance.DrivingTestExist(drivingTest);
         }
-
+         
         //We need to implement this
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
         public IEnumerable<Person> GetAllPersons()
@@ -162,7 +153,6 @@ namespace BL
             return result1.Concat(result2);
 
         }
-
 
         public List<Tester> GetTesters()
         {//try and catch????
@@ -196,7 +186,7 @@ namespace BL
 
 
 
-        //-------------------Test requirments------------------------------------------------------------------------------------------
+        //------------------------------------------------------------Test requirments--------------------------------------------------------------------
         private bool testerAvailableTesting(string tester_ID, DateTime date)
         {
             if (date.Hour > 14 || date.Hour < 9)
