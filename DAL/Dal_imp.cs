@@ -33,15 +33,21 @@ namespace DAL
             Tester result = (from item1 in DS.DataSource.TestersList
                              where item1.ID == tester.ID
                              select item1).FirstOrDefault();
-
+            result.Address.City = tester.Address.City;
+            result.Address.StreetName = tester.Address.StreetName;
+            result.Address.Number = tester.Address.Number;
+            result.Experience = tester.Experience;
+            result.Expertise = tester.Expertise;
+            result.MaxDistance = tester.MaxDistance;
+            result.MaxTestWeekly
             return true;
 
         }
         public bool RemoveTester(Tester tester)
         {
             Tester temp_tester = GetTester(tester.ID);
-            if (temp_tester == null)
-                throw new Exception("Tester with the same id not found...");
+            //if (temp_tester == null)
+            //    throw new Exception("Tester with the same id not found...");
             return GetTesters().Remove(temp_tester);
 
         }
@@ -53,12 +59,12 @@ namespace DAL
             {
                 result = from t in DS.DataSource.TestersList
                          where (predicate(t))
-                         select t.Clone();
+                         select t;
             }
             else
             {
                 result = from t in DS.DataSource.TestersList
-                         select t.Clone();
+                         select t;
             }
 
             return result.ToList();
@@ -66,7 +72,7 @@ namespace DAL
         public List<Tester> GetTesters()
         {
             var result = from t in DS.DataSource.TestersList
-                         select t.Clone();
+                         select t;
             return result.ToList();
         }
         public Tester GetTester(string id)
@@ -78,10 +84,6 @@ namespace DAL
         #region Trainee
         public bool AddTrainee(Trainee trainee)
         {
-            if(DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
-            {
-                throw new Exception("Trainee under 18");
-            }
             foreach (Trainee item in DS.DataSource.TraineesList)
             {
                 if (item.ID == trainee.ID)
@@ -89,7 +91,7 @@ namespace DAL
                     throw new Exception("Trainee already exist");
                 }
             }
-            DS.DataSource.TraineesList.Add(trainee.Clone());
+            DS.DataSource.TraineesList.Add(trainee);
             return true;
         }
         public bool UpdateTrainee(Trainee trainee)
