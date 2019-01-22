@@ -16,10 +16,10 @@ namespace BL
 
         public void AddTester(Tester tester)
         {
+            if (TesterExist(tester))
+                throw new Exception("This tester already exists...");
             if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)//checking tester age
                 throw new Exception("Tester under 40 years");
-            if (TesterExist(tester))
-                throw new Exception("This tester already exists");
             else
                 instance.AddTester(tester);
         }
@@ -52,10 +52,10 @@ namespace BL
 
         public void AddTrainee(Trainee trainee)
         {
-            if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
-                throw new Exception("Trainee under 18 years");
             if (TraineeExist(trainee))
                 throw new Exception("This trainee already exists");
+            if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
+                throw new Exception("Trainee under 18 years");
 
             instance.AddTrainee(trainee);
         }

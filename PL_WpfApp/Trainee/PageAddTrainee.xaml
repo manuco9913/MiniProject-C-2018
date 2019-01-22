@@ -7,13 +7,8 @@
       xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL_WpfApp.PageAddTrainee"
       mc:Ignorable="d" 
       Title="PageAddTrainee">
-
-    <Page.Resources>
-        <CollectionViewSource x:Key="traineeViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Trainee}, CreateList=True}"/>
-    </Page.Resources>
-
     <Grid Height="350" Width="720">
-        <Grid x:Name="grid1" DataContext="{StaticResource traineeViewSource}">
+        <Grid x:Name="grid1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -31,32 +26,32 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,5.411,0,0.589" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="24"/>
-            <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,9,0,10.589" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,9,0,10.589" Grid.Row="0" VerticalAlignment="Center" Width="120"/>
             <Label Content="First Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="70"/>
-            <TextBox x:Name="firstNameTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4,0,4" Grid.Row="1" Text="{Binding Name.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="firstNameTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4,0,4" Grid.Row="1" VerticalAlignment="Center" Width="120"/>
             <Label Content="Last Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,4" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="69"/>
-            <TextBox x:Name="lastNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4,0,6" Grid.Row="2" Text="{Binding Instructor.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="lastNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4,0,6" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
             <Label Content="City:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.411,0,2.589" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="33"/>
-            <TextBox x:Name="cityTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4.411,0,3.589" Grid.Row="3" Text="{Binding Address.City, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="cityTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4.411,0,3.589" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
             <Label Content="Street Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.411,0,2.589" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="78"/>
-            <TextBox x:Name="streetNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4.411,0,3.589" Grid.Row="4" Text="{Binding Address.StreetName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Day Of Birth:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="77"/>
-            <DatePicker x:Name="dayOfBirthDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,4" Grid.Row="5" SelectedDate="{Binding DayOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="24" Width="102"/>
+            <TextBox x:Name="streetNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4.411,0,3.589" Grid.Row="4" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.411,0,2.589" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="56"/>
+            <TextBox x:Name="numberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4.411,0,3.589" Grid.Row="5" VerticalAlignment="Center" Width="120"/>
             <Label Content="Gender:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="6" VerticalAlignment="Center" Height="26" Width="51"/>
-            <ComboBox x:Name="genderComboBox" Grid.Column="1" DisplayMemberPath="Gender" HorizontalAlignment="Left" Height="22" ItemsSource="{Binding}" Margin="3,5,0,5" Grid.Row="6" VerticalAlignment="Center" Width="120"/>
+            <ComboBox x:Name="genderComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="3,5,0,5" Grid.Row="6" VerticalAlignment="Center" Width="120"/>
 
             <Label Content="Driving School:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="90"/>
-            <ComboBox x:Name="drivingSchoolComboBox" Grid.Column="3" DisplayMemberPath="DrivingSchool" HorizontalAlignment="Left" Height="22" ItemsSource="{Binding}" Margin="3,5,0,5" Grid.Row="0" VerticalAlignment="Center" Width="120"/>
+            <ComboBox x:Name="drivingSchoolComboBox" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="3,5,0,5" Grid.Row="0" VerticalAlignment="Center" Width="120"/>
             <Label Content="Lessons Number:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,9,0,9" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="auto"/>
-            <TextBox x:Name="lessonsNbTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="3,6.411,0,4.589" Grid.Row="1" Text="{Binding LessonsNb, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="lessonsNbTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="3,6.411,0,4.589" Grid.Row="1" VerticalAlignment="Center" Width="120"/>
             <Label Content="Car Trained:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,4,0,4" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="72"/>
-            <ComboBox x:Name="carTrainedComboBox" Grid.Column="3" DisplayMemberPath="CarTrained" HorizontalAlignment="Left" Height="22" ItemsSource="{Binding}" Margin="3,6,0,6" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
+            <ComboBox x:Name="carTrainedComboBox" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="3,6,0,6" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
             <Label Content="Gear Type:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="65"/>
-            <ComboBox x:Name="gearTypeComboBox" Grid.Column="3" DisplayMemberPath="GearType" HorizontalAlignment="Left" Height="22" ItemsSource="{Binding}" Margin="3,5,0,5" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Number:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3.411,0,2.589" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="56"/>
-            <TextBox x:Name="numberTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="3,4.411,0,3.589" Grid.Row="4" Text="{Binding Address.Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <ComboBox x:Name="gearTypeComboBox" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="3,5,0,5" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Day Of Birth:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="77"/>
+            <DatePicker x:Name="dayOfBirthDatePicker" Grid.Column="3" HorizontalAlignment="Left" Margin="3,4,0,4" Grid.Row="4" VerticalAlignment="Center" Height="24" Width="102"/>
 
-            <Button Grid.Row="7" Grid.Column="3" Click="Update_TraineeInformation" Content="Finish" FontSize="20" Margin="0,5,0,5" HorizontalAlignment="Center" Width="150"/>
+            <Button Grid.Row="7" Grid.Column="3" Click="Click_AddTrainee" Content="Finish" FontSize="20" Margin="0,5,0,5" HorizontalAlignment="Center" Width="150"/>
 
         </Grid>
     </Grid>

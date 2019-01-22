@@ -12,13 +12,31 @@
         <TabControl Height="350" Width="720">
             <TabItem Header="Account">
                 <Grid Background="#FFE5E5E5">
-                    <Button Content="Update Account" HorizontalAlignment="Left" Height="25.5" Margin="55.5,53.04,0,0" VerticalAlignment="Top" Width="100" Click="Update_TraineeAccount"/>
-                    <Button Content="Remove Account" HorizontalAlignment="Left" Height="25.5" Margin="55.5,101.04,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Margin="10,10,10,10">
+                        <Button Content="Add Trainee" FontSize="30"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="10,10,10,10">
+                        <Button Content="Update Trainee" FontSize="30" Click="Update_TraineeAccount"/>
+                    </Grid>
+                    <Grid Grid.Row="2" Margin="10,10,10,10">
+                        <Button Content="Remove Trainee" FontSize="30"/>
+                    </Grid>
+                    
                 </Grid>
             </TabItem>
-            <TabItem Header="Test">
+            <TabItem Header="Tester">
                 <Grid Background="#FFE5E5E5">
-                    <!--if there isnt a test already, => add it -->
+                    
                     <Button Content="Add a new test" HorizontalAlignment="Left" Height="25.5" Margin="55.5,68.04,0,0" VerticalAlignment="Top" Width="100" Click="Add_Test"/>
                     <!--if there is a test give the oppotrtunity to update it or remove it-->
                     <Button Content="Update Test" HorizontalAlignment="Left" Height="25.5" Margin="55.5,116.04,0,0" VerticalAlignment="Top" Width="100" Click="Update_Test"/>
@@ -26,6 +44,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-
     </Grid>
 </Page>

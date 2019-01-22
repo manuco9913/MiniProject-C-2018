@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL_WpfApp"
       mc:Ignorable="d" 
-      d:DesignHeight="350" d:DesignWidth="720"
+      d:DesignHeight="350" d:DesignWidth="800"
       Title="MainWindow">
 
-    <Grid Margin="-1.5,0,1.5,0">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -18,32 +18,67 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Welcome to the new system of licensing tests" Margin="10,10,10,10" FontSize="34" TextAlignment="Center" Foreground="Black" Grid.Row="0" Grid.ColumnSpan="3" />
-        <TextBox x:Name="UsernameTextBox" Grid.Row="2" MinWidth="112" Foreground="DarkGray" Background="{x:Null}" TextWrapping="Wrap" Text="Username" HorizontalAlignment="Center" VerticalAlignment="Center" Height="44" FontSize="24" GotFocus="UsernameTextBox_GotFocus" Cursor="Hand" Grid.Column="1">
-
-
-        </TextBox>
-        <PasswordBox x:Name="Password_User" Grid.Row="3" Background="{x:Null}"  HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="204" FontSize="22" Grid.Column="1" />
-        <Button Content="Add Trainee" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" Margin="10,10,10,10" Click="ClickAddTrainee" />
-        <Button Content="Add Tester" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="10,10,10,10" Click="ClickAddTester" />
-        <Button Content="Add Test" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="10,10,10,10" Click="ClickAddTest" />
-        <Button Content="Sign in" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Grid.Row="4" Click="ButtonClickTo_AddUser" Grid.Column="1" Margin="10,10,10,10" />
-
-
+        <Grid Margin="10,10,10,10" Grid.ColumnSpan="3">
+            <TextBlock Text="Welcome to the new system of licensing tests" FontSize="34" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Black"  />
+        </Grid>
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <TabControl>
+                <TabItem Header="Account">
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Margin="10,10,10,10">
+                            <Button Content="Add Trainee" FontSize="30" Click="Button_Click"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="10,10,10,10">
+                            <Button Content="Update Trainee" FontSize="30"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="10,10,10,10">
+                            <Button Content="Remove Trainee" FontSize="30"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Tester">
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Margin="10,10,10,10">
+                            <Button Content="Add Tester" FontSize="30"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="10,10,10,10">
+                            <Button Content="Update Tester" FontSize="30"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="10,10,10,10">
+                            <Button Content="Remove Tester" FontSize="30"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Test">
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Margin="10,10,10,10">
+                            <Button Content="Add Test" FontSize="30"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="10,10,10,10">
+                            <Button Content="Update Test" FontSize="30"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="10,10,10,10">
+                            <Button Content="Remove Test" FontSize="30"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>                
+            </TabControl>
+        </Grid>
     </Grid>
 </Page>
-
-<!--<TextBlock Name="label" Text="sign in" HorizontalAlignment="Left" Height="32.521" Margin="38,16.115,0,0" Grid.Row="3" VerticalAlignment="Top" Width="138" FontSize="20" MouseEnter="Underline_SignIn" MouseLeave="Ununderline_SignIn">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" Value="Blue"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style >
-        </TextBlock>-->

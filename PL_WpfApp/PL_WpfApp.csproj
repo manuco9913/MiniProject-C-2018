@@ -70,15 +70,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageAddTest.xaml">
+    <Page Include="Test\PageAddTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageAddTester.xaml">
+    <Page Include="Tester\PageAddTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageAddTrainee.xaml">
+    <Page Include="Trainee\PageAddTrainee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,23 +86,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageMainTester.xaml">
+    <Page Include="Tester\PageMainTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageMainTrainee.xaml">
+    <Page Include="Trainee\PageMainTrainee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageUpdateTest.xaml">
+    <Page Include="Test\PageUpdateTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageUpdateTesterAccount.xaml">
+    <Page Include="Tester\PageUpdateTesterAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageUpdateTraineeAccount.xaml">
+    <Page Include="Trainee\PageUpdateTraineeAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,31 +111,31 @@
     <Compile Include="FirstPage.xaml.cs">
       <DependentUpon>FirstPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageAddTest.xaml.cs">
+    <Compile Include="Test\PageAddTest.xaml.cs">
       <DependentUpon>PageAddTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageAddTester.xaml.cs">
+    <Compile Include="Tester\PageAddTester.xaml.cs">
       <DependentUpon>PageAddTester.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageAddTrainee.xaml.cs">
+    <Compile Include="Trainee\PageAddTrainee.xaml.cs">
       <DependentUpon>PageAddTrainee.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageAddUser.xaml.cs">
       <DependentUpon>PageAddUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageMainTester.xaml.cs">
+    <Compile Include="Tester\PageMainTester.xaml.cs">
       <DependentUpon>PageMainTester.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageMainTrainee.xaml.cs">
+    <Compile Include="Trainee\PageMainTrainee.xaml.cs">
       <DependentUpon>PageMainTrainee.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageUpdateTest.xaml.cs">
+    <Compile Include="Test\PageUpdateTest.xaml.cs">
       <DependentUpon>PageUpdateTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageUpdateTesterAccount.xaml.cs">
+    <Compile Include="Tester\PageUpdateTesterAccount.xaml.cs">
       <DependentUpon>PageUpdateTesterAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageUpdateTraineeAccount.xaml.cs">
+    <Compile Include="Trainee\PageUpdateTraineeAccount.xaml.cs">
       <DependentUpon>PageUpdateTraineeAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -181,8 +181,6 @@
       <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Trainee\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

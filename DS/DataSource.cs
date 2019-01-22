@@ -59,7 +59,7 @@ namespace DS
                 DayOfBirth = DateTime.Now.AddYears(-21),
                 Gender = Gender.MALE,
                 CarTrained = CarType.TwoWheels,
-                DrivingSchool = "Machon Bli Lev",
+                DrivingSchool = SchoolName.MAOF,
                 GearType = GearType.Manual,
                 Instructor =  new Name { FirstName = "Martze", LastName = "bemivne netunim" },
                 LessonsNb = 134
@@ -79,7 +79,7 @@ namespace DS
                 DayOfBirth = DateTime.Now.AddYears(-24),
                 Gender = Gender.MALE,
                 CarTrained = CarType.Private,
-                DrivingSchool = "Machon Bli Kishkes",
+                DrivingSchool = SchoolName.OR_YAROK,
                 GearType = GearType.Manual,
                 Instructor = new Name { FirstName = "Super", LastName = "lo Kayam" },
                 LessonsNb = 12

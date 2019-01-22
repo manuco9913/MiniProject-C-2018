@@ -19,5 +19,6 @@ namespace BE
         Automatic, Manual
     }
     public enum Day { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
+    public enum SchoolName { OZ, OR_YAROK, MAOF, RAMZOR, YUVALI, SCHREIBER };
 }
 

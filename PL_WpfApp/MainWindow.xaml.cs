@@ -43,7 +43,10 @@ namespace PL_WpfApp
             if (MainFrame.CanGoBack)
                 MainFrame.GoBack();
             else
+            {
+                //this.Button_back.Visibility =Visibility.Hidden;
                 MessageBox.Show("Cannot go back from here", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
