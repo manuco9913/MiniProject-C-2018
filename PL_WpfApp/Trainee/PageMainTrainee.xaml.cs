@@ -47,7 +47,7 @@ namespace PL_WpfApp
         {
             try
             {
-                string id = Interaction.InputBox("Message", "Title", "Defult Value", -1, -1);
+                string id = Interaction.InputBox("type the ID number of the Trainee you want to delete", "Window delete trainee", "Trainee ID:", -1, -1);
                 if (id != null)
                 {
                     if (bl.TraineeExist(bl.GetTrainee(id))) // if press "אישור" so if ge goes to if.
