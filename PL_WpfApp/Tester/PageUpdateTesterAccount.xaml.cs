@@ -27,17 +27,22 @@ namespace PL_WpfApp
         {
             InitializeComponent();
             tester = t;
-          this.genderComboBox.ItemsSource=Enum.GetValues(typeof(BE.Gender));
-          this.expertiseComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
-          this.firstNameTextBox.Text = tester.Name.FirstName;
-          this.lastNameTextBox.Text = tester.Name.LastName;
-          this.iDTextBox.Text = tester.ID;
-          this.cityTextBox.Text = tester.Address.City;
-          this.dayOfBirthTextBlock.Text = tester.DayOfBirth.ToString();
-          this.streetNameTextBox.Text = tester.Address.StreetName;
-          this.numberTextBox.Text = tester.Address.Number.ToString();
-          this.genderComboBox.SelectedIndex = (int)tester.Gender;
-          this.maxDistanceTextBox.Text = tester.MaxDistance.ToString();
+            this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
+            this.expertiseComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
+
+
+            this.firstNameTextBox.Text = tester.Name.FirstName;
+            this.lastNameTextBox.Text = tester.Name.LastName;
+            this.iDTextBox.Text = tester.ID;
+            this.cityTextBox.Text = tester.Address.City;
+            this.dayOfBirthTextBlock.Text = tester.DayOfBirth.ToString();
+            this.streetNameTextBox.Text = tester.Address.StreetName;
+            this.numberTextBox.Text = tester.Address.Number.ToString();
+            this.genderComboBox.SelectedIndex = (int)tester.Gender;
+            this.experienceTextBox.Text = tester.Experience.ToString();
+            this.expertiseComboBox.SelectedIndex = (int)tester.Expertise;
+            this.maxDistanceTextBox.Text = tester.MaxDistance.ToString();
+            this.maxTestWeeklyTextBox.Text = tester.MaxTestWeekly.ToString();
         }
 
         private void Click_UpdateTrainee(object sender, RoutedEventArgs e)

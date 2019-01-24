@@ -223,7 +223,7 @@ namespace BL
                 }
                 else
                 {
-                    if (result.Count() > Configuration.MAX_TEST_WEEKLY)
+                    if (result.Count() > GetTester(tester_ID).MaxTestWeekly)
                     {
                         return true;
                     }

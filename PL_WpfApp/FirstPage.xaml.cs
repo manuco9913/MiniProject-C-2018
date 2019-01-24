@@ -111,7 +111,24 @@ namespace PL_WpfApp
 
         private void Click_UpdateTester(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageUpdateTesterAccount());
+            try
+            {
+                string id = Interaction.InputBox("Type the tester you want to update", "Update tester", "Tester ID", -1, -1);
+                if (id != null)
+                {
+                    BE.Tester tester = bl.GetTester(id);
+                    if (bl.TesterExist(tester)) // if pressed "אישור"
+                    {
+                        this.NavigationService.Navigate(new PageUpdateTesterAccount(tester));
+                    }
+                    else
+                        MessageBox.Show("The Trainee doesn't exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Click_UpdateTest(object sender, RoutedEventArgs e)

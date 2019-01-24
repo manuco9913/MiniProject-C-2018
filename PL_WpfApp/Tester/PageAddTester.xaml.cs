@@ -26,11 +26,9 @@ namespace PL_WpfApp
         public PageAddTester()
         {
             InitializeComponent();
-            //----------------------- Aviad ADD this func for the comboBox ----------------------------
             this.dayOfBirthDatePicker.DisplayDateEnd = DateTime.Now;
             this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
             this.expertiseComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
-            //-----------------------------------------------------------------------------------------
         }
 
         private void Click_AddTester(object sender, RoutedEventArgs e)

@@ -13,7 +13,6 @@ namespace BE
         public static int MAX_TESTER_AGE = 40;
         public static int MIN_TRAINEE_AGE = 18;
         public static int MIN_GAP_TEST = 7;
-        public static int MAX_TEST_WEEKLY = 10;
         public static int TIME_BETWEEN_TESTS = 1;
     } 
 }
