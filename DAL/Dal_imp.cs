@@ -73,6 +73,8 @@ namespace DAL
         }
         public bool RemoveTrainee(Trainee trainee)
         {
+            //BE.Trainee tr = new Trainee();
+            //tr=trainee.Clone();
             return DS.DataSource.TraineesList.Remove(trainee);
         }
         public void UpdateTrainee(Trainee trainee)
