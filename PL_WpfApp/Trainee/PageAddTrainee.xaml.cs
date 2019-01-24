@@ -37,9 +37,32 @@ namespace PL_WpfApp
         {
             try
             {
-
+                //if we want to add in one exception one string to throw with all the fields there are to fields
                 if (String.IsNullOrEmpty(this.iDTextBox.Text))
                     throw new Exception("You have to fill the ID field");
+                if (String.IsNullOrEmpty(this.firstNameTextBox1.Text))
+                    throw new Exception("You have to fill the First Name field");
+                if (String.IsNullOrEmpty(this.lastNameTextBox.Text))
+                    throw new Exception("You have to fill the Last Name field");
+                if (String.IsNullOrEmpty(this.cityTextBox.Text))
+                    throw new Exception("You have to fill the City field");
+                if (String.IsNullOrEmpty(this.streetNameTextBox.Text))
+                    throw new Exception("You have to fill the Street Name field");
+                if (String.IsNullOrEmpty(this.numberTextBox.Text))
+                    throw new Exception("You have to fill the Number field");
+                if (String.IsNullOrEmpty(this.genderComboBox.Text))
+                    throw new Exception("You have to choose a Gender");
+                if (String.IsNullOrEmpty(this.drivingSchoolComboBox.Text))
+                    throw new Exception("You have to choose a Driving School");
+                if (String.IsNullOrEmpty(this.lessonsNbTextBox.Text))
+                    throw new Exception("You have to fill the Lessons Number field");
+                if (String.IsNullOrEmpty(this.carTrainedComboBox.Text))
+                    throw new Exception("You have to choose a Car Trained");
+                if (String.IsNullOrEmpty(this.gearTypeComboBox.Text))
+                    throw new Exception("You have to choose a Gear Type ");
+                if (String.IsNullOrEmpty(this.dayOfBirthDatePicker.Text))
+                    throw new Exception("You have to choose a Day Of Birth");
+
 
                 trainee = new BE.Trainee();
                 trainee.Address = new BE.Address();

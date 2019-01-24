@@ -32,8 +32,6 @@ namespace PL_WpfApp
             this.drivingSchoolComboBox.ItemsSource = Enum.GetValues(typeof(BE.SchoolName));
 
 
-            trainee.Address = new BE.Address();
-            trainee.Name = new BE.Name();
             this.iDTextBox.Text = trainee.ID;
             this.firstNameTextBox1.Text = trainee.Name.FirstName;
             this.lastNameTextBox.Text = trainee.Name.LastName;
@@ -75,8 +73,8 @@ namespace PL_WpfApp
                 if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
                     throw new Exception("Trainee under 18 years");
 
-                bl.AddTrainee(tempTrainee);
-                MessageBox.Show("Successfully added trainee!");
+                bl.UpdateTrainee(tempTrainee);
+                MessageBox.Show("Successfully updated trainee!");
                 this.NavigationService.Navigate(new PageMainTrainee());
             }
             catch (Exception exception)
