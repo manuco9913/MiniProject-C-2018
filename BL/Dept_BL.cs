@@ -33,7 +33,7 @@ namespace BL
             else
             {
                 throw new Exception("You can't remove a tester that doesn't exist");
-                return false;
+             //   return false;
             }
         }
         public void UpdateTester(Tester tester)
@@ -61,16 +61,23 @@ namespace BL
         }
         public bool RemoveTrainee(Trainee trainee)
         {
-            bool b = true;
-            try
+            if (TraineeExist(trainee))
             {
-                b = instance.RemoveTrainee(trainee);
+                instance.RemoveTrainee(trainee);
+                return true;
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return b;
+            else
+                throw new Exception("you can't remove a tester that doesn't exist");
+            //bool b = true;
+            //try
+            //{
+            //    b = instance.RemoveTrainee(trainee);
+            //}
+            //catch (Exception e)
+            //{
+            //    throw e;
+            //}
+            //return b;
         }
         public void UpdateTrainee(Trainee trainee)
         {

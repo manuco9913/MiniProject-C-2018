@@ -22,7 +22,7 @@ namespace DAL
         }
         public bool RemoveTester(Tester tester)
         {
-            return GetTesters().Remove(tester);
+            return DS.DataSource.TestersList.Remove(tester);
         }
         public void UpdateTester(Tester tester)
         {
@@ -90,7 +90,7 @@ namespace DAL
         }
         public bool TraineeExist(Trainee trainee)
         {
-            if (GetTrainees().Exists(item => item.ID == trainee.ID))
+            if (GetTrainees().Exists(trat => trat.ID == trainee.ID))
                 return true;
             return false;
         }

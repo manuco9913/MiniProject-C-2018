@@ -75,6 +75,7 @@ namespace PL_WpfApp
                 tester.Gender = (BE.Gender)this.genderComboBox.SelectedValue;
                 tester.Experience =Convert.ToInt32(this.experienceTextBox.Text);
                 tester.MaxDistance = Convert.ToInt32(this.maxDistanceTextBox.Text);
+                tester.MaxTestWeekly = Convert.ToInt32(this.maxTestWeeklyTextBox.Text);
                 //--------------------------------------------------------------------
                 
                 if (bl.TesterExist(tester))
@@ -84,7 +85,7 @@ namespace PL_WpfApp
 
                 bl.AddTester(tester);
                 MessageBox.Show("Successfully added tester!");
-                this.NavigationService.Navigate(new PageMainTester());
+                this.NavigationService.Navigate(new FirstPage());
             }
             catch (Exception exp)
             {
