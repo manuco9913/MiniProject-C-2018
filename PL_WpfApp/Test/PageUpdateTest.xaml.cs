@@ -24,14 +24,9 @@ namespace PL_WpfApp
         {
             InitializeComponent();
         }
-
-        private void Test_Updated(object sender, RoutedEventArgs e)
+        private void Click_UpdateTest(object sender, RoutedEventArgs e)
         {
-            if (this.NavigationService.CanGoBack)
-            {
-                this.NavigationService.GoBack();
-            }
-            else MessageBox.Show("Cannot go back from this page");
+            this.NavigationService.Navigate(new FirstPage());
         }
     }
 }

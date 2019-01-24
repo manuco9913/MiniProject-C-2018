@@ -47,8 +47,7 @@ namespace PL_WpfApp
 
         private void Click_UpdateTrainee(object sender, RoutedEventArgs e)
         {
-           
-                         BE.Tester tempTester = new BE.Tester();
+            BE.Tester tempTester = new BE.Tester();
             try
             {
                 if (String.IsNullOrEmpty(this.iDTextBox.Text))
