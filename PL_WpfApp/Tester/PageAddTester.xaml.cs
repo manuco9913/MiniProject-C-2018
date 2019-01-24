@@ -37,6 +37,32 @@ namespace PL_WpfApp
         {
             try
             {
+                if (String.IsNullOrEmpty(this.iDTextBox.Text))
+                    throw new Exception("You have to fill the ID field");
+                if (String.IsNullOrEmpty(this.firstNameTextBox.Text))
+                    throw new Exception("You have to fill the First Name field");
+                if (String.IsNullOrEmpty(this.lastNameTextBox.Text))
+                    throw new Exception("You have to fill the Last Name field");
+                if (String.IsNullOrEmpty(this.cityTextBox.Text))
+                    throw new Exception("You have to fill the City field");
+                if (String.IsNullOrEmpty(this.streetNameTextBox.Text))
+                    throw new Exception("You have to fill the Street Name field");
+                if (String.IsNullOrEmpty(this.numberTextBox.Text))
+                    throw new Exception("You have to fill the number field");
+                if (String.IsNullOrEmpty(this.genderComboBox.Text))
+                    throw new Exception("You have to chose Gender");
+                if (String.IsNullOrEmpty(this.experienceTextBox.Text))
+                    throw new Exception("You have to fill the experience field");
+                if (String.IsNullOrEmpty(this.expertiseComboBox.Text))
+                    throw new Exception("You have to chose expertise");
+                if (String.IsNullOrEmpty(this.maxDistanceTextBox.Text))
+                    throw new Exception("You have to fill the Max-Distance field");
+                if (String.IsNullOrEmpty(this.maxTestWeeklyTextBox.Text))
+                    throw new Exception("You have to fill the Max-Test-Weekly field");
+                if (String.IsNullOrEmpty(this.dayOfBirthDatePicker.Text))
+                    throw new Exception("You have to chose birth-day");
+                
+
                 tester = new BE.Tester();
                 tester.Address = new BE.Address();
                 tester.Name = new BE.Name();
