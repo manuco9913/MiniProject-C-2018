@@ -25,7 +25,7 @@ namespace PL_WpfApp
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Click_AddTrainee(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new PageAddTrainee());
         }
@@ -33,6 +33,7 @@ namespace PL_WpfApp
         private void Click_UpdateTrainee(object sender, RoutedEventArgs e)
         {
 
+            this.NavigationService.Navigate(new PageUpdateTraineeAccount());
         }
     }
 }
