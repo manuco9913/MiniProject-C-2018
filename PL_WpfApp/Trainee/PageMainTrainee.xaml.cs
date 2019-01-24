@@ -44,9 +44,7 @@ namespace PL_WpfApp
         private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
         {
             string id = Interaction.InputBox("Message", "Title", "Defult Value", -1, -1);
-            if (id==null)
-                //return false
-          //  if(traine)
+
         }
     }
 }
