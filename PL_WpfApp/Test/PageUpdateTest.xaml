@@ -8,13 +8,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="720"
       Title="PageUpdateTest">
-    <Page.Resources>
-        <CollectionViewSource x:Key="drivingTestViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:DrivingTest}, CreateList=True}"/>
-    </Page.Resources>
     <Grid Height="350" Width="720">
-
-        <Grid x:Name="grid1" DataContext="{StaticResource drivingTestViewSource}">
-            <Grid x:Name="grid2" >
+        <Grid x:Name="grid1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
@@ -30,7 +25,7 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <TextBlock x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Background="#FFBBB9B9"/>
                 <Label Content="Tester ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
                 <TextBox x:Name="tester_IDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Tester_ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Trainee ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
@@ -56,8 +51,6 @@
             </Grid>
 
         </Grid>
-
-    </Grid>
 </Page>
 
 

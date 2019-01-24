@@ -1,40 +1,54 @@
-﻿<Page x:Class="PL_WpfApp.PageAddTest"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL_WpfApp"
+      xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL_WpfApp.PageAddTest"
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="720"
       Title="PageAddTest">
     <Grid Height="350" Width="720">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Button Content="Finish" FontSize="20" Margin="10,10,10,10" Width="150" Grid.Row="6" HorizontalAlignment="Center" Grid.ColumnSpan="2" Click="NewTest_Added"></Button>
-        <TextBlock Text="the id of the test (to do)" Grid.Row="0" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
-        <TextBlock Text="None" Grid.Row="3" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
-        <TextBox Grid.Row="2" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
-        <!--we need to make it a radio button-->
-        <TextBox Grid.Row="1" Grid.Column="1" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" VerticalAlignment="Center" Width="100.188"/>
-        <DatePicker Grid.Row="1" Margin='170,0,0,0' HorizontalAlignment="Left" Height="22.075" VerticalAlignment="Center" Width="100.188"/>
-        <TextBlock Grid.Row="0" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Center" Width="77"/>
-        <TextBlock Grid.Row="1" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Date of the test:" VerticalAlignment="Center" Width="120"/>
-        <TextBlock Grid.Row="2" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Tester ID:" VerticalAlignment="Center" Width="120"/>
-        <TextBlock Grid.Row="0" Grid.Column="1" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Trainee ID:" VerticalAlignment="Center" Width="77"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Starting point address:" VerticalAlignment="Center" Width="120"/>
-        <TextBlock Grid.Row="3" Margin='20,0,0,0' HorizontalAlignment="Left" Height="22.075" TextWrapping="Wrap" Text="Tester's comments:" VerticalAlignment="Center" Width="120"/>
-        <TextBlock Grid.Row="3" Margin='20,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" Text="Successed:" Foreground="Red" FontSize="24" VerticalAlignment="Center" Width="130"/>
-        <TextBlock Name="Succesed_TextBlock" Grid.Row="3" Margin='170,0,0,0' Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" FontSize="24" VerticalAlignment="Center" Width="130"/>
+        <Grid x:Name="grid1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Tester ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="tester_IDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Tester_ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Trainee ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="trainee_IDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Trainee_ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dateDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Content="Time:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="timeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Time, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+            <Label Content="City:" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="cityTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding StartingPoint.City, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Street Name:" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="streetNameTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding StartingPoint.StreetName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Street Number:" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="numberTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding StartingPoint.Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Comment:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3.5,0,3.5" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="commentTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Comment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Success:" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <CheckBox x:Name="successCheckBox" Content="" Grid.Column="3" HorizontalAlignment="Left" IsChecked="{Binding Success, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+
+            <Button Content="Finish" FontSize="20" Margin="0,10,0,10" Width="150" Grid.Row="6" HorizontalAlignment="Center" Grid.Column="3" Click="Test_Updated" ></Button>
+
+        </Grid>
 
     </Grid>
 </Page>
