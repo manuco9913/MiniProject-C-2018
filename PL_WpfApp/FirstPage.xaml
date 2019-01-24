@@ -59,38 +59,39 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Margin="10,10,10,10" Grid.Row="1">
-                            <Button Content="Add Tester" FontSize="30"/>
+                            <Button Content="Add Tester" FontSize="30" Click="click_AddTester"/>
                         </Grid>
                         <Grid Grid.Column="1" Grid.Row="1" Margin="10,10,10,10">
                             <Button Content="Update Tester" FontSize="30"/>
                         </Grid>
                         <Grid Grid.Column="2" Grid.Row="1" Margin="10,10,10,10">
-                            <Button Content="Remove Tester" FontSize="30"/>
+                            <Button Content="Remove Tester" FontSize="30" Click="Remove_TesterAccount"/>
                         </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Test">
                     <Grid Background="#FFE5E5E5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="14*"/>
+                            <ColumnDefinition Width="39*"/>
+                            <ColumnDefinition Width="53*"/>
+                            <ColumnDefinition Width="53*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Grid Margin="10,10,10,10" Grid.Row="1">
+                        <Grid Margin="10,10.2,9.8,10.4" Grid.Row="1" Grid.ColumnSpan="2">
                             <Button Content="Add Test" FontSize="30"/>
                         </Grid>
-                        <Grid Grid.Column="1" Grid.Row="1" Margin="10,10,10,10">
+                        <Grid Grid.Column="2" Grid.Row="1" Margin="10.2,10.2,9.6,10.4">
                             <Button Content="Update Test" FontSize="30"/>
                         </Grid>
-                        <Grid Grid.Column="2" Grid.Row="1" Margin="10,10,10,10">
+                        <Grid Grid.Column="3" Grid.Row="1" Margin="10.4,10.2,10.4,10.4">
                             <Button Content="Remove Test" FontSize="30"/>
                         </Grid>
                     </Grid>
-                </TabItem>                
+                </TabItem>
             </TabControl>
         </Grid>
     </Grid>

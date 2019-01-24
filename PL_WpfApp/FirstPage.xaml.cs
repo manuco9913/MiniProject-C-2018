@@ -57,7 +57,7 @@ namespace PL_WpfApp
         {
             try
             {
-                string id = Interaction.InputBox("Message", "Title", "Defult Value", -1, -1);
+                string id = Interaction.InputBox("type the ID number of the Trainee you want to delete", "Window delete trainee", "Trainee ID:", -1, -1);
                 if (id != null)
                 {
                     if (bl.TraineeExist(bl.GetTrainee(id))) // if press "אישור" so if ge goes to if.
@@ -74,6 +74,34 @@ namespace PL_WpfApp
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Remove_TesterAccount(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string id = Interaction.InputBox("type the ID number of the Tester you want to delete", "Window delete Tester", "Tester ID:", -1, -1);
+                if (id != null)
+                {
+                    if (bl.TesterExist(bl.GetTester(id))) // if press "אישור" so if ge goes to if.
+                    {
+                        bl.RemoveTester(bl.GetTester(id));
+
+                        MessageBox.Show("Delete successful");
+                    }
+                    else
+                        MessageBox.Show("The Tester doesn't exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void click_AddTester(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageAddTester());
         }
     }
 }
