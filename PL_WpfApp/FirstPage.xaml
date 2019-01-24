@@ -37,7 +37,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Margin="10,10,10,10" Grid.Row="1">
-                            <Button Content="Add Trainee" FontSize="30" Click="Button_Click"/>
+                            <Button Content="Add Trainee" FontSize="30" Click="Click_AddTrainee"/>
                         </Grid>
                         <Grid Grid.Column="1" Grid.Row="1" Margin="10,10,10,10">
                             <Button Content="Update Trainee" FontSize="30" Click="Click_UpdateTrainee"/>
