@@ -73,7 +73,7 @@ namespace DAL
         }
         public bool RemoveTrainee(Trainee trainee)
         {
-            return GetTrainees().Remove(trainee);
+            return DS.DataSource.TraineesList.Remove(trainee);
         }
         public void UpdateTrainee(Trainee trainee)
         {

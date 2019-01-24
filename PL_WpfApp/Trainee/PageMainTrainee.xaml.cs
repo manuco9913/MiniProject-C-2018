@@ -21,6 +21,8 @@ namespace PL_WpfApp
     /// </summary>
     public partial class PageMainTrainee : Page
     {
+        BL.IBL bl = BL.FactorySingletonBL.getInstance();
+
         public PageMainTrainee()
         {
             InitializeComponent();
@@ -43,8 +45,24 @@ namespace PL_WpfApp
 
         private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
         {
-            string id = Interaction.InputBox("Message", "Title", "Defult Value", -1, -1);
-
+            try
+            {
+                string id = Interaction.InputBox("Message", "Title", "Defult Value", -1, -1);
+                if (id != null)
+                {
+                    if (bl.TraineeExist(bl.GetTrainee(id))) // if press "אישור" so if ge goes to if.
+                    {
+                        bl.RemoveTrainee(bl.GetTrainee(id));
+                        MessageBox.Show("Delete successful");
+                    }
+                    else
+                        MessageBox.Show("The Trainee doesn't exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

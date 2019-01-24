@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
 
 namespace PL_WpfApp
 {
@@ -20,6 +21,7 @@ namespace PL_WpfApp
     /// </summary>
     public partial class FirstPage : Page
     {
+        BL.IBL bl = BL.FactorySingletonBL.getInstance();
         public FirstPage()
         {
             InitializeComponent();
@@ -34,6 +36,30 @@ namespace PL_WpfApp
         {
 
             this.NavigationService.Navigate(new PageUpdateTraineeAccount());
+        }
+
+
+        private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string id = Interaction.InputBox("Message", "Title", "Defult Value", -1, -1);
+                if (id != null)
+                {
+                    if (bl.TraineeExist(bl.GetTrainee(id))) // if press "אישור" so if ge goes to if.
+                    {
+                        bl.RemoveTrainee(bl.GetTrainee(id));
+                        
+                        MessageBox.Show("Delete successful");
+                    }
+                    else
+                        MessageBox.Show("The Trainee doesn't exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
