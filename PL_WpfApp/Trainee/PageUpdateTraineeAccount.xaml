@@ -25,7 +25,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,5.411,0,0.589" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="24"/>
-            <TextBlock x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,9,0,10.589" Grid.Row="0" VerticalAlignment="Center" Width="120" Background="#FFC5C5C5" />
+            <TextBlock x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,9,0,10.589" Grid.Row="0" VerticalAlignment="Center" Width="auto" Background="#FFC5C5C5" />
             <Label Content="First Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="70"/>
             <TextBox x:Name="firstNameTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4,0,4" Grid.Row="1" VerticalAlignment="Center" Width="120"/>
             <Label Content="Last Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,4" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="69"/>
@@ -48,7 +48,7 @@
             <Label Content="Gear Type:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="65"/>
             <ComboBox x:Name="gearTypeComboBox" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="3,5,0,5" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
             <Label Content="Day Of Birth:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="77"/>
-            <TextBlock x:Name="dayOfBirthTextBlock" Grid.Column="3" HorizontalAlignment="Left" Margin="3,4,0,4" Grid.Row="4" VerticalAlignment="Center" Height="24" Width="102" Background="#FFC5C5C5"/>
+            <TextBlock x:Name="dayOfBirthTextBlock" Grid.Column="3" HorizontalAlignment="Left" Margin="3,4,0,4" Grid.Row="4" VerticalAlignment="Center" Height="24" Width="auto" Background="#FFC5C5C5"/>
 
             <Button Grid.Row="7" Grid.Column="3" Click="Click_UpdateTrainee" Content="Finish" FontSize="20" Margin="0,5,0,5" HorizontalAlignment="Center" Width="150"/>
 

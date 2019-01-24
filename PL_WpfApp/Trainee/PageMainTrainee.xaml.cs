@@ -30,7 +30,7 @@ namespace PL_WpfApp
 
         private void Update_TraineeAccount(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageUpdateTraineeAccount());
+            this.NavigationService.Navigate(new PageUpdateTraineeAccount(null));
         }
 
         private void Add_Test(object sender, RoutedEventArgs e)

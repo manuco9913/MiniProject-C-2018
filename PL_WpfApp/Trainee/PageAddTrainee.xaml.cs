@@ -37,6 +37,10 @@ namespace PL_WpfApp
         {
             try
             {
+
+                if (String.IsNullOrEmpty(this.iDTextBox.Text))
+                    throw new Exception("You have to fill the ID field");
+
                 trainee = new BE.Trainee();
                 trainee.Address = new BE.Address();
                 trainee.Name = new BE.Name();
@@ -51,8 +55,7 @@ namespace PL_WpfApp
                 trainee.LessonsNb = Convert.ToInt32(this.lessonsNbTextBox.Text);
                 trainee.CarTrained = (BE.CarType)this.carTrainedComboBox.SelectedValue;
                 trainee.GearType = (BE.GearType)this.gearTypeComboBox.SelectedValue;
-                // we probably need to add phone numbers to trainee and tester
-                ////................................
+                trainee.DrivingSchool = (BE.SchoolName)this.drivingSchoolComboBox.SelectedValue;
 
                 if (bl.TraineeExist(trainee))
                     throw new Exception("This trainee already exists...");
@@ -69,6 +72,9 @@ namespace PL_WpfApp
             }
         }
 
+        private void IDTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
     }
 }

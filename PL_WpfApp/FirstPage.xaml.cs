@@ -34,11 +34,25 @@ namespace PL_WpfApp
 
         private void Click_UpdateTrainee(object sender, RoutedEventArgs e)
         {
-
-            this.NavigationService.Navigate(new PageUpdateTraineeAccount());
+            try
+            {
+                string id = Interaction.InputBox("Type the trainee you want to update", "Update trainee", "Trainee ID", -1, -1);
+                if (id != null)
+                {
+                    BE.Trainee trainee = bl.GetTrainee(id);
+                    if (bl.TraineeExist(trainee)) // if pressed "אישור"
+                    {
+                        this.NavigationService.Navigate(new PageUpdateTraineeAccount(trainee));
+                    }
+                    else
+                        MessageBox.Show("The Trainee doesn't exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-
-
         private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
         {
             try
@@ -50,7 +64,7 @@ namespace PL_WpfApp
                     {
                         bl.RemoveTrainee(bl.GetTrainee(id));
                         
-                        MessageBox.Show("Delete successful");
+                        MessageBox.Show("Deleted successfully");
                     }
                     else
                         MessageBox.Show("The Trainee doesn't exist.");
