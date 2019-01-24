@@ -43,7 +43,7 @@
                             <Button Content="Update Trainee" FontSize="30" Click="Click_UpdateTrainee"/>
                         </Grid>
                         <Grid Grid.Column="2" Grid.Row="1" Margin="10,10,10,10">
-                            <Button Content="Remove Trainee" FontSize="30"/>
+                            <Button Content="Remove Trainee" Click="Remove_TraineeAccount"  FontSize="30"/>
                         </Grid>
                     </Grid>
                 </TabItem>
