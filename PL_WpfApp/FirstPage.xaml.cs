@@ -29,5 +29,10 @@ namespace PL_WpfApp
         {
             this.NavigationService.Navigate(new PageAddTrainee());
         }
+
+        private void Click_UpdateTrainee(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

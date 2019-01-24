@@ -61,12 +61,12 @@ namespace PL_WpfApp
 
                 bl.AddTrainee(trainee);
                 MessageBox.Show("Successfully added trainee!");
+                this.NavigationService.Navigate(new PageMainTrainee());
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-            this.NavigationService.Navigate(new PageMainTrainee());
         }
 
 
