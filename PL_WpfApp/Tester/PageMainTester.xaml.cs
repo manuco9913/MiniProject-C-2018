@@ -27,7 +27,7 @@ namespace PL_WpfApp
 
         private void Update_TesterAccount(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageUpdateTesterAccount());
+            this.NavigationService.Navigate(new PageUpdateTesterAccount(null));
         }
 
         private void Update_Test(object sender, RoutedEventArgs e)

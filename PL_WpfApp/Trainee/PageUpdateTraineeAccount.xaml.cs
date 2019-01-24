@@ -50,7 +50,31 @@ namespace PL_WpfApp
         {
             BE.Trainee tempTrainee = new BE.Trainee();
             try
-            { 
+            {
+                if (String.IsNullOrEmpty(this.iDTextBox.Text))
+                    throw new Exception("You have to fill the ID field");
+                if (String.IsNullOrEmpty(this.firstNameTextBox1.Text))
+                    throw new Exception("You have to fill the First Name field");
+                if (String.IsNullOrEmpty(this.lastNameTextBox.Text))
+                    throw new Exception("You have to fill the Last Name field");
+                if (String.IsNullOrEmpty(this.cityTextBox.Text))
+                    throw new Exception("You have to fill the City field");
+                if (String.IsNullOrEmpty(this.streetNameTextBox.Text))
+                    throw new Exception("You have to fill the Street Name field");
+                if (String.IsNullOrEmpty(this.numberTextBox.Text))
+                    throw new Exception("You have to fill the Number field");
+                if (String.IsNullOrEmpty(this.genderComboBox.Text))
+                    throw new Exception("You have to choose a Gender");
+                if (String.IsNullOrEmpty(this.drivingSchoolComboBox.Text))
+                    throw new Exception("You have to choose a Driving School");
+                if (String.IsNullOrEmpty(this.lessonsNbTextBox.Text))
+                    throw new Exception("You have to fill the Lessons Number field");
+                if (String.IsNullOrEmpty(this.carTrainedComboBox.Text))
+                    throw new Exception("You have to choose a Car Trained");
+                if (String.IsNullOrEmpty(this.gearTypeComboBox.Text))
+                    throw new Exception("You have to choose a Gear Type ");
+
+
                 tempTrainee = new BE.Trainee();
                 tempTrainee.Address = new BE.Address();
                 tempTrainee.Name = new BE.Name();

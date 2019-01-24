@@ -20,38 +20,83 @@ namespace PL_WpfApp
     /// </summary>
     public partial class PageUpdateTesterAccount : Page
     {
+        BL.IBL bl = BL.FactorySingletonBL.getInstance();
         BE.Tester tester;
-        BL.IBL bl;
 
-        public PageUpdateTesterAccount()
+        public PageUpdateTesterAccount(BE.Tester t)
         {
             InitializeComponent();
-
-            tester = new BE.Tester();
-            this.grid1.DataContext = tester;
-            bl = BL.FactorySingletonBL.getInstance();
-
-            tester.Address = new BE.Address();
-            tester.Name = new BE.Name();
-            tester.Schedule = new BE.Schedule();
-            this.expertiseComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
-
-            this.firstNameTextBox.Text = tester.Name.FirstName;
+            tester = t;
+          this.genderComboBox.ItemsSource=Enum.GetValues(typeof(BE.Gender));
+          this.expertiseComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
+          this.firstNameTextBox.Text = tester.Name.FirstName;
+          this.lastNameTextBox.Text = tester.Name.LastName;
+          this.iDTextBox.Text = tester.ID;
+          this.cityTextBox.Text = tester.Address.City;
+          this.dayOfBirthTextBlock.Text = tester.DayOfBirth.ToString();
+          this.streetNameTextBox.Text = tester.Address.StreetName;
+          this.numberTextBox.Text = tester.Address.Number.ToString();
+          this.genderComboBox.SelectedIndex = (int)tester.Gender;
+          this.maxDistanceTextBox.Text = tester.MaxDistance.ToString();
         }
 
-        private void Click_GoBackToMainTester(object sender, RoutedEventArgs e)
+        private void Click_UpdateTrainee(object sender, RoutedEventArgs e)
         {
+           
+                         BE.Tester tempTester = new BE.Tester();
             try
             {
-                bl.UpdateTester(tester);
-                tester = new BE.Tester();
-                this.grid1.DataContext = tester;
+                if (String.IsNullOrEmpty(this.iDTextBox.Text))
+                    throw new Exception("You have to fill the ID field");
+                if (String.IsNullOrEmpty(this.firstNameTextBox.Text))
+                    throw new Exception("You have to fill the First Name field");
+                if (String.IsNullOrEmpty(this.lastNameTextBox.Text))
+                    throw new Exception("You have to fill the Last Name field");
+                if (String.IsNullOrEmpty(this.cityTextBox.Text))
+                    throw new Exception("You have to fill the City field");
+                if (String.IsNullOrEmpty(this.streetNameTextBox.Text))
+                    throw new Exception("You have to fill the Street Name field");
+                if (String.IsNullOrEmpty(this.numberTextBox.Text))
+                    throw new Exception("You have to fill the number field");
+                if (String.IsNullOrEmpty(this.genderComboBox.Text))
+                    throw new Exception("You have to chose Gender");
+                if (String.IsNullOrEmpty(this.experienceTextBox.Text))
+                    throw new Exception("You have to fill the experience field");
+                if (String.IsNullOrEmpty(this.expertiseComboBox.Text))
+                    throw new Exception("You have to chose expertise");
+                if (String.IsNullOrEmpty(this.maxDistanceTextBox.Text))
+                    throw new Exception("You have to fill the Max-Distance field");
+                if (String.IsNullOrEmpty(this.maxTestWeeklyTextBox.Text))
+                    throw new Exception("You have to fill the Max-Test-Weekly field");
+                if (String.IsNullOrEmpty(this.dayOfBirthTextBlock.Text))
+                    throw new Exception("You have to chose birth-day");
+
+                tempTester = new BE.Tester();
+                tempTester.Address = new BE.Address();
+                tempTester.Name = new BE.Name();
+                tempTester.ID = tester.ID;//the ID CANNOT change so it takes the id from before
+                tempTester.Name.FirstName = this.firstNameTextBox.Text;
+                tempTester.Name.LastName = this.lastNameTextBox.Text;
+                tempTester.Address.City = this.cityTextBox.Text;
+                tempTester.Address.StreetName = this.streetNameTextBox.Text;
+                tempTester.Address.Number = Convert.ToInt32(this.numberTextBox.Text);
+                tempTester.DayOfBirth = tester.DayOfBirth;//the DayOfBirth CANNOT change so we take the old one
+                tempTester.Gender = (BE.Gender)this.genderComboBox.SelectedValue;
+                tempTester.Expertise = (BE.CarType)this.expertiseComboBox.SelectedValue;
+
+                if (!bl.TesterExist(tempTester))
+                    throw new Exception("This tester doesn't exist...");
+                if (DateTime.Now.Year - tester.DayOfBirth.Year < 18)
+                    throw new Exception("tester under 18 years");
+
+                bl.UpdateTester(tempTester);
+                MessageBox.Show("Successfully updated tester!");
+                this.NavigationService.Navigate(new FirstPage());
             }
-            catch (Exception exp)
+            catch (Exception exception)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exception.Message);
             }
-            this.NavigationService.Navigate(new PageMainTester());
         }
     }
 }
