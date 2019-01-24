@@ -103,5 +103,20 @@ namespace PL_WpfApp
         {
             this.NavigationService.Navigate(new PageAddTester());
         }
+
+        private void Click_AddTest(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageAddTest());
+        }
+
+        private void Click_UpdateTester(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageUpdateTesterAccount());
+        }
+
+        private void Click_UpdateTest(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageUpdateTest());
+        }
     }
 }

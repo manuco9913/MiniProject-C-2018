@@ -87,7 +87,7 @@ namespace PL_WpfApp
 
                 bl.AddTrainee(trainee);
                 MessageBox.Show("Successfully added trainee!");
-                this.NavigationService.Navigate(new PageMainTrainee());
+                this.NavigationService.Navigate(new FirstPage());
             }
             catch (Exception exception)
             {

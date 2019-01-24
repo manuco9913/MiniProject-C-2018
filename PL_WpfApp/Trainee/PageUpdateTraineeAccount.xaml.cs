@@ -75,7 +75,7 @@ namespace PL_WpfApp
 
                 bl.UpdateTrainee(tempTrainee);
                 MessageBox.Show("Successfully updated trainee!");
-                this.NavigationService.Navigate(new PageMainTrainee());
+                this.NavigationService.Navigate(new FirstPage());
             }
             catch (Exception exception)
             {
