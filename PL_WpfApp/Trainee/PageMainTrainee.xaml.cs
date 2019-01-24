@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
 
 namespace PL_WpfApp
 {
@@ -38,6 +39,14 @@ namespace PL_WpfApp
         private void Update_Test(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new PageUpdateTest());
+        }
+
+        private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
+        {
+            string id = Interaction.InputBox("Message", "Title", "Defult Value", -1, -1);
+            if (id==null)
+                //return false
+          //  if(traine)
         }
     }
 }

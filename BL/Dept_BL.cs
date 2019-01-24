@@ -115,11 +115,11 @@ namespace BL
                 throw new Exception("This driving test doesn't exist");
             if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
                 throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-            if (!testedRecently(drivingTest.Trainee_ID))
+            if (testedRecently(drivingTest.Trainee_ID))
                 throw new Exception("The trainee cannot take the test since he was tested recently");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
                 throw new Exception("Tester and trainee do not use the same type of car");
-            if (!testerMaxTestWeekly(drivingTest.Tester_ID))
+            if (testerMaxTestWeekly(drivingTest.Tester_ID))
                 throw new Exception("Tester reached his maximum number of tests");
             if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
                 throw new Exception("The tester is not available during these hours");
