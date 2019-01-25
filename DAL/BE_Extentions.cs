@@ -97,7 +97,7 @@ namespace DAL
                 Trainee_ID = d.Trainee_ID,
                 Date = d.Date,
                 Comment = d.Comment,
-                Requirements = d.Requirements.ToList(),
+                //Requirements = d.Requirements.ToList(),
                 StartingPoint = d.StartingPoint.Clone(),
                 Success = d.Success,
                 Time = d.Time

@@ -134,7 +134,7 @@ namespace DAL
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
             DrivingTest temp_test = GetDrivingTest(drivingTest.ID);
-            temp_test.Requirements.Clear();
+            //temp_test.Requirements.Clear();
             return GetDrivingTests().Remove(temp_test);
         }
         public void UpdateDrivingTest(DrivingTest drivingTest)

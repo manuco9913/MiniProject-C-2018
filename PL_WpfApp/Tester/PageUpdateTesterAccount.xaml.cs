@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,30 +51,42 @@ namespace PL_WpfApp
             BE.Tester tempTester = new BE.Tester();
             try
             {
-                if (String.IsNullOrEmpty(this.iDTextBox.Text))
-                    throw new Exception("You have to fill the ID field");
                 if (String.IsNullOrEmpty(this.firstNameTextBox.Text))
                     throw new Exception("You have to fill the First Name field");
+                else if (!Regex.IsMatch(this.firstNameTextBox.Text, @"^[a-zA-Z]+$"))
+                    throw new Exception("The first name can contain only letters");
                 if (String.IsNullOrEmpty(this.lastNameTextBox.Text))
                     throw new Exception("You have to fill the Last Name field");
+                else if (!Regex.IsMatch(this.lastNameTextBox.Text, @"^[a-zA-Z]+$"))
+                    throw new Exception("The last name can contain only letters");
                 if (String.IsNullOrEmpty(this.cityTextBox.Text))
                     throw new Exception("You have to fill the City field");
+                else if (!Regex.IsMatch(this.cityTextBox.Text, @"^[a-zA-Z]+$"))
+                    throw new Exception("The City name can contain only letters");
                 if (String.IsNullOrEmpty(this.streetNameTextBox.Text))
                     throw new Exception("You have to fill the Street Name field");
+                else if (!Regex.IsMatch(this.streetNameTextBox.Text, @"^[a-zA-Z]+$"))
+                    throw new Exception("The street name can contain only letters");
                 if (String.IsNullOrEmpty(this.numberTextBox.Text))
                     throw new Exception("You have to fill the number field");
+                else if (!Regex.IsMatch(this.numberTextBox.Text, @"^\d+$"))
+                    throw new Exception("The street number can only contain numbers");
                 if (String.IsNullOrEmpty(this.genderComboBox.Text))
                     throw new Exception("You have to chose Gender");
                 if (String.IsNullOrEmpty(this.experienceTextBox.Text))
                     throw new Exception("You have to fill the experience field");
+                else if (!Regex.IsMatch(this.experienceTextBox.Text, @"^\d+$"))
+                    throw new Exception("The experience field can only contain numbers");
                 if (String.IsNullOrEmpty(this.expertiseComboBox.Text))
                     throw new Exception("You have to chose expertise");
+                else if (!Regex.IsMatch(this.experienceTextBox.Text, @"^\d+$"))
+                    throw new Exception("The experience field can only contain numbers");
                 if (String.IsNullOrEmpty(this.maxDistanceTextBox.Text))
                     throw new Exception("You have to fill the Max-Distance field");
                 if (String.IsNullOrEmpty(this.maxTestWeeklyTextBox.Text))
                     throw new Exception("You have to fill the Max-Test-Weekly field");
-                if (String.IsNullOrEmpty(this.dayOfBirthTextBlock.Text))
-                    throw new Exception("You have to chose birth-day");
+                else if (!Regex.IsMatch(this.maxTestWeeklyTextBox.Text, @"^\d+$"))
+                    throw new Exception("The max test weekly can only contain numbers");
 
                 tempTester = new BE.Tester();
                 tempTester.Address = new BE.Address();
