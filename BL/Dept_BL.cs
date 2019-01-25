@@ -116,6 +116,22 @@ namespace BL
         {
             return instance.GetTrainee(id);
         }
+        public int NumberTestsTraineeMade(Trainee trainee)
+        {
+            int count = 0;
+            List<DrivingTest> res = GetDrivingTests(temp_trainee => temp_trainee.Trainee_ID == trainee.ID);
+            if (res == null)
+                throw new Exception("this trainee does not have a test");
+            else
+            {
+                count = res.Count();
+                return count;
+            }
+        }
+        //---------------------------------------------------------------------------------------------
+
+
+
 
 
         public void AddDrivingTest(DrivingTest drivingTest)
@@ -174,7 +190,26 @@ namespace BL
         {
             return instance.GetDrivingTest(id);
         }
-
+        public List<DrivingTest> GetDrivingTestsByDate(Func<DrivingTest, bool> predicate = null)
+        {
+            List<DrivingTest> res = GetDrivingTests(predicate);
+            if (res == null)
+                throw new Exception("type in date for this test");
+            else
+            {
+                var result = from t in res
+                             where (predicate(t))
+                             select t;
+                if (result == null)
+                {
+                    throw new Exception("there are no tests in this date");
+                }
+                else
+                {
+                    return result.ToList();
+                }
+            }
+        }
 
         //We need to implement this
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
@@ -233,7 +268,9 @@ namespace BL
                 Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
         }
+        
 
+        
 
 
 
