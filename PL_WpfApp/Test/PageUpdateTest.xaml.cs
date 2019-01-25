@@ -20,9 +20,22 @@ namespace PL_WpfApp
     /// </summary>
     public partial class PageUpdateTest : Page
     {
-        public PageUpdateTest()
+        BL.IBL bl = BL.FactorySingletonBL.getInstance();
+        BE.DrivingTest drivingTest;
+
+        public PageUpdateTest(BE.DrivingTest dr)
         {
+            drivingTest = dr;
             InitializeComponent();
+            this.iDTextBox.Text = drivingTest.ID; // why does not working ???
+            this.tester_IDTextBox.Text = drivingTest.Tester_ID;
+            this.trainee_IDTextBox.Text = drivingTest.Trainee_ID;
+            this.dateDatePicker.DisplayDateEnd = DateTime.Now;
+            this.dateDatePicker.DisplayDate = drivingTest.Date;
+            this.timeTextBox.Text = drivingTest.Time.ToString();
+
+
+
         }
         private void Click_UpdateTest(object sender, RoutedEventArgs e)
         {

@@ -40,7 +40,7 @@ namespace PL_WpfApp
 
         private void Update_Test(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageUpdateTest());
+            this.NavigationService.Navigate(new PageUpdateTest(null));//change from null to driving test
         }
 
         private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
