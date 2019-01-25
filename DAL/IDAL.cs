@@ -29,9 +29,9 @@ namespace DAL
         Tester GetTester(string id);
 
         List<Trainee> GetTrainees(Func<Trainee, bool> p = null);
-        List<Trainee> GetTrainees();
-
         Trainee GetTrainee(string id);
+
         List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> p = null);
+        DrivingTest GetDrivingTest(string id);
     }
 }

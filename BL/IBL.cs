@@ -1,33 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BE;
 
 namespace BL
 {
-    public interface IBL//מה יותר יפה? כל האדדים והרמובים וכו' ביחד? או כמו באיידל לפי ישות
+    public interface IBL
     {
-        void AddDrivingTest(DrivingTest drivingTest);
         void AddTester(Tester tester);
-        void AddTrainee(Trainee trainee);
-
-        bool TesterExist(Tester tester);
-        bool TraineeExist(Trainee trainee);
-        bool DrivingTestExist(DrivingTest drivingTest);
-
-        bool RemoveDrivingTest(DrivingTest drivingTest);
         bool RemoveTester(Tester tester);
-        bool RemoveTrainee(Trainee trainee);
-
-        void UpdateDrivingTest(DrivingTest drivingTest);
         void UpdateTester(Tester tester);
+        bool TesterExist(Tester tester);
+
+        void AddTrainee(Trainee trainee);
+        bool RemoveTrainee(Trainee trainee);
         void UpdateTrainee(Trainee trainee);
+        bool TraineeExist(Trainee trainee);
 
-        List<DrivingTest> GetAllDrivingTests();
-        List<Tester> GetTesters();
-        Tester GetTester(string id);//not sure we need this
-        List<Trainee> GetTrainees();
-        Trainee GetTrainee(string id);//not sure we need this
+
+        void AddDrivingTest(DrivingTest drivingTest);
+        bool RemoveDrivingTest(DrivingTest drivingTest);
+        void UpdateDrivingTest(DrivingTest drivingTest);
+        bool DrivingTestExist(DrivingTest test);
+
+        List<Tester> GetTesters(Func<Tester, bool> p = null);
+        Tester GetTester(string id);
+
+        List<Trainee> GetTrainees(Func<Trainee, bool> p = null);
+        Trainee GetTrainee(string id);
+
+        List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> p = null);
+        DrivingTest GetDrivingTest(string id);
+
         IEnumerable<Person> GetAllPersons();
-
-
     }
 }

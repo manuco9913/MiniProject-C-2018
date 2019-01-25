@@ -25,8 +25,8 @@ namespace PL_WpfApp
 
         public PageUpdateTest(BE.DrivingTest dr)
         {
-            drivingTest = dr;
             InitializeComponent();
+            drivingTest = dr;
             this.iDTextBox.Text = drivingTest.ID; // why does not working ???
             this.tester_IDTextBox.Text = drivingTest.Tester_ID;
             this.trainee_IDTextBox.Text = drivingTest.Trainee_ID;

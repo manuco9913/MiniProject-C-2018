@@ -133,19 +133,12 @@ namespace DAL
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
-            DrivingTest temp_test = GetDrivingTest(drivingTest);
+            DrivingTest temp_test = GetDrivingTest(drivingTest.ID);
             temp_test.Requirements.Clear();
             return GetDrivingTests().Remove(temp_test);
         }
         public void UpdateDrivingTest(DrivingTest drivingTest)
         {
-            //int index = GetDrivingTests().FindIndex(s => s.ID == drivingTest.ID); // index = index of the tester we are looking for
-            //if (index == -1)
-            //{
-            //    throw new Exception("Driving Test with the same id not found...");
-            //}
-            //GetDrivingTests()[index] = drivingTest;
-            //return true;
             var result = (from item in DS.DataSource.DrivingtestsList
                           where item.ID == drivingTest.ID
                           select item).FirstOrDefault();
@@ -177,9 +170,9 @@ namespace DAL
             }
             return result.ToList();
         }
-        private DrivingTest GetDrivingTest(DrivingTest dt)
+        public DrivingTest GetDrivingTest(string id)
         {
-            return GetDrivingTests().FirstOrDefault(tmp_drivingtes => tmp_drivingtes.ID == dt.ID);
+            return GetDrivingTests().FirstOrDefault(tmp_drivingtest => tmp_drivingtest.ID == id);
         }
         #endregion
     }

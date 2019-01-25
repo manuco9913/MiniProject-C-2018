@@ -133,7 +133,25 @@ namespace PL_WpfApp
 
         private void Click_UpdateTest(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageUpdateTest(null));
+            try
+            {
+                string id = Interaction.InputBox("Type the test you want to update", "Update test", "Test ID", -1, -1);
+                if (id != null)
+                {
+                    BE.DrivingTest dr = bl.GetAllDrivingTests();
+                    if (bl.TesterExist(tester)) // if pressed "אישור"
+                    {
+                        this.NavigationService.Navigate(new PageUpdateTest(null));
+                    }
+                    else
+                        MessageBox.Show("The Trainee doesn't exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-    }
+    }            
+
 }

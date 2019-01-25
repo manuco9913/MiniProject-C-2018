@@ -52,6 +52,18 @@ namespace BL
         {
             return instance.TesterExist(tester);
         }
+        public List<Tester> GetTesters(Func<Tester, bool> p = null)
+        {
+            if (p == null)
+                return instance.GetTesters();
+            else
+                return instance.GetTesters(p);
+        }
+        public Tester GetTester(string id)
+        {
+            return instance.GetTester(id);
+        }
+
 
         public void AddTrainee(Trainee trainee)
         {
@@ -92,6 +104,17 @@ namespace BL
         public bool TraineeExist(Trainee trainee)
         {
             return instance.TraineeExist(trainee);
+        }
+        public List<Trainee> GetTrainees(Func<Trainee, bool> p = null)
+        {
+            if (p == null)
+                return instance.GetTrainees();
+            else
+                return instance.GetTrainees(p);
+        }
+        public Trainee GetTrainee(string id)
+        {
+            return instance.GetTrainee(id);
         }
 
 
@@ -140,7 +163,19 @@ namespace BL
         {
             return instance.DrivingTestExist(drivingTest);
         }
-         
+        public List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> p = null)
+        {
+            if (p == null)
+                return instance.GetDrivingTests(p);//use GetDrivingTests in class Dal_imp
+            else
+                return instance.GetDrivingTests(p);
+        }
+        public DrivingTest GetDrivingTest(string id)
+        {
+            return instance.GetDrivingTest(id);
+        }
+
+
         //We need to implement this
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
         public IEnumerable<Person> GetAllPersons()
@@ -152,36 +187,6 @@ namespace BL
             return result1.Concat(result2);
 
         }
-
-        public List<Tester> GetTesters()
-        {//try and catch????
-            return instance.GetTesters();
-        }
-        public Tester GetTester(string id)
-        {
-            return instance.GetTester(id);
-        }
-
-        public List<Trainee> GetTrainees()
-        { //try and catch????
-            return instance.GetTrainees();
-        }
-        public Trainee GetTrainee(string id)
-        {
-            return instance.GetTrainee(id);
-        }
-
-        public List<DrivingTest> GetAllDrivingTests()
-        {
-            return instance.GetDrivingTests();
-        }
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-        //we can simply do this with predicate = null and we will have only one function
-        public List<DrivingTest> GetAllDrivingTestsThat(Func<DrivingTest, bool> predicate)
-        {
-            return instance.GetDrivingTests(predicate);//use GetDrivingTests in class Dal_imp
-        }
-
 
         public void distance_Calculate(Tester tester, Trainee trainee) // what this func need get?
         {
@@ -228,12 +233,16 @@ namespace BL
                 Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
         }
+
+
+
+
         //------------------------------------------------------------Test requirments--------------------------------------------------------------------
         private bool testerAvailableTesting(string tester_ID, DateTime date)
         {
             if (date.Hour > 14 || date.Hour < 9)
                 return false;
-            List<DrivingTest> res = GetAllDrivingTestsThat(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
+            List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
             IEnumerable<DrivingTest> result = null;
             if (res == null)//if there's no tester with that id it means that the tester we are trying to add to the test is available because he has no tests at all
                 return true;
@@ -261,7 +270,7 @@ namespace BL
         }
         private bool testerMaxTestWeekly(string tester_ID)
         {
-            List<DrivingTest> res = GetAllDrivingTestsThat(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
+            List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
             IEnumerable<DrivingTest> result = null;
             if (res == null)
                 return false;
@@ -292,7 +301,7 @@ namespace BL
         {
             // DrivingTest temp = new DrivingTest();
             //temp.Trainee_ID = trainee_ID;
-            List<DrivingTest> res = GetAllDrivingTestsThat(temp_dt => temp_dt.Trainee_ID == trainee_ID);
+            List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Trainee_ID == trainee_ID);
             if (res == null)
                 return false;
             else
