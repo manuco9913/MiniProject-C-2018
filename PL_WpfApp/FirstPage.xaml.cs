@@ -63,7 +63,7 @@ namespace PL_WpfApp
                     if (bl.TraineeExist(bl.GetTrainee(id))) // if press "אישור" so if ge goes to if.
                     {
                         bl.RemoveTrainee(bl.GetTrainee(id));
-                        
+
                         MessageBox.Show("Deleted successfully");
                     }
                     else
@@ -138,13 +138,13 @@ namespace PL_WpfApp
                 string id = Interaction.InputBox("Type the test you want to update", "Update test", "Test ID", -1, -1);
                 if (id != null)
                 {
-                    BE.DrivingTest dr = bl.GetAllDrivingTests();
-                    if (bl.TesterExist(tester)) // if pressed "אישור"
+                    BE.DrivingTest dr = bl.GetDrivingTest(id);
+                    if (bl.DrivingTestExist(dr)) // if pressed "אישור"
                     {
                         this.NavigationService.Navigate(new PageUpdateTest(null));
                     }
                     else
-                        MessageBox.Show("The Trainee doesn't exist");
+                        MessageBox.Show("The Test doesn't exist");
                 }
             }
             catch (Exception ex)
@@ -152,6 +152,6 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
-    }            
+    }
 
 }
