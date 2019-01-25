@@ -153,6 +153,44 @@ namespace BL
 
         }
 
+        //-------------------------New Func - return TestLists by day/month----------------------------
+        public List<DrivingTest> GetDrivingTestsByDate (Func<DrivingTest, bool> predicate=null)
+        {
+            List<DrivingTest> res = GetAllDrivingTestsThat(predicate);
+            if (res == null)
+                throw new Exception("type in date for this test");
+            else
+            {
+              var result = from t in res
+                         where (predicate(t))
+                         select t;
+                if (result == null)
+                {
+                    throw new Exception("there are no tests in this date");
+                }
+                else
+                {
+                    return result.ToList();
+                }
+            }
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //-------------------------New Func - return the Number of tests the student made--------------
+        public int NumberTestsTraineeMade(Trainee trainee)
+        {
+            int count = 0;
+            List<DrivingTest> res = GetAllDrivingTestsThat(temp_trainee => temp_trainee.Trainee_ID == trainee.ID);
+            if (res == null)
+                throw new Exception("this trainee does not have a test");
+            else
+            {
+                count = res.Count();
+                return count;
+            }
+        }
+        //---------------------------------------------------------------------------------------------
+
         public List<Tester> GetTesters()
         {//try and catch????
             return instance.GetTesters();
