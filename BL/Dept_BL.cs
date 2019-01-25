@@ -17,6 +17,7 @@ namespace BL
 
         private static DAL.Idal instance = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
 
+        //--------------Tester---------------
         public void AddTester(Tester tester)
         {
             if (TesterExist(tester))
@@ -63,8 +64,8 @@ namespace BL
         {
             return instance.GetTester(id);
         }
-
-
+        
+        //--------------Trainee---------------
         public void AddTrainee(Trainee trainee)
         {
             if (TraineeExist(trainee))
@@ -163,12 +164,8 @@ namespace BL
             else
                 return false;
         }
-        //---------------------------------------------------------------------------------------------
 
-
-
-
-
+        //--------------DrivingTest---------------
         public void AddDrivingTest(DrivingTest drivingTest)
         {
             if (!DrivingTestExist(drivingTest))
@@ -246,6 +243,8 @@ namespace BL
             }
         }
 
+
+
         //We need to implement this
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
         public IEnumerable<Person> GetAllPersons()
@@ -304,6 +303,9 @@ namespace BL
             }
         }
        
+
+
+
 
         //------------------------------------------------------------Test requirments--------------------------------------------------------------------
         private bool testerAvailableTesting(string tester_ID, DateTime date)
