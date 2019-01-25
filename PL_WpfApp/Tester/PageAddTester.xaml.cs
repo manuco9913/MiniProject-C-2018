@@ -27,7 +27,7 @@ namespace PL_WpfApp
         {
             InitializeComponent();
             this.dayOfBirthDatePicker.DisplayDateEnd = DateTime.Now;
-            this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
+            this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender)); 
             this.expertiseComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
         }
 
