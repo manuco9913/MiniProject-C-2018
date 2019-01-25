@@ -156,6 +156,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.datasource" />
     <None Include="BE.Address.datasource" />
     <None Include="BE.Configuration.datasource" />
     <None Include="BE.DrivingTest.datasource" />
@@ -164,6 +165,21 @@
     <None Include="BE.Schedule.datasource" />
     <None Include="BE.Tester.datasource" />
     <None Include="BE.Trainee.datasource" />
+    <None Include="BL.FactorySingletonBL.datasource" />
+    <None Include="BL.IBL.datasource" />
+    <None Include="FirstPage.datasource" />
+    <None Include="MainWindow.datasource" />
+    <None Include="PageAddTest.datasource" />
+    <None Include="PageAddTester.datasource" />
+    <None Include="PageAddTrainee.datasource" />
+    <None Include="PageAddUser.datasource" />
+    <None Include="PageMainTester.datasource" />
+    <None Include="PageMainTrainee.datasource" />
+    <None Include="PageUpdateTest.datasource" />
+    <None Include="PageUpdateTesterAccount.datasource" />
+    <None Include="PageUpdateTraineeAccount.datasource" />
+    <None Include="PL_WpfApp.Properties.Resources.datasource" />
+    <None Include="PL_WpfApp.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -17,6 +17,7 @@ namespace BL
 
         private static DAL.Idal instance = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
 
+        //--------------Tester---------------
         public void AddTester(Tester tester)
         {
             if (TesterExist(tester))
@@ -63,8 +64,8 @@ namespace BL
         {
             return instance.GetTester(id);
         }
-
-
+        
+        //--------------Trainee---------------
         public void AddTrainee(Trainee trainee)
         {
             if (TraineeExist(trainee))
@@ -116,8 +117,55 @@ namespace BL
         {
             return instance.GetTrainee(id);
         }
+        public int NumberTestsTraineeMade(Trainee trainee)
+        {
+            int count = 0;
+            List<DrivingTest> res = GetDrivingTests(temp_trainee => temp_trainee.Trainee_ID == trainee.ID);
+            if (res == null)
+                throw new Exception("this trainee does not have a test");
+            else
+            {
+                count = res.Count();
+                return count;
+            }
+        }
+        private bool CheckIfHasLicense(Trainee trainee)     //-----------check if he has a License
+        {
+            List<Trainee> res = GetTrainees(tra => tra.ID == trainee.ID && tra.CarTrained == trainee.CarTrained);
 
+            if (res == null)
+                return false;
+            else
+            {
+                if (trainee.Succsess == true)
+                    return true;
+            }
+            return false;
+        }
+        public bool succsessInTest(Trainee trainee)        //--------pass or field int test-------
 
+        {
+
+            DrivingTest dr = GetDrivingTest(trainee.ID);
+            bool a = dr.requirments._gradeBlinkersUsed = false;
+            bool b = dr.requirments._gradeDistanceKeepping = false;
+            bool c = dr.requirments._gradeGearsUsage = false;
+            bool d = dr.requirments._gradeGivingPriorityToPedestrians = false;
+            bool e = dr.requirments._gradeMirrorLooking = false;
+            bool f = dr.requirments._gradeObeyedToSigns = false;
+            bool g = dr.requirments._gradeRegularParking = false;
+            bool h = dr.requirments._gradeReverseParking = false;
+            bool i = dr.requirments._gradeSpeedKeeping = false;
+            if ((a && b && c && d && e && f && g && h && i) == true)
+            {
+                trainee.Succsess = true;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        //--------------DrivingTest---------------
         public void AddDrivingTest(DrivingTest drivingTest)
         {
             if (!DrivingTestExist(drivingTest))
@@ -174,6 +222,27 @@ namespace BL
         {
             return instance.GetDrivingTest(id);
         }
+        public List<DrivingTest> GetDrivingTestsByDate(Func<DrivingTest, bool> predicate = null)
+        {
+            List<DrivingTest> res = GetDrivingTests(predicate);
+            if (res == null)
+                throw new Exception("type in date for this test");
+            else
+            {
+                var result = from t in res
+                             where (predicate(t))
+                             select t;
+                if (result == null)
+                {
+                    throw new Exception("there are no tests in this date");
+                }
+                else
+                {
+                    return result.ToList();
+                }
+            }
+        }
+
 
 
         //We need to implement this
@@ -233,6 +302,7 @@ namespace BL
                 Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
         }
+       
 
 
 

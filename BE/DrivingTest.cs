@@ -13,8 +13,12 @@ namespace BE
     /// </summary>
     public class DrivingTest
     {
+        //
+        public TestProp requirments { get; set; } // what do with this ?
+        
+        //
         private DateTime _date;
-        private List<string> _requirements = new List<string>();
+        // private List<string> _requirements = new List<string>();
         //  private ArrayList _requirements = new ArrayList();
         /// <summary>
         /// get set the Trainee ID
@@ -29,7 +33,7 @@ namespace BE
         public DateTime Date { get => _date.Date; set => _date = value.Date; }
         public TimeSpan Time { get => Date.TimeOfDay; set => _date.AddMilliseconds(value.TotalMilliseconds); }
         public Address StartingPoint { get; set; }
-        public List<String> Requirements { get => _requirements; set => _requirements = value; }
+       // public List<String> Requirements { get => _requirements; set => _requirements = value; }
         public bool Success { get; set; }
         public String Comment { get; set; }
 
