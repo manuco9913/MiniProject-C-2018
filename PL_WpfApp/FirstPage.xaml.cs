@@ -133,7 +133,7 @@ namespace PL_WpfApp
 
         private void Click_UpdateTest(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageUpdateTest());
+            this.NavigationService.Navigate(new PageUpdateTest(null));
         }
     }
 }
