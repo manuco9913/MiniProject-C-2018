@@ -14,7 +14,7 @@ namespace BE
         public SchoolName DrivingSchool { get; set; }
         public Name Instructor { get; set; }
         public int LessonsNb { get; set; }
-
+        public bool Succsess { get; set; }// Past or Failed test
         public override string ToString()
         {
             return this.ToStringProperty();

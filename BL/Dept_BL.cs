@@ -128,6 +128,41 @@ namespace BL
                 return count;
             }
         }
+        private bool CheckIfHasLicense(Trainee trainee)     //-----------check if he has a License
+        {
+            List<Trainee> res = GetTrainees(tra => tra.ID == trainee.ID && tra.CarTrained == trainee.CarTrained);
+
+            if (res == null)
+                return false;
+            else
+            {
+                if (trainee.Succsess == true)
+                    return true;
+            }
+            return false;
+        }
+        public bool succsessInTest(Trainee trainee)        //--------pass or field int test-------
+
+        {
+
+            DrivingTest dr = GetDrivingTest(trainee.ID);
+            bool a = dr.requirments._gradeBlinkersUsed = false;
+            bool b = dr.requirments._gradeDistanceKeepping = false;
+            bool c = dr.requirments._gradeGearsUsage = false;
+            bool d = dr.requirments._gradeGivingPriorityToPedestrians = false;
+            bool e = dr.requirments._gradeMirrorLooking = false;
+            bool f = dr.requirments._gradeObeyedToSigns = false;
+            bool g = dr.requirments._gradeRegularParking = false;
+            bool h = dr.requirments._gradeReverseParking = false;
+            bool i = dr.requirments._gradeSpeedKeeping = false;
+            if ((a && b && c && d && e && f && g && h && i) == true)
+            {
+                trainee.Succsess = true;
+                return true;
+            }
+            else
+                return false;
+        }
         //---------------------------------------------------------------------------------------------
 
 
@@ -268,11 +303,7 @@ namespace BL
                 Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
         }
-        
-
-        
-
-
+       
 
         //------------------------------------------------------------Test requirments--------------------------------------------------------------------
         private bool testerAvailableTesting(string tester_ID, DateTime date)
