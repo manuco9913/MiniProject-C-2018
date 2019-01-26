@@ -15,7 +15,7 @@ namespace BL
     internal class Dept_BL : IBL
     {
 
-        private static DAL.Idal instance = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
+        private static DAL.Idal dal = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
 
         //--------------Tester---------------
         public void AddTester(Tester tester)
@@ -25,13 +25,13 @@ namespace BL
             if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)//checking tester age
                 throw new Exception("Tester under 40 years");
             else
-                instance.AddTester(tester);
+                dal.AddTester(tester);
         }
         public bool RemoveTester(Tester tester)
         {
             if (TesterExist(tester))
             {
-                instance.RemoveTester(tester);
+                dal.RemoveTester(tester);
                 return true;
             }
             else
@@ -45,24 +45,24 @@ namespace BL
             if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
                 throw new Exception("Tester under 40 years");
             if (TesterExist(tester))
-                instance.UpdateTester(tester);
+                dal.UpdateTester(tester);
             else
                 throw new Exception("This tester doesn't exist");
         }
         public bool TesterExist(Tester tester)
         {
-            return instance.TesterExist(tester);
+            return dal.TesterExist(tester);
         }
         public List<Tester> GetTesters(Func<Tester, bool> p = null)
         {
             if (p == null)
-                return instance.GetTesters();
+                return dal.GetTesters();
             else
-                return instance.GetTesters(p);
+                return dal.GetTesters(p);
         }
         public Tester GetTester(string id)
         {
-            return instance.GetTester(id);
+            return dal.GetTester(id);
         }
         
         //--------------Trainee---------------
@@ -73,13 +73,13 @@ namespace BL
             if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
                 throw new Exception("Trainee under 18 years");
 
-            instance.AddTrainee(trainee);
+            dal.AddTrainee(trainee);
         }
         public bool RemoveTrainee(Trainee trainee)
         {
             if (TraineeExist(trainee))
             {
-                instance.RemoveTrainee(trainee);
+                dal.RemoveTrainee(trainee);
                 return true;
             }
             else
@@ -100,22 +100,22 @@ namespace BL
             if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
                 throw new Exception("Trainee under 18 years");
 
-            instance.UpdateTrainee(trainee);
+            dal.UpdateTrainee(trainee);
         }
         public bool TraineeExist(Trainee trainee)
         {
-            return instance.TraineeExist(trainee);
+            return dal.TraineeExist(trainee);
         }
         public List<Trainee> GetTrainees(Func<Trainee, bool> p = null)
         {
             if (p == null)
-                return instance.GetTrainees();
+                return dal.GetTrainees();
             else
-                return instance.GetTrainees(p);
+                return dal.GetTrainees(p);
         }
         public Trainee GetTrainee(string id)
         {
-            return instance.GetTrainee(id);
+            return dal.GetTrainee(id);
         }
         public int NumberTestsTraineeMade(Trainee trainee)
         {
@@ -181,12 +181,12 @@ namespace BL
             if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if it is not available then you cant
                 throw new Exception("The tester is not available during these hours");
 
-            instance.AddDrivingTest(drivingTest);
+            dal.AddDrivingTest(drivingTest);
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
             if (DrivingTestExist(drivingTest))
-                return instance.RemoveDrivingTest(drivingTest);
+                return dal.RemoveDrivingTest(drivingTest);
             else
                 throw new Exception("Cannot remove a test that doesn't exist");
         }
@@ -205,22 +205,22 @@ namespace BL
             if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
                 throw new Exception("The tester is not available during these hours");
 
-            instance.UpdateDrivingTest(drivingTest);
+            dal.UpdateDrivingTest(drivingTest);
         }
         public bool DrivingTestExist(DrivingTest drivingTest)
         {
-            return instance.DrivingTestExist(drivingTest);
+            return dal.DrivingTestExist(drivingTest);
         }
         public List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> p = null)
         {
             if (p == null)
-                return instance.GetDrivingTests(p);//use GetDrivingTests in class Dal_imp
+                return dal.GetDrivingTests(p);//use GetDrivingTests in class Dal_imp
             else
-                return instance.GetDrivingTests(p);
+                return dal.GetDrivingTests(p);
         }
         public DrivingTest GetDrivingTest(string id)
         {
-            return instance.GetDrivingTest(id);
+            return dal.GetDrivingTest(id);
         }
         public List<DrivingTest> GetDrivingTestsByDate(Func<DrivingTest, bool> predicate = null)
         {
@@ -249,9 +249,9 @@ namespace BL
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
         public IEnumerable<Person> GetAllPersons()
         {
-            IEnumerable<Person> result1 = (from p in instance.GetTrainees()
+            IEnumerable<Person> result1 = (from p in dal.GetTrainees()
                                            select p);
-            IEnumerable<Person> result2 = (from p in instance.GetTesters()
+            IEnumerable<Person> result2 = (from p in dal.GetTesters()
                                            select p);
             return result1.Concat(result2);
 

@@ -83,18 +83,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageAddUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tester\PageMainTester.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Trainee\PageMainTrainee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Test\PageUpdateTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,15 +108,6 @@
     </Compile>
     <Compile Include="Trainee\PageAddTrainee.xaml.cs">
       <DependentUpon>PageAddTrainee.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageAddUser.xaml.cs">
-      <DependentUpon>PageAddUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tester\PageMainTester.xaml.cs">
-      <DependentUpon>PageMainTester.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Trainee\PageMainTrainee.xaml.cs">
-      <DependentUpon>PageMainTrainee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Test\PageUpdateTest.xaml.cs">
       <DependentUpon>PageUpdateTest.xaml</DependentUpon>
@@ -156,30 +135,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.datasource" />
-    <None Include="BE.Address.datasource" />
-    <None Include="BE.Configuration.datasource" />
-    <None Include="BE.DrivingTest.datasource" />
-    <None Include="BE.Name.datasource" />
-    <None Include="BE.Person.datasource" />
-    <None Include="BE.Schedule.datasource" />
-    <None Include="BE.Tester.datasource" />
-    <None Include="BE.Trainee.datasource" />
-    <None Include="BL.FactorySingletonBL.datasource" />
-    <None Include="BL.IBL.datasource" />
-    <None Include="FirstPage.datasource" />
-    <None Include="MainWindow.datasource" />
-    <None Include="PageAddTest.datasource" />
-    <None Include="PageAddTester.datasource" />
-    <None Include="PageAddTrainee.datasource" />
-    <None Include="PageAddUser.datasource" />
-    <None Include="PageMainTester.datasource" />
-    <None Include="PageMainTrainee.datasource" />
-    <None Include="PageUpdateTest.datasource" />
-    <None Include="PageUpdateTesterAccount.datasource" />
-    <None Include="PageUpdateTraineeAccount.datasource" />
-    <None Include="PL_WpfApp.Properties.Resources.datasource" />
-    <None Include="PL_WpfApp.Properties.Settings.datasource" />
+    <None Include="BE.DataSource\BE.Address.datasource" />
+    <None Include="BE.DataSource\BE.Configuration.datasource" />
+    <None Include="BE.DataSource\BE.DrivingTest.datasource" />
+    <None Include="BE.DataSource\BE.Name.datasource" />
+    <None Include="BE.DataSource\BE.Person.datasource" />
+    <None Include="BE.DataSource\BE.Schedule.datasource" />
+    <None Include="BE.DataSource\BE.Tester.datasource" />
+    <None Include="BE.DataSource\BE.Trainee.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

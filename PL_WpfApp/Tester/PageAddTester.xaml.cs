@@ -36,25 +36,26 @@ namespace PL_WpfApp
         {
             try
             {
+                #region if text boxes are null or if the input format is wrong
                 if (String.IsNullOrEmpty(this.iDTextBox.Text))
                     throw new Exception("You have to fill the ID field");
-                else if (this.iDTextBox.Text.Length != 9)
+                else if (this.iDTextBox.Text.Length != 9 && !Regex.IsMatch(this.iDTextBox.Text, @"[\p{L} ]+$"))
                     throw new Exception("The ID needs to have 9 digits");
                 if (String.IsNullOrEmpty(this.firstNameTextBox.Text))
                     throw new Exception("You have to fill the First Name field");
-                else if (!Regex.IsMatch(this.firstNameTextBox.Text, @"^[a-zA-Z]+$"))
+                else if (!Regex.IsMatch(this.firstNameTextBox.Text, @"[\p{L} ]+$"))
                     throw new Exception("The first name can contain only letters");
                 if (String.IsNullOrEmpty(this.lastNameTextBox.Text))
                     throw new Exception("You have to fill the Last Name field");
-                else if (!Regex.IsMatch(this.lastNameTextBox.Text, @"^[a-zA-Z]+$"))
+                else if (!Regex.IsMatch(this.lastNameTextBox.Text, @"[\p{L} ]+$"))
                     throw new Exception("The last name can contain only letters");
                 if (String.IsNullOrEmpty(this.cityTextBox.Text))
                     throw new Exception("You have to fill the City field");
-                else if (!Regex.IsMatch(this.cityTextBox.Text, @"^[a-zA-Z]+$"))
+                else if (!Regex.IsMatch(this.cityTextBox.Text, @"[\p{L} ]+$"))
                     throw new Exception("The City name can contain only letters");
                 if (String.IsNullOrEmpty(this.streetNameTextBox.Text))
                     throw new Exception("You have to fill the Street Name field");
-                else if (!Regex.IsMatch(this.streetNameTextBox.Text, @"^[a-zA-Z]+$"))
+                else if (!Regex.IsMatch(this.streetNameTextBox.Text, @"[\p{L} ]+$"))
                     throw new Exception("The street name can contain only letters");
                 if (String.IsNullOrEmpty(this.numberTextBox.Text))
                     throw new Exception("You have to fill the number field");
@@ -78,7 +79,7 @@ namespace PL_WpfApp
                     throw new Exception("The max test weekly can only contain numbers");
                 if (String.IsNullOrEmpty(this.dayOfBirthDatePicker.Text))
                     throw new Exception("You have to chose birth-day");
-                
+                #endregion
 
                 tester = new BE.Tester();
                 tester.Address = new BE.Address();
@@ -115,8 +116,8 @@ namespace PL_WpfApp
                 //-----------------------------------------------------------------------------------------
                 if (bl.TesterExist(tester))
                     throw new Exception("This tester already exists...");
-                if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
-                    throw new Exception("tester under 40 years");
+                if (DateTime.Now.Year - tester.DayOfBirth.Year < BE.Configuration.MIN_TESTER_AGE)
+                    throw new Exception("tester too young");
 
                 bl.AddTester(tester);
                 MessageBox.Show("Successfully added tester!");
