@@ -142,43 +142,43 @@ namespace BL
             }
             return false;
         }
-        //public bool succsessInTest(Trainee trainee)        //--------pass or field int test-------
+        /*public bool succsessInTest(Trainee trainee)        //--------pass or field int test-------
 
-        //{
+        {
 
-        //    DrivingTest dr = GetDrivingTest(trainee.ID);
-        //    bool a = dr.requirments._gradeBlinkersUsed = false;
-        //    bool b = dr.requirments._gradeDistanceKeepping = false;
-        //    bool c = dr.requirments._gradeGearsUsage = false;
-        //    bool d = dr.requirments._gradeGivingPriorityToPedestrians = false;
-        //    bool e = dr.requirments._gradeMirrorLooking = false;
-        //    bool f = dr.requirments._gradeObeyedToSigns = false;
-        //    bool g = dr.requirments._gradeRegularParking = false;
-        //    bool h = dr.requirments._gradeReverseParking = false;
-        //    bool i = dr.requirments._gradeSpeedKeeping = false;
-        //    if ((a && b && c && d && e && f && g && h && i) == true)
-        //    {
-        //        trainee.Succsess = true;
-        //        return true;
-        //    }
-        //    else
-        //        return false;
-        //}
+            DrivingTest dr = GetDrivingTest(trainee.ID);
+            bool a = dr.requirments._gradeBlinkersUsed = false;
+            bool b = dr.requirments._gradeDistanceKeepping = false;
+            bool c = dr.requirments._gradeGearsUsage = false;
+            bool d = dr.requirments._gradeGivingPriorityToPedestrians = false;
+            bool e = dr.requirments._gradeMirrorLooking = false;
+            bool f = dr.requirments._gradeObeyedToSigns = false;
+            bool g = dr.requirments._gradeRegularParking = false;
+            bool h = dr.requirments._gradeReverseParking = false;
+            bool i = dr.requirments._gradeSpeedKeeping = false;
+            if ((a && b && c && d && e && f && g && h && i) == true)
+            {
+                trainee.Succsess = true;
+                return true;
+            }
+            else
+                return false;
+        }*/
 
         //--------------DrivingTest---------------
         public void AddDrivingTest(DrivingTest drivingTest)
         {
-            if (!DrivingTestExist(drivingTest))
-                throw new Exception("This driving test doesn't exist");
+            if (DrivingTestExist(drivingTest))
+                throw new Exception("This driving test already exists");
             if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
                 throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-            if (testedRecently(drivingTest.Trainee_ID)) // if he did test in the last 7 days
+            if (!testedRecently(drivingTest.Trainee_ID)) // if he took a test in the last 7 days
                 throw new Exception("The trainee cannot take the test since he was tested recently");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
                 throw new Exception("Tester and trainee do not use the same type of car");
-            if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester do more tests in week than the max he can do
+            if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester does more tests in week than the max he can do
                 throw new Exception("Tester reached his maximum number of tests");
-            if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if it is not available then you cant
+            if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if he is not available then you cant
                 throw new Exception("The tester is not available during these hours");
 
             dal.AddDrivingTest(drivingTest);
@@ -372,21 +372,20 @@ namespace BL
             // DrivingTest temp = new DrivingTest();
             //temp.Trainee_ID = trainee_ID;
             List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Trainee_ID == trainee_ID);
-            if (res == null)
-                return false;
+            if (res.Count == 0)
+                return true;
             else
             {
-                IEnumerable<DrivingTest> result = null;
-                result = from t in res
+                var result = (from t in res
                          where (DateTime.Now.Subtract(t.Date).TotalDays > 7)
-                         select t;
-                if (result == null)
+                         select t).ToList<DrivingTest>();
+                if (result.Count == 0)
                 {
-                    return false;
+                    return true;
                 }
                 else
                 {
-                    return true;
+                    return false;
                 }
             }
         }

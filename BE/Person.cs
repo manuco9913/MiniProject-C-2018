@@ -20,5 +20,8 @@ namespace BE
             return this.ToStringProperty();
         }
 
+        public string FirstName { get { return Name.FirstName; } }
+        public string LastName { get { return Name.LastName; } }
+
     }
 }

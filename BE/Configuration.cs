@@ -14,5 +14,6 @@ namespace BE
         public static int MIN_TRAINEE_AGE = 18;
         public static int MIN_GAP_TEST = 7;
         public static int TIME_BETWEEN_TESTS = 1;
+        public static int NUMBER_OF_TEST = 0;
     } 
 }

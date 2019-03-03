@@ -26,7 +26,6 @@ namespace PL_WpfApp
         public PageAddTest()
         {
             InitializeComponent();
-            this.dateDatePicker.DisplayDateEnd = DateTime.Now;
         }
 
         private void Click_AddTest(object sender, RoutedEventArgs e)
@@ -34,18 +33,10 @@ namespace PL_WpfApp
             try
             {
                 #region if text boxes are null or if the input format is wrong
-                if (String.IsNullOrEmpty(this.iDTextBox.Text))
-                    throw new Exception("You have to fill the ID field");
-                else if (this.iDTextBox.Text.Length != 9 && !Regex.IsMatch(this.iDTextBox.Text, @"[\p{L} ]+$"))
-                    throw new Exception("The ID needs to have 9 DIGITS");
                 if (String.IsNullOrEmpty(this.tester_IDTextBox.Text))
-                    throw new Exception("You have to fill the First Name field");
-                else if (!Regex.IsMatch(this.tester_IDTextBox.Text, @"[\p{L} ]+$"))
-                    throw new Exception("The first name can contain only letters");
+                    throw new Exception("You have to fill the tester id field");
                 if (String.IsNullOrEmpty(this.trainee_IDTextBox.Text))
-                    throw new Exception("You have to fill the Last Name field");
-                else if (!Regex.IsMatch(this.trainee_IDTextBox.Text, @"[\p{L} ]+$"))
-                    throw new Exception("The last name can contain only letters");
+                    throw new Exception("You have to fill the trainee id field");
                 if (String.IsNullOrEmpty(this.cityTextBox.Text))
                     throw new Exception("You have to fill the City field");
                 else if (!Regex.IsMatch(this.cityTextBox.Text, @"[\p{L} ]+$"))
@@ -59,21 +50,16 @@ namespace PL_WpfApp
                 else if (!Regex.IsMatch(this.numberTextBox.Text, @"^\d+$"))
                     throw new Exception("The street number can only contain numbers");
                 if (String.IsNullOrEmpty(this.timeTextBox.Text))
-                    throw new Exception("You have to fill the experience field");
-                else if (Regex.IsMatch(this.timeTextBox.Text, @"[\p{L} ]+$"))
-                    throw new Exception("The experience field can only contain numbers");
-                if (String.IsNullOrEmpty(this.commentTextBox.Text))
-                    throw new Exception("You have to chose expertise");
-                else if (!Regex.IsMatch(this.commentTextBox.Text, @"[\p{L} ]+$"))
-                    throw new Exception("The experience field can only contain letters");
+                    throw new Exception("You have to fill the time field");
                 #endregion
 
                 drivingTest = new BE.DrivingTest();
+                drivingTest.StartingPoint = new BE.Address();
                 drivingTest.ID = this.iDTextBox.Text;
                 drivingTest.Tester_ID = this.tester_IDTextBox.Text;
                 drivingTest.Trainee_ID = this.trainee_IDTextBox.Text;
-                drivingTest.Date = this.dateDatePicker.DisplayDate;
-                drivingTest.Time = TimeSpan.Parse(this.timeTextBox.Text);
+                drivingTest.Date = new DateTime(dateDatePicker.DisplayDate.Year, dateDatePicker.DisplayDate.Month, dateDatePicker.DisplayDate.Day,
+                    Convert.ToInt32(timeTextBox.Text), 0, 0);
                 drivingTest.StartingPoint.City = this.cityTextBox.Text;
                 drivingTest.StartingPoint.StreetName = this.streetNameTextBox.Text;
                 drivingTest.StartingPoint.Number = Convert.ToInt32(this.numberTextBox.Text);
@@ -86,13 +72,25 @@ namespace PL_WpfApp
                     throw new Exception("Cannot be tested on a different car");
                 //פה נצטרך לבדוק את כל ההגבלות על טסט
 
-
+                bl.AddDrivingTest(drivingTest);
                 this.NavigationService.Navigate(new FirstPage());
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Fill_Click(object sender, RoutedEventArgs e)
+        {
+            
+            tester_IDTextBox.Text = "1111";
+            trainee_IDTextBox.Text = "9999";
+            timeTextBox.Text = "12";
+            dateDatePicker.DisplayDate = DateTime.Now;
+            streetNameTextBox.Text = "av";
+            cityTextBox.Text = "sdf";
+            numberTextBox.Text = "1";
         }
     }
 }

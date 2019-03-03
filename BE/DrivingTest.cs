@@ -15,9 +15,9 @@ namespace BE
     {
         //
         //public TestProp requirments { get; set; } // what do with this ?
-        
+
         //
-        private DateTime _date;
+        private DateTime _date = new DateTime();
         private List<string> _requirements = new List<string>();
         //  private ArrayList _requirements = new ArrayList();
         /// <summary>
@@ -30,10 +30,14 @@ namespace BE
         /// </summary>
         public String Tester_ID { get; set; }
 
-        public DateTime Date { get => _date.Date; set => _date = value.Date; }
+        public DateTime Date
+        {
+            get { return _date; }
+            set { _date = value; }
+        }
         public TimeSpan Time { get => Date.TimeOfDay; set => _date.AddMilliseconds(value.TotalMilliseconds); }
         public Address StartingPoint { get; set; }
-        public List<String> Requirements { get => _requirements; set => _requirements = value; }
+        //public List<String> Requirements { get => _requirements; set => _requirements = value; }
         public bool Success { get; set; }
         public String Comment { get; set; }
 

@@ -82,6 +82,7 @@ namespace DAL
             var result = (from item in GetTrainees()
                           where item.ID == trainee.ID
                           select item).FirstOrDefault();
+            result.Name = trainee.Name;
             result.Address.City = trainee.Address.City;
             result.Address.StreetName = trainee.Address.StreetName;
             result.Address.Number = trainee.Address.Number;
@@ -129,6 +130,7 @@ namespace DAL
         #region DrivingTest
         public void AddDrivingTest(DrivingTest drivingTest)
         {
+            drivingTest.ID = (++Configuration.NUMBER_OF_TEST).ToString("00000000");
             DS.DataSource.DrivingtestsList.Add(drivingTest);
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
@@ -172,7 +174,16 @@ namespace DAL
         }
         public DrivingTest GetDrivingTest(string id)
         {
-            return GetDrivingTests().FirstOrDefault(tmp_drivingtest => tmp_drivingtest.ID == id);
+            foreach (DrivingTest test in DS.DataSource.DrivingtestsList)
+            {
+                if (int.Parse(test.ID) == int.Parse(id))
+                {
+                    return test;
+                }
+            }
+
+            return null;
+            //return GetDrivingTests().FirstOrDefault(tmp_drivingtest => int.Parse(tmp_drivingtest.ID) == int.Parse(id));
         }
         #endregion
     }

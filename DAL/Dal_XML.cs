@@ -12,43 +12,124 @@ namespace DAL
 {
     internal class Dal_XML
     {
+        XElement testersRoot;
 
-        private void initTester()
+        string testersPath = @"\XML Files";
+
+        private void CreateTestersFile()
         {
-            AddTester(new Tester
-            {
-                ID = "1111",
-                Name = new Name { FirstName = "jojo", LastName = "chalass" },
-                Address = new Address
-                {
-                    City = "Jerusalem",
-                    Number = 21,
-                    StreetName = "havvad haleumi",
-                    //                  ZipCode = 91160
-                },
-                DayOfBirth = DateTime.Now.AddYears(-45),
-                Gender = Gender.MALE,
-                Experience = 10,
-                Expertise = CarType.Truck_Heavy,
-                MaxDistance = 2,
-                // MaxTestWeekly = 1,
-                Schedule = new Schedule
-                {
-                    Data = new bool[5][]
-                    {
-                        new bool[6] { false, false, true, false, false, false},
-                        new bool[6] { false, false, false, false, false, false},
-                        new bool[6] { false, false, false, false, false, false},
-                        new bool[6] { false, false, true, false, false, false},
-                        new bool[6] { false, false, false, false, false, false}
-                    }
-                }
-            });
+            testersRoot = new XElement("Testers");
+            testersRoot.Save(testersPath);
         }
+        private void LoadTestersFile()
+        {
+            try
+            {
+                testersRoot = XElement.Load(testersPath);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        private void LoadTestersList()
+        {
+            List<Tester> testersList = new List<Tester>();
+
+            testersList = (from tester in testersRoot.Elements()
+                           select new Tester()
+                           {
+                               ID = tester.Element("Id").Value,
+                               Name = {
+                                        FirstName = tester.Element("Name").Element("First Name").Value,
+                                        LastName = tester.Element("Name").Element("Last Name").Value
+                                      }
+                               //todo: all the properties.....
+                           }).ToList();
+
+            DS.DataSource.TestersList = testersList;
+        }
+        //todo: load for every entity
+        private void LoadLists()
+        {
+            LoadTestersList();
+        }
+
+
+        //todo: add all the create/load functions
+        private void LoadFiles()
+        {
+            if (!File.Exists(testersPath))
+            {
+                CreateTestersFile();
+            }
+            else
+            {
+                LoadTestersFile();
+            }
+        }
+
+        //private void initTester()
+        //{
+        //    AddTester(new Tester
+        //    {
+        //        ID = "1111",
+        //        Name = new Name { FirstName = "jojo", LastName = "chalass" },
+        //        Address = new Address
+        //        {
+        //            City = "Jerusalem",
+        //            Number = 21,
+        //            StreetName = "havvad haleumi",
+        //            //                  ZipCode = 91160
+        //        },
+        //        DayOfBirth = DateTime.Now.AddYears(-45),
+        //        Gender = Gender.MALE,
+        //        Experience = 10,
+        //        Expertise = CarType.Truck_Heavy,
+        //        MaxDistance = 2,
+        //        // MaxTestWeekly = 1,
+        //        Schedule = new Schedule
+        //        {
+        //            Data = new bool[5][]
+        //            {
+        //                new bool[6] { false, false, true, false, false, false},
+        //                new bool[6] { false, false, false, false, false, false},
+        //                new bool[6] { false, false, false, false, false, false},
+        //                new bool[6] { false, false, true, false, false, false},
+        //                new bool[6] { false, false, false, false, false, false}
+        //            }
+        //        }
+        //    });
+        //}
 
         public Dal_XML()
         {
             //initTester();
+            LoadFiles();
+        }
+
+       
+
+        public bool AddTester(Tester tester)
+        {
+            DS.DataSource.TestersList.Add(tester);
+            SaveTestersList();
+            return true;
+        }
+
+        private void SaveTestersList()
+        {
+            List<Tester> testersList = DS.DataSource.TestersList;
+
+            testersRoot = new XElement("Testers", from tester in testersList
+                                                  select new XElement("Tester",
+                                                                new XElement("Id", tester.ID),
+                                                                new XElement("Name",
+                                                                        new XElement("First Name", tester.Name.FirstName),
+                                                                        new XElement("Last Name", tester.Name.LastName))
+                                                                ));
+
+            testersRoot.Save(testersPath);
         }
 
         public bool AddDrivingTest(DrivingTest drivingTest)
@@ -57,16 +138,6 @@ namespace DAL
             DS.DataSourceXML.SaveDrivingtests();
             return true;
         }
-
-        public bool AddTester(Tester tester)
-        {
-            string str = tester.ToXMLstring();
-            XElement xml = XElement.Parse(str);
-            DS.DataSourceXML.Testers.Add(xml);
-            DS.DataSourceXML.SaveTesters();
-            return true;
-        }
-
         public bool AddTrainee(Trainee trainee)
         {
             string str = trainee.ToXMLstring();

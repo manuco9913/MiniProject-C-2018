@@ -13,15 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.VisualBasic;
+using BE;
+using System.ComponentModel;
 
 namespace PL_WpfApp
 {
+    //todo: erase ID, Comment, Success on TestAddPage
+    //todo: in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
+    //todo: add dateTimeStart in update/add test equals to now
+    //todo: finish checkin nullorempty and all that stuff in updateTestPage
     /// <summary>
     /// Interaction logic for FirstPage.xaml
     /// </summary>
     public partial class FirstPage : Page
     {
         BL.IBL bl = BL.FactorySingletonBL.getInstance();
+
+        //todo: lists for all the entities and also icollectionview for everyone
+        List<Trainee> traineesList = BL.FactorySingletonBL.getInstance().GetTrainees();
+        ICollectionView groupedTrainees = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetTrainees());
+
         public FirstPage()
         {
             InitializeComponent();
@@ -139,9 +150,9 @@ namespace PL_WpfApp
                 if (id != null)
                 {
                     BE.DrivingTest dr = bl.GetDrivingTest(id);
-                    if (bl.DrivingTestExist(dr)) // if pressed "אישור"
+                    if (dr != null) // if pressed "אישור"
                     {
-                        this.NavigationService.Navigate(new PageUpdateTest(null));
+                        this.NavigationService.Navigate(new PageUpdateTest(dr));
                     }
                     else
                         MessageBox.Show("The Test doesn't exist");
@@ -151,6 +162,30 @@ namespace PL_WpfApp
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        /*todo: define item source for every datagrid. erase all the lines and leave only te ones with x:Name...... and add to that line binding= the binding that its inside. remove the event "fistname_selected" since we have an event for all
+        */
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            traineeDataGrid.ItemsSource = traineesList;
+        }
+
+        //Todo: create one event that checks which element is selected and call the function accordingly
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
+            switch (item)
+            {
+                //todo: finish all the cases for all the properties
+                case "First Name":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("FirstName"));
+                    break;
+                //case "   ":......
+                default:
+                    break;
+            }
+            traineeDataGrid.ItemsSource = groupedTrainees;
         }
     }
 

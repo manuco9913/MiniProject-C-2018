@@ -30,9 +30,10 @@ namespace PL_WpfApp
             this.iDTextBox.Text = drivingTest.ID;
             this.tester_IDTextBox.Text = drivingTest.Tester_ID;
             this.trainee_IDTextBox.Text = drivingTest.Trainee_ID;
-            this.dateDatePicker.DisplayDateEnd = DateTime.Now;
             this.dateDatePicker.DisplayDate = drivingTest.Date;
+            dateDatePicker.Text = drivingTest.Date.ToString();
             this.timeTextBox.Text = drivingTest.Time.ToString();
+            this.cityTextBox.Text = drivingTest.StartingPoint.City;
         }
         private void Click_UpdateTest(object sender, RoutedEventArgs e)
         {

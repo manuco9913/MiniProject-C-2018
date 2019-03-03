@@ -23,6 +23,7 @@ namespace PL_WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        //todo: check if all the add/remove/update work
         IBL myBl; 
         public MainWindow()
         {
