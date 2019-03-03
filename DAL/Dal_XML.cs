@@ -13,24 +13,35 @@ namespace DAL
     internal class Dal_XML
     {
         XElement testersRoot;
+        XElement traineesRoot;
+        XElement testsRoot;
 
         string testersPath = @"\XML Files";
+        string traineesPath = @"\XML Files";
+        string testsPath = @"\XML Files";
 
         private void CreateTestersFile()
         {
             testersRoot = new XElement("Testers");
             testersRoot.Save(testersPath);
         }
+        private void SaveTestersList()
+        {
+            List<Tester> testersList = DS.DataSource.TestersList;
+
+            testersRoot = new XElement("Testers", from tester in testersList
+                                                  select new XElement("Tester",
+                                                                new XElement("Id", tester.ID),
+                                                                new XElement("Name",
+                                                                        new XElement("First Name", tester.Name.FirstName),
+                                                                        new XElement("Last Name", tester.Name.LastName))
+                                                                ));
+
+            testersRoot.Save(testersPath);
+        }
         private void LoadTestersFile()
         {
-            try
-            {
-                testersRoot = XElement.Load(testersPath);
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
+            testersRoot = XElement.Load(testersPath);
         }
         private void LoadTestersList()
         {
@@ -44,29 +55,104 @@ namespace DAL
                                         FirstName = tester.Element("Name").Element("First Name").Value,
                                         LastName = tester.Element("Name").Element("Last Name").Value
                                       }
+                               //day of birth?????
                                //todo: all the properties.....
                            }).ToList();
 
             DS.DataSource.TestersList = testersList;
         }
-        //todo: load for every entity
-        private void LoadLists()
+
+        private void CreateTraineesFile()
         {
-            LoadTestersList();
+            traineesRoot = new XElement("Trainess");
+            traineesRoot.Save(traineesPath);
+        }
+        private void SaveTraineesList()
+        {
+            List<Trainee> traineesList = DS.DataSource.TraineesList;
+
+            traineesRoot = new XElement("Trainee", from trainee in traineesList
+                                                  select new XElement("Trainee",
+                                                                new XElement("Id", trainee.ID),
+                                                                new XElement("Name",
+                                                                        new XElement("First Name", trainee.Name.FirstName),
+                                                                        new XElement("Last Name", trainee.Name.LastName)),
+                                                                new XElement("Day Of Birth", trainee.DayOfBirth)
+                                                                ));
+
+            traineesRoot.Save(traineesPath);
+        }
+        private void LoadTraineesFile()
+        {
+            traineesRoot = XElement.Load(traineesPath);
+        }
+        private void LoadTraineesList()
+        {
+            List<Trainee> traineesList = new List<Trainee>();
+
+            traineesList = (from trainee in traineesRoot.Elements()
+                            select new Trainee()
+                            {
+                                ID = trainee.Element("Id").Value,
+                                Name =
+                                {
+                                    FirstName=trainee.Element("Name").Element("First Name").Value,
+                                    LastName=trainee.Element("Name").Element("First Name").Value
+                                }
+                                //todo: all the properties.....
+                            }).ToList();
         }
 
 
-        //todo: add all the create/load functions
+        private void CreateTestsFile()
+        {
+            testsRoot = new XElement("Tests");
+            testsRoot.Save(testersPath);
+        }
+        private void SaveTestsList()
+        {
+            throw new NotImplementedException();
+        }
+        private void LoadTestsFile()
+        {
+            testsRoot = XElement.Load(testersPath);
+        }
+        private void LoadTestsList()
+        {
+            List<DrivingTest> testsList = new List<DrivingTest>();
+
+            testsList = (from trainee in testsRoot.Elements()
+                            select new DrivingTest()
+                            {
+                                ID = trainee.Element("Id").Value,
+                                //todo: all the properties.....
+                            }).ToList();
+        }
+
+        private void LoadLists()
+        {
+            LoadTestersList();
+            LoadTraineesList():
+            LoadTestsList();
+        }
+
+
         private void LoadFiles()
         {
             if (!File.Exists(testersPath))
-            {
                 CreateTestersFile();
-            }
             else
-            {
                 LoadTestersFile();
-            }
+
+            if (!File.Exists(traineesPath))
+                CreateTraineesFile();
+            else
+                LoadTraineesFile();
+
+            if (!File.Exists(testsPath))
+                CreateTestsFile();
+            else
+                LoadTestsFile();
         }
 
         //private void initTester()
@@ -107,45 +193,36 @@ namespace DAL
             //initTester();
             LoadFiles();
         }
-
-       
-
+        
         public bool AddTester(Tester tester)
         {
             DS.DataSource.TestersList.Add(tester);
             SaveTestersList();
             return true;
         }
-
-        private void SaveTestersList()
-        {
-            List<Tester> testersList = DS.DataSource.TestersList;
-
-            testersRoot = new XElement("Testers", from tester in testersList
-                                                  select new XElement("Tester",
-                                                                new XElement("Id", tester.ID),
-                                                                new XElement("Name",
-                                                                        new XElement("First Name", tester.Name.FirstName),
-                                                                        new XElement("Last Name", tester.Name.LastName))
-                                                                ));
-
-            testersRoot.Save(testersPath);
-        }
-
-        public bool AddDrivingTest(DrivingTest drivingTest)
-        {
-            DS.DataSourceXML.DrivingTests.Add(drivingTest.ToXML());
-            DS.DataSourceXML.SaveDrivingtests();
-            return true;
-        }
         public bool AddTrainee(Trainee trainee)
         {
-            string str = trainee.ToXMLstring();
-            XElement xml = XElement.Parse(str);
-            DS.DataSourceXML.Trainees.Add(xml);
-            DS.DataSourceXML.SaveTrainees();
+            DS.DataSource.TraineesList.Add(trainee);
+            SaveTraineesList();
             return true;
         }
+        public bool AddDrivingTest(DrivingTest drivingTest)
+        {
+            DS.DataSource.DrivingtestsList.Add(drivingTest);
+            SaveTestsList();
+            return true;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         public List<DrivingTest> GetDrivingTests()
         {
