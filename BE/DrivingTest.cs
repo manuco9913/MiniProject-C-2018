@@ -35,6 +35,7 @@ namespace BE
             get { return _date; }
             set { _date = value; }
         }
+        //todo: we are using TimeSpan or we dont need it since we have time in date?
         public TimeSpan Time { get => Date.TimeOfDay; set => _date.AddMilliseconds(value.TotalMilliseconds); }
         public Address StartingPoint { get; set; }
         //public List<String> Requirements { get => _requirements; set => _requirements = value; }

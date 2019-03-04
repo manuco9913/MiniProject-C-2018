@@ -10,6 +10,7 @@ namespace BE
     {
         public bool[][] Data { get; set; } = new bool[5][];
 
+        //todo: a toString() that's easy also to translate from XML to Schedule class type
         public override string ToString()
         {
             int starttime = 9;
@@ -27,7 +28,7 @@ namespace BE
                     {
                         oved = true;
                         hayom += "\t" + (starttime + j) + ":00-";
-                        hayom += (starttime + j + 1).ToString() + ":00\n";
+                        hayom += (starttime + j + 1) + ":00\n";
                     }
                 }
                 if (oved == true)
@@ -36,7 +37,7 @@ namespace BE
                     result += hayom;
                 }
             }
-            return result.Substring(0, result.Length - 1);
+            return result;//.Substring(0, result.Length - 1);
         }
     }
 }

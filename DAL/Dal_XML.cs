@@ -34,7 +34,18 @@ namespace DAL
                                                                 new XElement("Id", tester.ID),
                                                                 new XElement("Name",
                                                                         new XElement("First Name", tester.Name.FirstName),
-                                                                        new XElement("Last Name", tester.Name.LastName))
+                                                                        new XElement("Last Name", tester.Name.LastName)),
+                                                                new XElement("Day Of Birth", tester.DayOfBirth.ToString()),
+                                                                new XElement("Gender", tester.Gender.ToString()),
+                                                                new XElement("Address",
+                                                                        new XElement("Street Name", tester.Address.StreetName),
+                                                                        new XElement("Number", tester.Address.Number.ToString()),
+                                                                        new XElement("City", tester.Address.City)),
+                                                                //todo: schedule?
+                                                                new XElement("Expertise",tester.Expertise.ToString()),
+                                                                new XElement("Experience",tester.Experience.ToString()),
+                                                                new XElement("Max Test Weekly",tester.MaxTestWeekly.ToString()),
+                                                                new XElement("Max Distance", tester.MaxDistance)
                                                                 ));
 
             testersRoot.Save(testersPath);
@@ -54,9 +65,19 @@ namespace DAL
                                Name = {
                                         FirstName = tester.Element("Name").Element("First Name").Value,
                                         LastName = tester.Element("Name").Element("Last Name").Value
-                                      }
-                               //day of birth?????
-                               //todo: all the properties.....
+                                      },
+                               DayOfBirth = Convert.ToDateTime(tester.Element("Day Of Birth").Value),
+                               Gender = (Gender)Enum.Parse(typeof(Gender), tester.Element("Gender").Value),
+                               Address = {
+                                            StreetName = tester.Element("Address").Element("Street Name").Value,
+                                            Number = Convert.ToInt32(tester.Element("Address").Element("Number").Value),
+                                            City = tester.Element("Address").Element("City").Value
+                                         },
+                               Expertise = (CarType)Enum.Parse(typeof(CarType), tester.Element("Expertise").Value),
+                               Experience = Convert.ToInt32(tester.Element("Experience").Value),
+                               MaxTestWeekly = Convert.ToInt32(tester.Element("Max Test Weekly").Value),
+                               MaxDistance = Convert.ToInt32(tester.Element("Max Distance").Value)
+                               //todo: schedule
                            }).ToList();
 
             DS.DataSource.TestersList = testersList;
@@ -71,13 +92,26 @@ namespace DAL
         {
             List<Trainee> traineesList = DS.DataSource.TraineesList;
 
-            traineesRoot = new XElement("Trainee", from trainee in traineesList
+            traineesRoot = new XElement("Trainees", from trainee in traineesList
                                                   select new XElement("Trainee",
                                                                 new XElement("Id", trainee.ID),
                                                                 new XElement("Name",
                                                                         new XElement("First Name", trainee.Name.FirstName),
                                                                         new XElement("Last Name", trainee.Name.LastName)),
-                                                                new XElement("Day Of Birth", trainee.DayOfBirth)
+                                                                new XElement("Day Of Birth", trainee.DayOfBirth.ToString()),
+                                                                new XElement("Gender",trainee.Gender.ToString()),
+                                                                new XElement("Address",
+                                                                        new XElement("Street Name", trainee.Address.StreetName),
+                                                                        new XElement("Number",trainee.Address.Number.ToString()),
+                                                                        new XElement("City",trainee.Address.City)),
+                                                                new XElement("Car Trained",trainee.CarTrained.ToString()),
+                                                                new XElement("Gear Type",trainee.GearType.ToString()),
+                                                                new XElement("School Name", trainee.DrivingSchool.ToString()),
+                                                                new XElement("Instructor",
+                                                                        new XElement("First Name",trainee.Instructor.FirstName),
+                                                                        new XElement("Last Name",trainee.Instructor.LastName)),
+                                                                new XElement("Lessons Number",trainee.LessonsNb.ToString()),
+                                                                new XElement("Success",trainee.Succsess.ToString())
                                                                 ));
 
             traineesRoot.Save(traineesPath);
@@ -98,9 +132,25 @@ namespace DAL
                                 {
                                     FirstName=trainee.Element("Name").Element("First Name").Value,
                                     LastName=trainee.Element("Name").Element("First Name").Value
-                                }
-                                //todo: all the properties.....
+                                },
+                                DayOfBirth = Convert.ToDateTime(trainee.Element("Day Of Birth").Value),
+                                Gender = (Gender)Enum.Parse(typeof(Gender), trainee.Element("Gender").Value),
+                                Address = {
+                                              StreetName = trainee.Element("Address").Element("Street Name").Value,
+                                              Number = Convert.ToInt32(trainee.Element("Address").Element("Number").Value),
+                                              City = trainee.Element("Address").Element("City").Value
+                                          },
+                                CarTrained = (CarType)Enum.Parse(typeof(CarType), trainee.Element("Car Trained").Value),
+                                GearType = (GearType)Enum.Parse(typeof(GearType), trainee.Element("Gear Type").Value),
+                                DrivingSchool = (SchoolName)Enum.Parse(typeof(SchoolName), trainee.Element("School Name").Value),
+                                Instructor = {
+                                                FirstName = trainee.Element("Instructor").Element("First Name").Value,
+                                                LastName = trainee.Element("Instructor").Element("Last Name").Value
+                                             },
+                                LessonsNb = Convert.ToInt32(trainee.Element("Lessons Number").Value),
+                                Succsess = Convert.ToBoolean(trainee.Element("Success").Value)
                             }).ToList();
+            DS.DataSource.TraineesList = traineesList;
         }
 
 
@@ -111,7 +161,23 @@ namespace DAL
         }
         private void SaveTestsList()
         {
-            throw new NotImplementedException();
+            List<DrivingTest> testsList = DS.DataSource.DrivingtestsList;
+
+            testsRoot = new XElement("Tests", from test in testsList
+                                              select new XElement("Trainee",
+                                                            new XElement("Id",test.ID),
+                                                            new XElement("Trainee Id",test.Trainee_ID),
+                                                            new XElement("Tester Id",test.Tester_ID),
+                                                            new XElement("Date",test.Date.ToString()),
+                                                            new XElement("Time", test.Time.ToString()), //new XElement("Time", test.Date.TimeOfDay.ToString()),???????????????
+                                                            new XElement("Starting Point",
+                                                                    new XElement("Street Name", test.StartingPoint.StreetName),
+                                                                    new XElement("Number",test.StartingPoint.Number.ToString()),
+                                                                    new XElement("City", test.StartingPoint.City)),
+                                                            new XElement("Success",test.Success.ToString()),
+                                                            new XElement("Comment",test.Comment)
+                                                            ));
+            testsRoot.Save(testsPath);
         }
         private void LoadTestsFile()
         {
@@ -121,22 +187,32 @@ namespace DAL
         {
             List<DrivingTest> testsList = new List<DrivingTest>();
 
-            testsList = (from trainee in testsRoot.Elements()
-                            select new DrivingTest()
-                            {
-                                ID = trainee.Element("Id").Value,
-                                //todo: all the properties.....
-                            }).ToList();
+            testsList = (from test in testsRoot.Elements()
+                         select new DrivingTest()
+                         {
+                             ID = test.Element("Id").Value,
+                             Trainee_ID = test.Element("Trainee Id").Value,
+                             Tester_ID = test.Element("Tester Id").Value,
+                             Date = Convert.ToDateTime(test.Element("Date").Value),
+                             Time = TimeSpan.Parse(test.Element("Time").Value),
+                             StartingPoint = {
+                                                StreetName = test.Element("Starting Point").Element("Street Name").Value,
+                                                Number =Convert.ToInt32(test.Element("Starting Point").Element("Number").Value),
+                                                City = test.Element("Starting Point").Element("City").Value
+                                             },
+                             Success = Convert.ToBoolean(test.Element("Success").Value),
+                             Comment = test.Element("Comment").Value
+                         }).ToList();
+
+            DS.DataSource.DrivingtestsList = testsList;
         }
 
         private void LoadLists()
         {
             LoadTestersList();
-            LoadTraineesList():
+            LoadTraineesList();
             LoadTestsList();
         }
-
-
         private void LoadFiles()
         {
             if (!File.Exists(testersPath))
@@ -213,7 +289,7 @@ namespace DAL
             return true;
         }
 
-
+        //todo: i think we have to finish with all the functions by simply copyinng them and adding save/load List accordingly
 
 
 
