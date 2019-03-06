@@ -14,7 +14,7 @@
                <PropertyUISetting Name="Trainee.Instructor">
                   <ControlSettings>
                      <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
-                        <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
+                        <BindableControlInfo Name="Details" Type="Microsoft.VSDesigner.Data.DataForm.Windows.DetailView" />
                      </ControlSetting>
                   </ControlSettings>
                </PropertyUISetting>

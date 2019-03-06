@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BE;
 
 namespace PL_WpfApp
 {
@@ -31,6 +32,7 @@ namespace PL_WpfApp
             this.carTrainedComboBox.ItemsSource = Enum.GetValues(typeof(BE.CarType));
             this.gearTypeComboBox.ItemsSource = Enum.GetValues(typeof(BE.GearType));
             this.drivingSchoolComboBox.ItemsSource = Enum.GetValues(typeof(BE.SchoolName));
+
         }
 
         private void Click_AddTrainee(object sender, RoutedEventArgs e)
@@ -62,6 +64,8 @@ namespace PL_WpfApp
                     throw new Exception("You have to choose a Gear Type ");
                 if (String.IsNullOrEmpty(this.dayOfBirthDatePicker.Text))
                     throw new Exception("You have to choose a Day Of Birth");
+                if (String.IsNullOrEmpty(this.InstructorNameTextBox1.Text))
+                    throw new Exception("You have to fill the Instructor First Name field");
 
 
                 trainee = new BE.Trainee();
@@ -79,6 +83,12 @@ namespace PL_WpfApp
                 trainee.CarTrained = (BE.CarType)this.carTrainedComboBox.SelectedValue;
                 trainee.GearType = (BE.GearType)this.gearTypeComboBox.SelectedValue;
                 trainee.DrivingSchool = (BE.SchoolName)this.drivingSchoolComboBox.SelectedValue;
+                //todo: we need to show in WPF the list of testers so the trainee can choose an instructor and then read it and convert it to Name class type
+                //ideal: ------- trainee.Instructor = this.InstructorNameTextBox1.Text;
+                //Type type = Type.GetType("Name");
+                //object instance = Activator.CreateInstance(type);
+                //trainee.Instructor = Activator.CreateInstance(Type);
+               //trainee.Instructor= this.GetType().Assembly.GetType("BE.Name");
 
                 if (bl.TraineeExist(trainee))
                     throw new Exception("This trainee already exists...");
