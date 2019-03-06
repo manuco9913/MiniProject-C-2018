@@ -94,8 +94,9 @@
                             </DataGrid.Columns>
                         </DataGrid>
                         <ComboBox x:Name="GroupComboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="34,24,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
-                            <ComboBoxItem x:Name="FirstNameItem" Content="First Name" />
-                            <ComboBoxItem x:Name="LastNameItem" Content="Last Name" />
+                            <ComboBoxItem x:Name="drivingSchoolItem" Content="Driving School" />
+                            <ComboBoxItem x:Name="instructorItem" Content="Instructor" />
+                            <ComboBoxItem x:Name="testNumberItem" Content="Test Number" />
 
                         </ComboBox>
                     </Grid>
@@ -120,6 +121,9 @@
                         <Grid Grid.Column="2" Grid.Row="1" Margin="10,10,10,10">
                             <Button Content="Remove Tester" FontSize="30" Click="Remove_TesterAccount"/>
                         </Grid>
+                        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="72,63,0,0" VerticalAlignment="Top" Width="120">
+                            <ComboBoxItem x:Name="expertiseItem" Content="Expertise"/>
+                        </ComboBox>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Test">

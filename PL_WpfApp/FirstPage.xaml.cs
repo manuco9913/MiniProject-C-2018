@@ -18,10 +18,7 @@ using System.ComponentModel;
 
 namespace PL_WpfApp
 {
-    //todo: erase ID, Comment, Success on TestAddPage
     //todo: in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
-    //todo: add dateTimeStart in update/add test equals to now
-    //todo: finish checkin nullorempty and all that stuff in updateTestPage
     /// <summary>
     /// Interaction logic for FirstPage.xaml
     /// </summary>
@@ -150,7 +147,7 @@ namespace PL_WpfApp
                 if (id != null)
                 {
                     BE.DrivingTest dr = bl.GetDrivingTest(id);
-                    if (dr != null) // if pressed "אישור"
+                    if (dr != null) // if pressed "OK"
                     {
                         this.NavigationService.Navigate(new PageUpdateTest(dr));
                     }
@@ -171,17 +168,22 @@ namespace PL_WpfApp
             traineeDataGrid.ItemsSource = traineesList;
         }
 
-        //Todo: create one event that checks which element is selected and call the function accordingly
+        //todo: ASK ELYASAF how to do Groupdescriptions.add with  school name and instructor
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
             switch (item)
             {
                 //todo: finish all the cases for all the properties
-                case "First Name":
-                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("FirstName"));
+                case "Driving School":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("DrivingSchool"));
                     break;
-                //case "   ":......
+                case "Instructor":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Instructor"));
+                    break;
+                case "Test Number":
+
+                    break;
                 default:
                     break;
             }

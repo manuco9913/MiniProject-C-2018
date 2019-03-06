@@ -42,7 +42,7 @@ namespace DAL
                 return true;
             return false;
         }
-        public List<Tester> GetTesters(Func<Tester, bool> predicate = null)//to get either all the testers or the one that the predicate return true for
+        public List<Tester> GetTesters(Func<Tester, bool> predicate = null)//to get either all the testers or the ones that the predicate returns true for
         {
             IEnumerable<Tester> result = null;
 
@@ -124,7 +124,6 @@ namespace DAL
         {
             return GetTrainees().FirstOrDefault(tmp_trainee => tmp_trainee.ID == id);
         }
-
         #endregion
 
         #region DrivingTest

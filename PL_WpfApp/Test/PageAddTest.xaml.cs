@@ -26,6 +26,7 @@ namespace PL_WpfApp
         public PageAddTest()
         {
             InitializeComponent();
+            this.dateDatePicker.DisplayDateStart = DateTime.Now;
         }
 
         private void Click_AddTest(object sender, RoutedEventArgs e)
@@ -55,16 +56,13 @@ namespace PL_WpfApp
 
                 drivingTest = new BE.DrivingTest();
                 drivingTest.StartingPoint = new BE.Address();
-                drivingTest.ID = this.iDTextBox.Text;
                 drivingTest.Tester_ID = this.tester_IDTextBox.Text;
                 drivingTest.Trainee_ID = this.trainee_IDTextBox.Text;
-                drivingTest.Date = new DateTime(dateDatePicker.DisplayDate.Year, dateDatePicker.DisplayDate.Month, dateDatePicker.DisplayDate.Day,
-                    Convert.ToInt32(timeTextBox.Text), 0, 0);
+                TimeSpan tempTime = TimeSpan.FromHours(Convert.ToDouble(this.timeTextBox.Text));
+                drivingTest.Date = Convert.ToDateTime(dateDatePicker.Text) + tempTime;
                 drivingTest.StartingPoint.City = this.cityTextBox.Text;
                 drivingTest.StartingPoint.StreetName = this.streetNameTextBox.Text;
                 drivingTest.StartingPoint.Number = Convert.ToInt32(this.numberTextBox.Text);
-                drivingTest.Comment = this.commentTextBox.Text;
-                drivingTest.Success = (this.successCheckBox.IsChecked) == true;
 
                 if (bl.DrivingTestExist(drivingTest))
                     throw new Exception("This test already exists");

@@ -64,7 +64,7 @@ namespace BL
         {
             return dal.GetTester(id);
         }
-        
+
         //--------------Trainee---------------
         public void AddTrainee(Trainee trainee)
         {
@@ -172,7 +172,7 @@ namespace BL
                 throw new Exception("This driving test already exists");
             if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
                 throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-            if (!testedRecently(drivingTest.Trainee_ID)) // if he took a test in the last 7 days
+            if (testedRecently(drivingTest)) // if he took a test in the last 7 days
                 throw new Exception("The trainee cannot take the test since he was tested recently");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
                 throw new Exception("Tester and trainee do not use the same type of car");
@@ -196,7 +196,7 @@ namespace BL
                 throw new Exception("This driving test doesn't exist");
             if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
                 throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-            if (testedRecently(drivingTest.Trainee_ID))
+            if (testedRecently(drivingTest))
                 throw new Exception("The trainee cannot take the test since he was tested recently");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
                 throw new Exception("Tester and trainee do not use the same type of car");
@@ -302,7 +302,7 @@ namespace BL
                 Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
         }
-       
+
 
 
 
@@ -367,25 +367,24 @@ namespace BL
         {
             return GetTester(tester_ID).Expertise == GetTrainee(trainee_ID).CarTrained;
         }
-        private bool testedRecently(string trainee_ID)
+        private bool testedRecently(DrivingTest testToAdd)
         {
-            // DrivingTest temp = new DrivingTest();
-            //temp.Trainee_ID = trainee_ID;
-            List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Trainee_ID == trainee_ID);
-            if (res.Count == 0)
-                return true;
+            List<DrivingTest> drivingTests = GetDrivingTests(temp_dt => temp_dt.Trainee_ID == testToAdd.Trainee_ID);
+            if (drivingTests.Count == 0)
+                return false;
             else
             {
-                var result = (from t in res
-                         where (DateTime.Now.Subtract(t.Date).TotalDays > 7)
-                         select t).ToList<DrivingTest>();
+                var result = (from test2 in drivingTests
+                                  //where (drivingTest.Date.Subtract(test2.Date).TotalDays < 7)
+                              where (Math.Abs((test2.Date - testToAdd.Date).Days) < BE.Configuration.MIN_GAP_TEST) && (test2.ID != testToAdd.ID)
+                              select test2).ToList();
                 if (result.Count == 0)
                 {
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
         }

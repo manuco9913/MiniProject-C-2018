@@ -31,7 +31,7 @@ namespace DS
                 Experience = 10,
                 Expertise = CarType.Truck_Heavy,
                 MaxDistance = 2,
-              
+              //todo: take example for Schedule in XML
                 Schedule = new Schedule
                 {
                     Data = new bool[5][]
