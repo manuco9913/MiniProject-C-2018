@@ -60,7 +60,7 @@
                                 <DataGridTextColumn x:Name="genderColumn" Header="Gender" Width="SizeToHeader" Binding ="{Binding Gender}"/>
                                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="lessonsNbColumn" Binding="{Binding LessonsNb}" Header="Lessons Nb" Width="SizeToHeader"/>
-                                <DataGridCheckBoxColumn x:Name="succsessColumn" Binding="{Binding Succsess}" Header="Succsess" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="succsessColumn" Binding="{Binding Succsess}" Header="Succsess" Width="SizeToHeader"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <ComboBox x:Name="GroupComboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="87,54,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">

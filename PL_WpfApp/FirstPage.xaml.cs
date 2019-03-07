@@ -62,6 +62,7 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
         {
             try
@@ -166,7 +167,6 @@ namespace PL_WpfApp
         */
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            traineeDataGrid.ItemsSource = traineesList;
         }
 
         //todo: ASK ELYASAF how to do Groupdescriptions.add with  school name and instructor

@@ -83,7 +83,7 @@ namespace PL_WpfApp
                 trainee.CarTrained = (BE.CarType)this.carTrainedComboBox.SelectedValue;
                 trainee.GearType = (BE.GearType)this.gearTypeComboBox.SelectedValue;
                 trainee.DrivingSchool = (BE.SchoolName)this.drivingSchoolComboBox.SelectedValue;
-                //todo: we need to show in WPF the list of testers so the trainee can choose an instructor and then read it and convert it to Name class type
+                //todo: ????????????? we need to show in WPF the list of testers so the trainee can choose an instructor and then read it and convert it to Name class type
                 string[] temp = InstructorNameTextBox1.Text.Split(' ');
                 trainee.Instructor.FirstName = temp[0];
                 trainee.Instructor.LastName = temp[1];
