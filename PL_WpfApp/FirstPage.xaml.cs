@@ -33,6 +33,7 @@ namespace PL_WpfApp
         public FirstPage()
         {
             InitializeComponent();
+            traineeDataGrid.ItemsSource = traineesList;
         }
 
         private void Click_AddTrainee(object sender, RoutedEventArgs e)
