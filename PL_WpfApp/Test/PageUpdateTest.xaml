@@ -43,10 +43,8 @@
                 <TextBox x:Name="numberTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2"  VerticalAlignment="Center" Width="120"/>
                 <Label Content="Comment:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3.5,0,3.5" Grid.Row="3" VerticalAlignment="Center"/>
                 <TextBox x:Name="commentTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3"  VerticalAlignment="Center" Width="120"/>
-                <Label Content="Success:" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-                <CheckBox x:Name="successCheckBox" Content="" Grid.Column="3" HorizontalAlignment="Left"  Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
 
-                <Button Content="Finish" FontSize="20" Margin="0,10,0,10" Width="150" Grid.Row="6" HorizontalAlignment="Center" Grid.Column="3" Click="Click_UpdateTest" ></Button>
+            <Button Content="Finish" FontSize="20" Margin="0,10,0,10" Width="150" Grid.Row="6" HorizontalAlignment="Center" Grid.Column="3" Click="Click_UpdateTest" ></Button>
 
             </Grid>
 

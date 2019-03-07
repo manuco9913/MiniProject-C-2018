@@ -14,11 +14,11 @@ namespace BE
     public class DrivingTest
     {
         //
-        public TestProp requirments { get; set; } // what do with this ?
-        
+        //public TestProp requirments { get; set; } // what do with this ?
+
         //
-        private DateTime _date;
-        // private List<string> _requirements = new List<string>();
+        private DateTime _date = new DateTime();
+        private List<string> _requirements = new List<string>();
         //  private ArrayList _requirements = new ArrayList();
         /// <summary>
         /// get set the Trainee ID
@@ -30,10 +30,15 @@ namespace BE
         /// </summary>
         public String Tester_ID { get; set; }
 
-        public DateTime Date { get => _date.Date; set => _date = value.Date; }
+        public DateTime Date
+        {
+            get { return _date; }
+            set { _date = value; }
+        }
+        //todo: we are using TimeSpan or we dont need it since we have time in date?
         public TimeSpan Time { get => Date.TimeOfDay; set => _date.AddMilliseconds(value.TotalMilliseconds); }
         public Address StartingPoint { get; set; }
-       // public List<String> Requirements { get => _requirements; set => _requirements = value; }
+        //public List<String> Requirements { get => _requirements; set => _requirements = value; }
         public bool Success { get; set; }
         public String Comment { get; set; }
 

@@ -11,6 +11,8 @@ namespace BE
     {
         public String ID { get; set; }
         public Name Name { get; set; }
+        public string FirstName { get { return Name.FirstName; } }
+        public string LastName { get { return Name.LastName; } }
         public DateTime DayOfBirth { get; set; }
         public Gender Gender { get; set; }
         public Address Address { get; set; }

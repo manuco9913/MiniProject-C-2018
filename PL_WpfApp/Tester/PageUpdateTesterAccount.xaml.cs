@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,6 +44,8 @@ namespace PL_WpfApp
             this.expertiseComboBox.SelectedIndex = (int)tester.Expertise;
             this.maxDistanceTextBox.Text = tester.MaxDistance.ToString();
             this.maxTestWeeklyTextBox.Text = tester.MaxTestWeekly.ToString();
+            bindGrid(boolgrid, tester.Schedule);
+
         }
 
         private void Click_UpdateTrainee(object sender, RoutedEventArgs e)
@@ -50,30 +53,44 @@ namespace PL_WpfApp
             BE.Tester tempTester = new BE.Tester();
             try
             {
-                if (String.IsNullOrEmpty(this.iDTextBox.Text))
-                    throw new Exception("You have to fill the ID field");
+                #region if text boxes are null or if the input format is wrong
                 if (String.IsNullOrEmpty(this.firstNameTextBox.Text))
                     throw new Exception("You have to fill the First Name field");
+                else if (!Regex.IsMatch(this.firstNameTextBox.Text, @"[\p{L} ]+$"))
+                    throw new Exception("The first name can contain only letters");
                 if (String.IsNullOrEmpty(this.lastNameTextBox.Text))
                     throw new Exception("You have to fill the Last Name field");
+                else if (!Regex.IsMatch(this.lastNameTextBox.Text, @"[\p{L} ]+$"))
+                    throw new Exception("The last name can contain only letters");
                 if (String.IsNullOrEmpty(this.cityTextBox.Text))
                     throw new Exception("You have to fill the City field");
+                else if (!Regex.IsMatch(this.cityTextBox.Text, @"[\p{L} ]+$"))
+                    throw new Exception("The City name can contain only letters");
                 if (String.IsNullOrEmpty(this.streetNameTextBox.Text))
                     throw new Exception("You have to fill the Street Name field");
+                else if (!Regex.IsMatch(this.streetNameTextBox.Text, @"[\p{L} ]+$"))
+                    throw new Exception("The street name can contain only letters");
                 if (String.IsNullOrEmpty(this.numberTextBox.Text))
                     throw new Exception("You have to fill the number field");
+                else if (!Regex.IsMatch(this.numberTextBox.Text, @"^\d+$"))
+                    throw new Exception("The street number can only contain numbers");
                 if (String.IsNullOrEmpty(this.genderComboBox.Text))
                     throw new Exception("You have to chose Gender");
                 if (String.IsNullOrEmpty(this.experienceTextBox.Text))
                     throw new Exception("You have to fill the experience field");
+                else if (!Regex.IsMatch(this.experienceTextBox.Text, @"^\d+$"))
+                    throw new Exception("The experience field can only contain numbers");
                 if (String.IsNullOrEmpty(this.expertiseComboBox.Text))
                     throw new Exception("You have to chose expertise");
+                else if (!Regex.IsMatch(this.experienceTextBox.Text, @"^\d+$"))
+                    throw new Exception("The experience field can only contain numbers");
                 if (String.IsNullOrEmpty(this.maxDistanceTextBox.Text))
                     throw new Exception("You have to fill the Max-Distance field");
                 if (String.IsNullOrEmpty(this.maxTestWeeklyTextBox.Text))
                     throw new Exception("You have to fill the Max-Test-Weekly field");
-                if (String.IsNullOrEmpty(this.dayOfBirthTextBlock.Text))
-                    throw new Exception("You have to chose birth-day");
+                else if (!Regex.IsMatch(this.maxTestWeeklyTextBox.Text, @"^\d+$"))
+                    throw new Exception("The max test weekly can only contain numbers");
+                #endregion
 
                 tempTester = new BE.Tester();
                 tempTester.Address = new BE.Address();
@@ -87,11 +104,20 @@ namespace PL_WpfApp
                 tempTester.DayOfBirth = tester.DayOfBirth;//the DayOfBirth CANNOT change so we take the old one
                 tempTester.Gender = (BE.Gender)this.genderComboBox.SelectedValue;
                 tempTester.Expertise = (BE.CarType)this.expertiseComboBox.SelectedValue;
+                if (tester.Schedule != null)
+                {
+                    int i, j;
+                    foreach (var item in this.boolgrid.Children)
+                    {
+                        CheckBox checkbox = item as CheckBox;
+                        i = Grid.GetRow(checkbox);
+                        j = Grid.GetColumn(checkbox);
+                        tester.Schedule.Data[i][j] = (checkbox.IsChecked == true);
+                    }
+                }
 
                 if (!bl.TesterExist(tempTester))
                     throw new Exception("This tester doesn't exist...");
-                if (DateTime.Now.Year - tester.DayOfBirth.Year < 18)
-                    throw new Exception("tester under 18 years");
 
                 bl.UpdateTester(tempTester);
                 MessageBox.Show("Successfully updated tester!");
@@ -101,6 +127,19 @@ namespace PL_WpfApp
             {
                 MessageBox.Show(exception.Message);
             }
+        }
+
+        private void bindGrid(Grid thegrid, BE.Schedule schedule)
+        {
+            foreach (var item in thegrid.Children)
+            {
+                CheckBox checkbox = item as CheckBox;
+                int i = Grid.GetRow(checkbox);
+                int j = Grid.GetColumn(checkbox);
+                checkbox.IsChecked = schedule.Data[i][j];
+            }
+            //refresh grid and window
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

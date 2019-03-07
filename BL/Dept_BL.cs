@@ -15,7 +15,7 @@ namespace BL
     internal class Dept_BL : IBL
     {
 
-        private static DAL.Idal instance = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
+        private static DAL.Idal dal = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
 
         //--------------Tester---------------
         public void AddTester(Tester tester)
@@ -25,13 +25,13 @@ namespace BL
             if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)//checking tester age
                 throw new Exception("Tester under 40 years");
             else
-                instance.AddTester(tester);
+                dal.AddTester(tester);
         }
         public bool RemoveTester(Tester tester)
         {
             if (TesterExist(tester))
             {
-                instance.RemoveTester(tester);
+                dal.RemoveTester(tester);
                 return true;
             }
             else
@@ -45,26 +45,26 @@ namespace BL
             if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
                 throw new Exception("Tester under 40 years");
             if (TesterExist(tester))
-                instance.UpdateTester(tester);
+                dal.UpdateTester(tester);
             else
                 throw new Exception("This tester doesn't exist");
         }
         public bool TesterExist(Tester tester)
         {
-            return instance.TesterExist(tester);
+            return dal.TesterExist(tester);
         }
         public List<Tester> GetTesters(Func<Tester, bool> p = null)
         {
             if (p == null)
-                return instance.GetTesters();
+                return dal.GetTesters();
             else
-                return instance.GetTesters(p);
+                return dal.GetTesters(p);
         }
         public Tester GetTester(string id)
         {
-            return instance.GetTester(id);
+            return dal.GetTester(id);
         }
-        
+
         //--------------Trainee---------------
         public void AddTrainee(Trainee trainee)
         {
@@ -73,13 +73,13 @@ namespace BL
             if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
                 throw new Exception("Trainee under 18 years");
 
-            instance.AddTrainee(trainee);
+            dal.AddTrainee(trainee);
         }
         public bool RemoveTrainee(Trainee trainee)
         {
             if (TraineeExist(trainee))
             {
-                instance.RemoveTrainee(trainee);
+                dal.RemoveTrainee(trainee);
                 return true;
             }
             else
@@ -100,22 +100,22 @@ namespace BL
             if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
                 throw new Exception("Trainee under 18 years");
 
-            instance.UpdateTrainee(trainee);
+            dal.UpdateTrainee(trainee);
         }
         public bool TraineeExist(Trainee trainee)
         {
-            return instance.TraineeExist(trainee);
+            return dal.TraineeExist(trainee);
         }
         public List<Trainee> GetTrainees(Func<Trainee, bool> p = null)
         {
             if (p == null)
-                return instance.GetTrainees();
+                return dal.GetTrainees();
             else
-                return instance.GetTrainees(p);
+                return dal.GetTrainees(p);
         }
         public Trainee GetTrainee(string id)
         {
-            return instance.GetTrainee(id);
+            return dal.GetTrainee(id);
         }
         public int NumberTestsTraineeMade(Trainee trainee)
         {
@@ -142,7 +142,7 @@ namespace BL
             }
             return false;
         }
-        public bool succsessInTest(Trainee trainee)        //--------pass or field int test-------
+        /*public bool succsessInTest(Trainee trainee)        //--------pass or field int test-------
 
         {
 
@@ -163,30 +163,30 @@ namespace BL
             }
             else
                 return false;
-        }
+        }*/
 
         //--------------DrivingTest---------------
         public void AddDrivingTest(DrivingTest drivingTest)
         {
-            if (!DrivingTestExist(drivingTest))
-                throw new Exception("This driving test doesn't exist");
+            if (DrivingTestExist(drivingTest))
+                throw new Exception("This driving test already exists");
             if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
                 throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-            if (testedRecently(drivingTest.Trainee_ID)) // if he did test in the last 7 days
+            if (testedRecently(drivingTest)) // if he took a test in the last 7 days
                 throw new Exception("The trainee cannot take the test since he was tested recently");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
                 throw new Exception("Tester and trainee do not use the same type of car");
-            if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester do more tests in week than the max he can do
+            if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester does more tests in week than the max he can do
                 throw new Exception("Tester reached his maximum number of tests");
-            if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if it is not available then you cant
+            if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if he is not available then you cant
                 throw new Exception("The tester is not available during these hours");
 
-            instance.AddDrivingTest(drivingTest);
+            dal.AddDrivingTest(drivingTest);
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
             if (DrivingTestExist(drivingTest))
-                return instance.RemoveDrivingTest(drivingTest);
+                return dal.RemoveDrivingTest(drivingTest);
             else
                 throw new Exception("Cannot remove a test that doesn't exist");
         }
@@ -196,7 +196,7 @@ namespace BL
                 throw new Exception("This driving test doesn't exist");
             if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
                 throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-            if (testedRecently(drivingTest.Trainee_ID))
+            if (testedRecently(drivingTest))
                 throw new Exception("The trainee cannot take the test since he was tested recently");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
                 throw new Exception("Tester and trainee do not use the same type of car");
@@ -205,22 +205,22 @@ namespace BL
             if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
                 throw new Exception("The tester is not available during these hours");
 
-            instance.UpdateDrivingTest(drivingTest);
+            dal.UpdateDrivingTest(drivingTest);
         }
         public bool DrivingTestExist(DrivingTest drivingTest)
         {
-            return instance.DrivingTestExist(drivingTest);
+            return dal.DrivingTestExist(drivingTest);
         }
         public List<DrivingTest> GetDrivingTests(Func<DrivingTest, bool> p = null)
         {
             if (p == null)
-                return instance.GetDrivingTests(p);//use GetDrivingTests in class Dal_imp
+                return dal.GetDrivingTests(p);//use GetDrivingTests in class Dal_imp
             else
-                return instance.GetDrivingTests(p);
+                return dal.GetDrivingTests(p);
         }
         public DrivingTest GetDrivingTest(string id)
         {
-            return instance.GetDrivingTest(id);
+            return dal.GetDrivingTest(id);
         }
         public List<DrivingTest> GetDrivingTestsByDate(Func<DrivingTest, bool> predicate = null)
         {
@@ -249,9 +249,9 @@ namespace BL
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
         public IEnumerable<Person> GetAllPersons()
         {
-            IEnumerable<Person> result1 = (from p in instance.GetTrainees()
+            IEnumerable<Person> result1 = (from p in dal.GetTrainees()
                                            select p);
-            IEnumerable<Person> result2 = (from p in instance.GetTesters()
+            IEnumerable<Person> result2 = (from p in dal.GetTesters()
                                            select p);
             return result1.Concat(result2);
 
@@ -302,7 +302,7 @@ namespace BL
                 Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
         }
-       
+
 
 
 
@@ -367,20 +367,18 @@ namespace BL
         {
             return GetTester(tester_ID).Expertise == GetTrainee(trainee_ID).CarTrained;
         }
-        private bool testedRecently(string trainee_ID)
+        private bool testedRecently(DrivingTest testToAdd)
         {
-            // DrivingTest temp = new DrivingTest();
-            //temp.Trainee_ID = trainee_ID;
-            List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Trainee_ID == trainee_ID);
-            if (res == null)
+            List<DrivingTest> drivingTests = GetDrivingTests(temp_dt => temp_dt.Trainee_ID == testToAdd.Trainee_ID);
+            if (drivingTests.Count == 0)
                 return false;
             else
             {
-                IEnumerable<DrivingTest> result = null;
-                result = from t in res
-                         where (DateTime.Now.Subtract(t.Date).TotalDays > 7)
-                         select t;
-                if (result == null)
+                var result = (from test2 in drivingTests
+                                  //where (drivingTest.Date.Subtract(test2.Date).TotalDays < 7)
+                              where (Math.Abs((test2.Date - testToAdd.Date).Days) < BE.Configuration.MIN_GAP_TEST) && (test2.ID != testToAdd.ID)
+                              select test2).ToList();
+                if (result.Count == 0)
                 {
                     return false;
                 }

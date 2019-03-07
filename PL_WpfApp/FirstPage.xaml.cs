@@ -13,18 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.VisualBasic;
+using BE;
+using System.ComponentModel;
 
 namespace PL_WpfApp
 {
+    //todo: in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
     /// <summary>
     /// Interaction logic for FirstPage.xaml
     /// </summary>
     public partial class FirstPage : Page
     {
         BL.IBL bl = BL.FactorySingletonBL.getInstance();
+
+        //todo: lists for all the entities and also icollectionview for everyone
+        List<Trainee> traineesList = BL.FactorySingletonBL.getInstance().GetTrainees();
+        ICollectionView groupedTrainees = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetTrainees());
+
         public FirstPage()
         {
             InitializeComponent();
+            traineeDataGrid.ItemsSource = traineesList;
         }
 
         private void Click_AddTrainee(object sender, RoutedEventArgs e)
@@ -139,9 +148,9 @@ namespace PL_WpfApp
                 if (id != null)
                 {
                     BE.DrivingTest dr = bl.GetDrivingTest(id);
-                    if (bl.DrivingTestExist(dr)) // if pressed "אישור"
+                    if (dr != null) // if pressed "OK"
                     {
-                        this.NavigationService.Navigate(new PageUpdateTest(null));
+                        this.NavigationService.Navigate(new PageUpdateTest(dr));
                     }
                     else
                         MessageBox.Show("The Test doesn't exist");
@@ -151,6 +160,35 @@ namespace PL_WpfApp
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        /*todo: define item source for every datagrid. erase all the lines and leave only te ones with x:Name...... and add to that line binding= the binding that its inside. remove the event "fistname_selected" since we have an event for all
+        */
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            traineeDataGrid.ItemsSource = traineesList;
+        }
+
+        //todo: ASK ELYASAF how to do Groupdescriptions.add with  school name and instructor
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
+            switch (item)
+            {
+                //todo: finish all the cases for all the properties
+                case "Driving School":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("DrivingSchool"));
+                    break;
+                case "Instructor":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Instructor"));
+                    break;
+                case "Test Number":
+
+                    break;
+                default:
+                    break;
+            }
+            traineeDataGrid.ItemsSource = groupedTrainees;
         }
     }
 

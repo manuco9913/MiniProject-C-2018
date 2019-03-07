@@ -31,7 +31,7 @@ namespace DS
                 Experience = 10,
                 Expertise = CarType.Truck_Heavy,
                 MaxDistance = 2,
-              
+              //todo: take example for Schedule in XML
                 Schedule = new Schedule
                 {
                     Data = new bool[5][]
@@ -58,7 +58,7 @@ namespace DS
                 },
                 DayOfBirth = DateTime.Now.AddYears(-21),
                 Gender = Gender.MALE,
-                CarTrained = CarType.TwoWheels,
+                CarTrained = CarType.Truck_Heavy,
                 DrivingSchool = SchoolName.MAOF,
                 GearType = GearType.Manual,
                 Instructor =  new Name { FirstName = "Martze", LastName = "bemivne netunim" },
@@ -89,19 +89,19 @@ namespace DS
         public static List<DrivingTest> DrivingtestsList
         {
             get { return drivingtestsList; }
-  //          set { drivingtestsList = value; }
+            set { drivingtestsList = value; }
         }
 
         public static List<Tester> TestersList
         {
             get { return testersList; }
- //           set { testersList = value; }
+            set { testersList = value; }
         }
 
         public static List<Trainee> TraineesList
         {
             get { return traineesList; }
-//            set { traineesList = value; }
+            set { traineesList = value; }
         }
     }
 }

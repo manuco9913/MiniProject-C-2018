@@ -104,21 +104,18 @@ namespace DAL
             };
         }
 
-      // public static XElement ToXML(this DrivingTest d)
-     //   {
-            //return new XElement("drivingtest",
-            //                     new XElement("Tester_ID", d.Tester_ID.ToString()),
-            //                     new XElement("Trainee_ID", d.Trainee_ID.ToString()),
-            //                     new XElement("Date", d.Date.ToString()),
-            //                     new XElement("Comment", d.Comment.ToString()),
-            //                     new XElement("Requirements",
-            //                     //                  (from r in d.Requirements
-            //                     //        select new XElement("Require", r)).ToList()),
-            //                     new XElement(d.StartingPoint.ToXML()),
-            //                     new XElement("Success", d.Success.ToString()),
-            //                     new XElement("Time", d.Time.ToString()));
-                                
-      //  }
+        public static XElement ToXML(this DrivingTest d)
+        {
+            return new XElement("drivingtest",
+                                 new XElement("Tester_ID", d.Tester_ID.ToString()),
+                                 new XElement("Trainee_ID", d.Trainee_ID.ToString()),
+                                 new XElement("Date", d.Date.ToString()),
+                                 new XElement("Comment", d.Comment.ToString()),
+                                 new XElement(d.StartingPoint.ToXML()),
+                                 new XElement("Success", d.Success.ToString()),
+                                 new XElement("Time", d.Time.ToString())
+                                );
+        }
         public static DrivingTest toDrivingTest(this XElement d)
         {
             return new DrivingTest
@@ -127,8 +124,6 @@ namespace DAL
                 Comment = d.Element("Comment").Value,
                 Trainee_ID = d.Element("Trainee_ID").Value,
                 Date = DateTime.Parse(d.Element("Date").Value),
-                //Requirements = (from s in d.Element("Requirements").Elements("Require")
-                           //     select s.Value).ToList(),
                 Success = Boolean.Parse(d.Element("Success").Value),
                 StartingPoint = d.Element("StartingPoint").ToAddress(),
                 Time = TimeSpan.Parse(d.Element("Time").Value)
