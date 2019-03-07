@@ -61,7 +61,7 @@ namespace DS
                 CarTrained = CarType.Truck_Heavy,
                 DrivingSchool = SchoolName.MAOF,
                 GearType = GearType.Manual,
-                Instructor =  new Name { FirstName = "Martze", LastName = "bemivne netunim" },
+                Instructor = "Martze bemivne netunim",
                 LessonsNb = 134
             }
             );
@@ -81,7 +81,7 @@ namespace DS
                 CarTrained = CarType.Private,
                 DrivingSchool = SchoolName.OR_YAROK,
                 GearType = GearType.Manual,
-                Instructor = new Name { FirstName = "Super", LastName = "lo Kayam" },
+                Instructor = "Super lo Kayam",
                 LessonsNb = 12
             }
             );

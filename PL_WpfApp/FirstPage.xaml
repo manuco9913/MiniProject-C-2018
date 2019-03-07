@@ -50,7 +50,7 @@
                         <Grid Grid.Column="2" Grid.Row="1" Margin="10,10,10,10">
                             <Button Content="Remove Trainee" Click="Remove_TraineeAccount"  FontSize="30"/>
                         </Grid>
-                        <DataGrid IsReadOnly="True" x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding traineesList}" Margin="0,1,199,0" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="3">
+                        <DataGrid IsReadOnly="True" x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding traineesList}" Margin="0,1,223,0" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="3">
                             <DataGrid.Columns>
                                 <DataGridTextColumn x:Name="carTrainedColumn" Header="Car Trained" Width="SizeToHeader" Binding="{Binding CarTrained}"/>
                                 <DataGridTextColumn x:Name="firstNameColumn" Header="First Name" Width="SizeToHeader" Binding="{Binding FirstName}"/>

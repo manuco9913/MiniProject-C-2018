@@ -107,9 +107,7 @@ namespace DAL
                                                                 new XElement("Car Trained",trainee.CarTrained.ToString()),
                                                                 new XElement("Gear Type",trainee.GearType.ToString()),
                                                                 new XElement("School Name", trainee.DrivingSchool.ToString()),
-                                                                new XElement("Instructor",
-                                                                        new XElement("First Name",trainee.Instructor.FirstName),
-                                                                        new XElement("Last Name",trainee.Instructor.LastName)),
+                                                                new XElement("Instructor",trainee.Instructor),
                                                                 new XElement("Lessons Number",trainee.LessonsNb.ToString()),
                                                                 new XElement("Success",trainee.Succsess.ToString())
                                                                 ));
@@ -143,10 +141,7 @@ namespace DAL
                                 CarTrained = (CarType)Enum.Parse(typeof(CarType), trainee.Element("Car Trained").Value),
                                 GearType = (GearType)Enum.Parse(typeof(GearType), trainee.Element("Gear Type").Value),
                                 DrivingSchool = (SchoolName)Enum.Parse(typeof(SchoolName), trainee.Element("School Name").Value),
-                                Instructor = {
-                                                FirstName = trainee.Element("Instructor").Element("First Name").Value,
-                                                LastName = trainee.Element("Instructor").Element("Last Name").Value
-                                             },
+                                Instructor = trainee.Element("Instructor").Value,
                                 LessonsNb = Convert.ToInt32(trainee.Element("Lessons Number").Value),
                                 Succsess = Convert.ToBoolean(trainee.Element("Success").Value)
                             }).ToList();

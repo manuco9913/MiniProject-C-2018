@@ -31,7 +31,7 @@ namespace PL_WpfApp
         ICollectionView groupedTrainees = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetTrainees());
 
         public FirstPage()
-        {
+        {//todo: binding the data grid that updates itself depending on the list 
             InitializeComponent();
             traineeDataGrid.ItemsSource = traineesList;
         }
@@ -48,10 +48,9 @@ namespace PL_WpfApp
                 string id = Interaction.InputBox("Type the trainee you want to update", "Update trainee", "Trainee ID", -1, -1);
                 if (id != null)
                 {
-                    BE.Trainee trainee = bl.GetTrainee(id);
-                    if (bl.TraineeExist(trainee)) // if pressed "אישור"
+                    if (bl.GetTrainee(id) != null) // if pressed "אישור"
                     {
-                        this.NavigationService.Navigate(new PageUpdateTraineeAccount(trainee));
+                        this.NavigationService.Navigate(new PageUpdateTraineeAccount(bl.GetTrainee(id)));
                     }
                     else
                         MessageBox.Show("The Trainee doesn't exist");
@@ -132,7 +131,7 @@ namespace PL_WpfApp
                         this.NavigationService.Navigate(new PageUpdateTesterAccount(tester));
                     }
                     else
-                        MessageBox.Show("The Trainee doesn't exist");
+                        MessageBox.Show("The Tester doesn't exist");
                 }
             }
             catch (Exception ex)
