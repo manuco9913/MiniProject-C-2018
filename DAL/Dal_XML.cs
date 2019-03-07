@@ -53,7 +53,7 @@ namespace DAL
 
         public bool AddDrivingTest(DrivingTest drivingTest)
         {
-            DS.DataSourceXML.DrivingTests.Add(drivingTest.ToXML());
+      //      DS.DataSourceXML.DrivingTests.Add(drivingTest.ToXML());
             DS.DataSourceXML.SaveDrivingtests();
             return true;
         }
