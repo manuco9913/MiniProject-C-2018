@@ -108,7 +108,33 @@ namespace PL_WpfApp
             }
         }
 
-        private void click_AddTester(object sender, RoutedEventArgs e)
+        //---------------------Aviad change-----------------------
+        private void Click_RemoveTest(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string id = Interaction.InputBox("type the ID number of the Test you want to delete", "Window delete Test", "Test ID:", -1, -1);
+                if (id != null)
+                {
+                    if (bl.DrivingTestExist(bl.GetDrivingTest(id))) // if press "אישור" so if ge goes to if.
+                    {
+                        bl.RemoveDrivingTest(bl.GetDrivingTest(id));
+
+                        MessageBox.Show("Delete successful");
+                    }
+                    else
+                        MessageBox.Show("The Test doesn't exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+    //-----------------------------------------------------------
+
+
+    private void click_AddTester(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new PageAddTester());
         }

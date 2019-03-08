@@ -185,8 +185,11 @@ namespace BL
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
-            if (DrivingTestExist(drivingTest))
-                return dal.RemoveDrivingTest(drivingTest);
+            if  (DrivingTestExist(drivingTest))
+            {
+                dal.RemoveDrivingTest(drivingTest);
+                return true;
+            }
             else
                 throw new Exception("Cannot remove a test that doesn't exist");
         }

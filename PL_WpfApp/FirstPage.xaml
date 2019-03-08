@@ -115,7 +115,7 @@
                             <Button Content="Update Test" FontSize="30" Click="Click_UpdateTest"/>
                         </Grid>
                         <Grid Grid.Column="3" Grid.Row="1" Margin="10.4,10.2,10.4,10.4">
-                            <Button Content="Remove Test" FontSize="30"/>
+                            <Button Content="Remove Test" FontSize="30" Click="Click_RemoveTest"/>
                         </Grid>
                     </Grid>
                 </TabItem>
