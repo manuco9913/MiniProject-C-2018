@@ -66,7 +66,11 @@ namespace PL_WpfApp
                     throw new Exception("You have to choose a Day Of Birth");
                 if (String.IsNullOrEmpty(this.InstructorNameTextBox1.Text))
                     throw new Exception("You have to fill the Instructor First Name field");
-
+                var result = (from tester in bl.GetTesters()
+                             where (tester.FirstName + " " + tester.LastName) == this.InstructorNameTextBox1.Text
+                             select tester).FirstOrDefault();
+                if (result == null)
+                    throw new Exception("there is no tester with such a name");
 
                 trainee = new BE.Trainee();
                 trainee.Address = new BE.Address();
@@ -84,9 +88,7 @@ namespace PL_WpfApp
                 trainee.GearType = (BE.GearType)this.gearTypeComboBox.SelectedValue;
                 trainee.DrivingSchool = (BE.SchoolName)this.drivingSchoolComboBox.SelectedValue;
                 //todo: we need to show in WPF the list of testers so the trainee can choose an instructor and then read it and convert it to Name class type
-                string[] temp = InstructorNameTextBox1.Text.Split(' ');
-                trainee.Instructor.FirstName = temp[0];
-                trainee.Instructor.LastName = temp[1];
+                trainee.Instructor = this.InstructorNameTextBox1.Text;
 
                 if (bl.TraineeExist(trainee))
                     throw new Exception("This trainee already exists...");
@@ -106,6 +108,22 @@ namespace PL_WpfApp
         private void IDTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Click_Fill(object sender, RoutedEventArgs e)
+        {
+            this.iDTextBox.Text = "987654333";
+            this.firstNameTextBox1.Text = "fhgj";
+            this.lastNameTextBox.Text = "jbn";
+            this.cityTextBox.Text = "kk";
+            this.streetNameTextBox.Text = "knk";
+            this.numberTextBox.Text = 12.ToString();
+            this.genderComboBox.SelectedIndex = 0;
+            this.lessonsNbTextBox.Text = "134";
+            this.carTrainedComboBox.SelectedIndex = 0;
+            this.gearTypeComboBox.SelectedIndex = 1;
+            this.drivingSchoolComboBox.SelectedIndex = 3;
+            this.InstructorNameTextBox1.Text = "Aviad Feig";
         }
     }
 }

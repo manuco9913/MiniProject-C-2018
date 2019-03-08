@@ -12,7 +12,7 @@ namespace BE
         public CarType CarTrained { get; set; }
         public GearType GearType { get; set; }
         public SchoolName DrivingSchool { get; set; }
-        public Name Instructor { get; set; }
+        public string Instructor { get; set; }
         public int LessonsNb { get; set; }
         public bool Succsess { get; set; }// Past or Failed test
         public override string ToString()

@@ -18,7 +18,7 @@ using System.ComponentModel;
 
 namespace PL_WpfApp
 {
-    //todo: in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
+    //todo: IMPORTANT in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
     /// <summary>
     /// Interaction logic for FirstPage.xaml
     /// </summary>
@@ -31,7 +31,7 @@ namespace PL_WpfApp
         ICollectionView groupedTrainees = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetTrainees());
 
         public FirstPage()
-        {
+        {//todo: binding the data grid that updates itself depending on the list 
             InitializeComponent();
             traineeDataGrid.ItemsSource = traineesList;
         }
@@ -48,10 +48,9 @@ namespace PL_WpfApp
                 string id = Interaction.InputBox("Type the trainee you want to update", "Update trainee", "Trainee ID", -1, -1);
                 if (id != null)
                 {
-                    BE.Trainee trainee = bl.GetTrainee(id);
-                    if (bl.TraineeExist(trainee)) // if pressed "אישור"
+                    if (bl.GetTrainee(id) != null) // if pressed "אישור"
                     {
-                        this.NavigationService.Navigate(new PageUpdateTraineeAccount(trainee));
+                        this.NavigationService.Navigate(new PageUpdateTraineeAccount(bl.GetTrainee(id)));
                     }
                     else
                         MessageBox.Show("The Trainee doesn't exist");
@@ -62,6 +61,7 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
         {
             try
@@ -72,7 +72,8 @@ namespace PL_WpfApp
                     if (bl.TraineeExist(bl.GetTrainee(id))) // if press "אישור" so if ge goes to if.
                     {
                         bl.RemoveTrainee(bl.GetTrainee(id));
-
+                        List<Trainee> traineesList = BL.FactorySingletonBL.getInstance().GetTrainees();
+                        traineeDataGrid.ItemsSource = traineesList;
                         MessageBox.Show("Deleted successfully");
                     }
                     else
@@ -157,7 +158,7 @@ namespace PL_WpfApp
                         this.NavigationService.Navigate(new PageUpdateTesterAccount(tester));
                     }
                     else
-                        MessageBox.Show("The Trainee doesn't exist");
+                        MessageBox.Show("The Tester doesn't exist");
                 }
             }
             catch (Exception ex)
@@ -188,32 +189,31 @@ namespace PL_WpfApp
             }
         }
 
-        /*todo: define item source for every datagrid. erase all the lines and leave only te ones with x:Name...... and add to that line binding= the binding that its inside. remove the event "fistname_selected" since we have an event for all
+        /*todo: define item source for every datagrid. erase all the lines and leave only te ones with x:Name...... and add to that line binding= the binding that its inside
         */
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            traineeDataGrid.ItemsSource = traineesList;
         }
 
-        //todo: ASK ELYASAF how to do Groupdescriptions.add with  school name and instructor
+        //todo: Grouping, the first time i select a comboboxItem it works, from the second time on it doesnt
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
             switch (item)
             {
-                //todo: finish all the cases for all the properties
                 case "Driving School":
                     groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("DrivingSchool"));
                     break;
                 case "Instructor":
                     groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Instructor"));
                     break;
-                case "Test Number":
-
+                case "Lessons Number":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("LessonsNb"));
                     break;
                 default:
                     break;
             }
+
             traineeDataGrid.ItemsSource = groupedTrainees;
         }
     }

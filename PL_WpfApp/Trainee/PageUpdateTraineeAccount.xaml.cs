@@ -44,6 +44,7 @@ namespace PL_WpfApp
             this.carTrainedComboBox.SelectedIndex = (int)trainee.CarTrained;
             this.gearTypeComboBox.SelectedIndex = (int)trainee.GearType;
             this.drivingSchoolComboBox.SelectedIndex = (int)trainee.DrivingSchool;
+            this.InstructorNameTextBox.Text = trainee.Instructor;
         }
 
         private void Click_UpdateTrainee(object sender, RoutedEventArgs e)
@@ -73,6 +74,13 @@ namespace PL_WpfApp
                     throw new Exception("You have to choose a Car Trained");
                 if (String.IsNullOrEmpty(this.gearTypeComboBox.Text))
                     throw new Exception("You have to choose a Gear Type ");
+                if (String.IsNullOrEmpty(this.InstructorNameTextBox.Text))
+                    throw new Exception("You have to fill the Instructor First Name field");
+                var result = (from tester in bl.GetTesters()
+                              where (tester.FirstName + " " + tester.LastName) == this.InstructorNameTextBox.Text
+                              select tester).FirstOrDefault();
+                if (result == null)
+                    throw new Exception("there is no tester with such a name");
 
 
                 tempTrainee = new BE.Trainee();
@@ -90,6 +98,7 @@ namespace PL_WpfApp
                 tempTrainee.CarTrained = (BE.CarType)this.carTrainedComboBox.SelectedValue;
                 tempTrainee.GearType = (BE.GearType)this.gearTypeComboBox.SelectedValue;
                 tempTrainee.DrivingSchool = (BE.SchoolName)this.drivingSchoolComboBox.SelectedValue;
+                tempTrainee.Instructor = this.InstructorNameTextBox.Text;
 
 
                 if (!bl.TraineeExist(tempTrainee))

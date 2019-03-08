@@ -51,8 +51,9 @@
             <Label Content="Day Of Birth:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="77"/>
             <DatePicker x:Name="dayOfBirthDatePicker" Grid.Column="3" HorizontalAlignment="Left" Margin="3,4,0,4" Grid.Row="4" VerticalAlignment="Center" Height="24" Width="102"/>
             <Label Content="Instructor Name:" Grid.Column="2" HorizontalAlignment="Left" Margin="3,8,0,9" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="167"/>
-            <ComboBox x:Name="InstructorNameTextBox1"  Grid.Column="4" HorizontalAlignment="Left" Height="24" Margin="3,4,0,4" Grid.Row="5" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="InstructorNameTextBox1"  Grid.Column="4" HorizontalAlignment="Left" Height="24" Margin="3,4,0,4" Grid.Row="5" VerticalAlignment="Center" Width="120"/>
             <Button Grid.Row="7" Grid.Column="3" Click="Click_AddTrainee" Content="Finish" FontSize="20" Margin="0,5,0,5" HorizontalAlignment="Center" Width="150"/>
+            <Button x:Name="FillButton" Content="Fill" Grid.Column="2" HorizontalAlignment="Left" Margin="95,15,0,0" Grid.Row="7" VerticalAlignment="Top" Width="75" Click="Click_Fill"/>
 
         </Grid>
     </Grid>

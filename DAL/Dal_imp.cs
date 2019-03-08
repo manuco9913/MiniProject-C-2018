@@ -54,8 +54,7 @@ namespace DAL
             }
             else
             {
-                result = from t in DS.DataSource.TestersList
-                         select t;
+                result = DS.DataSource.TestersList;
             }
 
             return result.ToList();
@@ -109,8 +108,7 @@ namespace DAL
             }
             else
             {
-                result = from t in DS.DataSource.TraineesList
-                         select t;
+                result = DS.DataSource.TraineesList;
             }
             return result.ToList();
         }
@@ -143,10 +141,10 @@ namespace DAL
             var result = (from item in DS.DataSource.DrivingtestsList
                           where item.ID == drivingTest.ID
                           select item).FirstOrDefault();
-            result.StartingPoint.City = drivingTest.StartingPoint.City;
-            result.Success = drivingTest.Success;
-            result.Tester_ID = drivingTest.Tester_ID;
-            result.Time = drivingTest.Time;
+            //todo: what is this?
+            //result.StartingPoint.City = drivingTest.StartingPoint.City;
+            //result.Success = drivingTest.Success;
+            //result.Tester_ID = drivingTest.Tester_ID;
         }
         public bool DrivingTestExist(DrivingTest test)
         {
