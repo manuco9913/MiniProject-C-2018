@@ -164,7 +164,6 @@ namespace DAL
                                                             new XElement("Trainee Id",test.Trainee_ID),
                                                             new XElement("Tester Id",test.Tester_ID),
                                                             new XElement("Date",test.Date.ToString()),
-                                                            new XElement("Time", test.Time.ToString()), //new XElement("Time", test.Date.TimeOfDay.ToString()),???????????????
                                                             new XElement("Starting Point",
                                                                     new XElement("Street Name", test.StartingPoint.StreetName),
                                                                     new XElement("Number",test.StartingPoint.Number.ToString()),
@@ -189,7 +188,7 @@ namespace DAL
                              Trainee_ID = test.Element("Trainee Id").Value,
                              Tester_ID = test.Element("Tester Id").Value,
                              Date = Convert.ToDateTime(test.Element("Date").Value),
-                             Time = TimeSpan.Parse(test.Element("Time").Value),
+                             //Time = TimeSpan.Parse(test.Element("Time").Value),
                              StartingPoint = {
                                                 StreetName = test.Element("Starting Point").Element("Street Name").Value,
                                                 Number =Convert.ToInt32(test.Element("Starting Point").Element("Number").Value),

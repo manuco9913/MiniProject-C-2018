@@ -100,7 +100,6 @@ namespace DAL
                 //Requirements = d.Requirements.ToList(),
                 StartingPoint = d.StartingPoint.Clone(),
                 Success = d.Success,
-                Time = d.Time
             };
         }
 
@@ -112,8 +111,7 @@ namespace DAL
                                  new XElement("Date", d.Date.ToString()),
                                  new XElement("Comment", d.Comment.ToString()),
                                  new XElement(d.StartingPoint.ToXML()),
-                                 new XElement("Success", d.Success.ToString()),
-                                 new XElement("Time", d.Time.ToString())
+                                 new XElement("Success", d.Success.ToString())
                                 );
         }
         public static DrivingTest toDrivingTest(this XElement d)
@@ -126,7 +124,7 @@ namespace DAL
                 Date = DateTime.Parse(d.Element("Date").Value),
                 Success = Boolean.Parse(d.Element("Success").Value),
                 StartingPoint = d.Element("StartingPoint").ToAddress(),
-                Time = TimeSpan.Parse(d.Element("Time").Value)
+                //Time = TimeSpan.Parse(d.Element("Time").Value)
             };
         }
 

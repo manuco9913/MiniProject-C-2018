@@ -18,7 +18,7 @@ using System.ComponentModel;
 
 namespace PL_WpfApp
 {
-    //todo: in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
+    //todo: IMPORTANT in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
     /// <summary>
     /// Interaction logic for FirstPage.xaml
     /// </summary>
@@ -72,7 +72,8 @@ namespace PL_WpfApp
                     if (bl.TraineeExist(bl.GetTrainee(id))) // if press "אישור" so if ge goes to if.
                     {
                         bl.RemoveTrainee(bl.GetTrainee(id));
-
+                        List<Trainee> traineesList = BL.FactorySingletonBL.getInstance().GetTrainees();
+                        traineeDataGrid.ItemsSource = traineesList;
                         MessageBox.Show("Deleted successfully");
                     }
                     else
@@ -162,31 +163,31 @@ namespace PL_WpfApp
             }
         }
 
-        /*todo: define item source for every datagrid. erase all the lines and leave only te ones with x:Name...... and add to that line binding= the binding that its inside. remove the event "fistname_selected" since we have an event for all
+        /*todo: define item source for every datagrid. erase all the lines and leave only te ones with x:Name...... and add to that line binding= the binding that its inside
         */
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
         }
 
-        //todo: ASK ELYASAF how to do Groupdescriptions.add with  school name and instructor
+        //todo: Grouping, the first time i select a comboboxItem it works, from the second time on it doesnt
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
             switch (item)
             {
-                //todo: finish all the cases for all the properties
                 case "Driving School":
                     groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("DrivingSchool"));
                     break;
                 case "Instructor":
                     groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Instructor"));
                     break;
-                case "Test Number":
-
+                case "Lessons Number":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("LessonsNb"));
                     break;
                 default:
                     break;
             }
+
             traineeDataGrid.ItemsSource = groupedTrainees;
         }
     }

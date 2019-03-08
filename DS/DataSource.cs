@@ -17,7 +17,7 @@ namespace DS
         {
             TestersList.Add(new Tester
             {
-                ID = "1111",
+                ID = "123456789",
                 Name = new Name { FirstName = "jojo", LastName = "chalass" },
                 Address = new Address
                 {
@@ -31,7 +31,7 @@ namespace DS
                 Experience = 10,
                 Expertise = CarType.Truck_Heavy,
                 MaxDistance = 2,
-              //todo: take example for Schedule in XML
+                //todo: take example for Schedule in XML
                 Schedule = new Schedule
                 {
                     Data = new bool[5][]
@@ -44,10 +44,38 @@ namespace DS
                       }
                 }
             });
+            TestersList.Add(new Tester
+            { 
+            ID = "123456788",
+                Name = new Name { FirstName = "Aviad", LastName = "Feig" },
+                Address = new Address
+                {
+                    City = "Jerusalem",
+                    Number = 21,
+                    StreetName = "uziel",
+                    //                  ZipCode = 91160
+                },
+                DayOfBirth = DateTime.Now.AddYears(-54),
+                Gender = Gender.MALE,
+                Experience = 10,
+                Expertise = CarType.Truck_Heavy,
+                MaxDistance = 2,
+                Schedule = new Schedule
+                {
+                    Data = new bool[5][]
+                     {
+                      new bool[6] { false, false, true, false, false, false},
+                      new bool[6] { false, false, true, false, false, false},
+                      new bool[6] { false, false, true, false, false, false},
+                      new bool[6] { false, false, true, false, false, false},
+                      new bool[6] { false, false, false, false, false, false}
+                      }
+                }
+            });
 
             TraineesList.Add(new Trainee
             {
-                ID = "9999",
+                ID = "987654321",
                 Name = new Name { FirstName = "eran", LastName = "zehuze" },
                 Address = new Address
                 {
@@ -61,13 +89,13 @@ namespace DS
                 CarTrained = CarType.Truck_Heavy,
                 DrivingSchool = SchoolName.MAOF,
                 GearType = GearType.Manual,
-                Instructor = "Martze bemivne netunim",
+                Instructor = "jojo chalass",
                 LessonsNb = 134
             }
             );
             TraineesList.Add(new Trainee
             {
-                ID = "99910",
+                ID = "987654322",
                 Name = new Name { FirstName = "Emanuel", LastName = "Macron" },
                 Address = new Address
                 {
@@ -81,7 +109,7 @@ namespace DS
                 CarTrained = CarType.Private,
                 DrivingSchool = SchoolName.OR_YAROK,
                 GearType = GearType.Manual,
-                Instructor = "Super lo Kayam",
+                Instructor = "jojo chalass",
                 LessonsNb = 12
             }
             );
