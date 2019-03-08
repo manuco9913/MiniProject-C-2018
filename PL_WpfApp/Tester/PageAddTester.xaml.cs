@@ -78,7 +78,7 @@ namespace PL_WpfApp
                 else if (!Regex.IsMatch(this.maxTestWeeklyTextBox.Text, @"^\d+$"))
                     throw new Exception("The max test weekly can only contain numbers");
                 if (String.IsNullOrEmpty(this.dayOfBirthDatePicker.Text))
-                    throw new Exception("You have to chose birth-day");
+                    throw new Exception("You have to chose birthday");
                 #endregion
 
                 tester = new BE.Tester();

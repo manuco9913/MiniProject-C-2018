@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Microsoft.VisualBasic;
 using BE;
 using System.ComponentModel;
+using System.Data;
 
 namespace PL_WpfApp
 {
@@ -29,18 +30,24 @@ namespace PL_WpfApp
         //todo: lists for all the entities and also icollectionview for everyone
         List<Trainee> traineesList = BL.FactorySingletonBL.getInstance().GetTrainees();
         ICollectionView groupedTrainees = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetTrainees());
+        public ICollectionView traineeCollectionView { get; private set; }
+
+        List<Tester> testersList = BL.FactorySingletonBL.getInstance().GetTesters();
+        ICollectionView groupedTesters = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetTesters());
+        public ICollectionView testerCollectionView { get; private set; }
 
         public FirstPage()
-        {//todo: binding the data grid that updates itself depending on the list 
+        {
             InitializeComponent();
             traineeDataGrid.ItemsSource = traineesList;
+            testerDataGrid.ItemsSource = testersList;
         }
+        
 
         private void Click_AddTrainee(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new PageAddTrainee());
         }
-
         private void Click_UpdateTrainee(object sender, RoutedEventArgs e)
         {
             try
@@ -61,7 +68,6 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void Remove_TraineeAccount(object sender, RoutedEventArgs e)
         {
             try
@@ -86,6 +92,31 @@ namespace PL_WpfApp
             }
         }
 
+        private void click_AddTester(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageAddTester());
+        }
+        private void Click_UpdateTester(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string id = Interaction.InputBox("Type the tester you want to update", "Update tester", "Tester ID", -1, -1);
+                if (id != null)
+                {
+                    BE.Tester tester = bl.GetTester(id);
+                    if (bl.TesterExist(tester)) // if pressed "אישור"
+                    {
+                        this.NavigationService.Navigate(new PageUpdateTesterAccount(tester));
+                    }
+                    else
+                        MessageBox.Show("The Tester doesn't exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void Remove_TesterAccount(object sender, RoutedEventArgs e)
         {
             try
@@ -108,39 +139,11 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void click_AddTester(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new PageAddTester());
-        }
-
+        
         private void Click_AddTest(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new PageAddTest());
         }
-
-        private void Click_UpdateTester(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string id = Interaction.InputBox("Type the tester you want to update", "Update tester", "Tester ID", -1, -1);
-                if (id != null)
-                {
-                    BE.Tester tester = bl.GetTester(id);
-                    if (bl.TesterExist(tester)) // if pressed "אישור"
-                    {
-                        this.NavigationService.Navigate(new PageUpdateTesterAccount(tester));
-                    }
-                    else
-                        MessageBox.Show("The Tester doesn't exist");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void Click_UpdateTest(object sender, RoutedEventArgs e)
         {
             try
@@ -167,12 +170,17 @@ namespace PL_WpfApp
         */
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+
         }
 
-        //todo: Grouping, the first time i select a comboboxItem it works, from the second time on it doesnt
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TraineeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
+
+            traineesList = bl.GetTrainees();
+            traineeCollectionView = CollectionViewSource.GetDefaultView(traineesList);
+            groupedTrainees = new ListCollectionView(traineesList);
+
             switch (item)
             {
                 case "Driving School":
@@ -189,6 +197,29 @@ namespace PL_WpfApp
             }
 
             traineeDataGrid.ItemsSource = groupedTrainees;
+        }
+
+        private void TesterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
+
+            testersList = bl.GetTesters();
+            testerCollectionView = CollectionViewSource.GetDefaultView(testersList);
+            groupedTesters = new ListCollectionView(testersList);
+
+            switch (item)
+            {
+                case "Car Expertise":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Expertise"));
+                    break;
+                case "Experience":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Experience"));
+                    break;
+                default:
+                    break;
+            }
+
+            testerDataGrid.ItemsSource = groupedTesters;
         }
     }
 
