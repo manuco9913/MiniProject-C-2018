@@ -18,8 +18,7 @@ using System.ComponentModel;
 using System.Data;
 
 namespace PL_WpfApp
-{
-    //todo: IMPORTANT in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
+{//todo:doubleclick on the line of an entity that navigates to pageUpdate-entity
     /// <summary>
     /// Interaction logic for FirstPage.xaml
     /// </summary>
@@ -27,7 +26,6 @@ namespace PL_WpfApp
     {
         BL.IBL bl = BL.FactorySingletonBL.getInstance();
 
-        //todo: lists for all the entities and also icollectionview for everyone
         List<Trainee> traineesList = BL.FactorySingletonBL.getInstance().GetTrainees();
         ICollectionView groupedTrainees = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetTrainees());
         public ICollectionView traineeCollectionView { get; private set; }
@@ -36,11 +34,17 @@ namespace PL_WpfApp
         ICollectionView groupedTesters = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetTesters());
         public ICollectionView testerCollectionView { get; private set; }
 
+        List<DrivingTest> testsList = BL.FactorySingletonBL.getInstance().GetDrivingTests();
+        ICollectionView groupedTests = new ListCollectionView(BL.FactorySingletonBL.getInstance().GetDrivingTests());
+        public ICollectionView testCollectionView { get; private set; }
+
+
         public FirstPage()
         {
             InitializeComponent();
             traineeDataGrid.ItemsSource = traineesList;
             testerDataGrid.ItemsSource = testersList;
+            drivingTestDataGrid.ItemsSource = testsList;
         }
         
 
@@ -165,14 +169,51 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
-
-        /*todo: define item source for every datagrid. erase all the lines and leave only te ones with x:Name...... and add to that line binding= the binding that its inside
-        */
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Click_RemoveTest(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                string id = Interaction.InputBox("type the ID number of the Test you want to delete", "Window delete Test", "Test ID:", -1, -1);
+                if (id != null)
+                {
+                    if (bl.DrivingTestExist(bl.GetDrivingTest(id))) // if press "אישור" so if ge goes to if.
+                    {
+                        bl.RemoveDrivingTest(bl.GetDrivingTest(id));
 
+                        MessageBox.Show("Delete successful");
+                    }
+                    else
+                        MessageBox.Show("The Test doesn't exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
+        private void TesterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
+
+            testersList = bl.GetTesters();
+            testerCollectionView = CollectionViewSource.GetDefaultView(testersList);
+            groupedTesters = new ListCollectionView(testersList);
+
+            switch (item)
+            {
+                case "Car Expertise":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Expertise"));
+                    break;
+                case "Experience":
+                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Experience"));
+                    break;
+                default:
+                    break;
+            }
+
+            testerDataGrid.ItemsSource = groupedTesters;
+        }
         private void TraineeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
@@ -198,29 +239,31 @@ namespace PL_WpfApp
 
             traineeDataGrid.ItemsSource = groupedTrainees;
         }
-
-        private void TesterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TestComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
 
-            testersList = bl.GetTesters();
-            testerCollectionView = CollectionViewSource.GetDefaultView(testersList);
-            groupedTesters = new ListCollectionView(testersList);
+            testsList = bl.GetDrivingTests();
+            testCollectionView = CollectionViewSource.GetDefaultView(testsList);
+            groupedTests = new ListCollectionView(testsList);
 
             switch (item)
             {
-                case "Car Expertise":
-                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Expertise"));
+                case "Trainee ID":
+                    groupedTests.GroupDescriptions.Add(new PropertyGroupDescription("Trainee_ID"));
                     break;
-                case "Experience":
-                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Experience"));
+                case "Tester ID":
+                    groupedTests.GroupDescriptions.Add(new PropertyGroupDescription("Tester_ID"));
                     break;
                 default:
                     break;
             }
 
-            testerDataGrid.ItemsSource = groupedTesters;
+            drivingTestDataGrid.ItemsSource = groupedTests;
         }
+
+
+        private void Page_Loaded(object sender, RoutedEventArgs e) { }
     }
 
 }

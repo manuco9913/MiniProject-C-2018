@@ -29,12 +29,7 @@ namespace DAL
             Tester result = (from item1 in DS.DataSource.TestersList
                              where item1.ID == tester.ID
                              select item1).FirstOrDefault();
-            result.Address.City = tester.Address.City;
-            result.Address.StreetName = tester.Address.StreetName;
-            result.Address.Number = tester.Address.Number;
-            result.Experience = tester.Experience;
-            result.Expertise = tester.Expertise;
-            result.MaxDistance = tester.MaxDistance;
+            result = tester;
         }
         public bool TesterExist(Tester tester)
         {
@@ -81,14 +76,7 @@ namespace DAL
             var result = (from item in GetTrainees()
                           where item.ID == trainee.ID
                           select item).FirstOrDefault();
-            result.Name = trainee.Name;
-            result.Address.City = trainee.Address.City;
-            result.Address.StreetName = trainee.Address.StreetName;
-            result.Address.Number = trainee.Address.Number;
-            result.DrivingSchool = trainee.DrivingSchool;
-            result.GearType = trainee.GearType;
-            result.Instructor = trainee.Instructor;
-            result.LessonsNb = trainee.LessonsNb;
+            result = trainee;
         }
         public bool TraineeExist(Trainee trainee)
         {
@@ -128,6 +116,7 @@ namespace DAL
         public void AddDrivingTest(DrivingTest drivingTest)
         {
             drivingTest.ID = (++Configuration.NUMBER_OF_TEST).ToString("00000000");
+
             DS.DataSource.DrivingtestsList.Add(drivingTest);
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
@@ -141,10 +130,7 @@ namespace DAL
             var result = (from item in DS.DataSource.DrivingtestsList
                           where item.ID == drivingTest.ID
                           select item).FirstOrDefault();
-            //todo: what is this?
-            //result.StartingPoint.City = drivingTest.StartingPoint.City;
-            //result.Success = drivingTest.Success;
-            //result.Tester_ID = drivingTest.Tester_ID;
+            result = drivingTest;
         }
         public bool DrivingTestExist(DrivingTest test)
         {

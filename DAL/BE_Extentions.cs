@@ -200,7 +200,6 @@ namespace DAL
                 CarTrained = t.CarTrained,
                 DrivingSchool = t.DrivingSchool,
                 GearType = t.GearType,
-                Instructor = t.Instructor,
                 LessonsNb = t.LessonsNb // new balance running shoes
             };
             return result;

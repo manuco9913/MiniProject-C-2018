@@ -19,6 +19,9 @@ namespace PL_WpfApp
     /// <summary>
     /// Interaction logic for PageUpdateTest.xaml
     /// </summary>
+    /// 
+    //todo: IMPORTANT in UpdateTestPage, remove Success and Add a table of requirments with checkboxes and in WPF check if most of them are checked and change the field in trainee that he successed
+
     public partial class PageUpdateTest : Page
     {
         BL.IBL bl = BL.FactorySingletonBL.getInstance();

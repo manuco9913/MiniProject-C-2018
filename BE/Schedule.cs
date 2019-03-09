@@ -10,7 +10,6 @@ namespace BE
     {
         public bool[][] Data { get; set; } = new bool[5][];
 
-        //todo: a toString() that's easy also to translate from XML to Schedule class type
         public override string ToString()
         {
             int starttime = 9;
@@ -38,6 +37,8 @@ namespace BE
                 }
             }
             return result;//.Substring(0, result.Length - 1);
+
+
         }
     }
 }

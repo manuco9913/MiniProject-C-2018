@@ -168,24 +168,27 @@ namespace BL
         //--------------DrivingTest---------------
         public void AddDrivingTest(DrivingTest drivingTest)
         {
-            if (DrivingTestExist(drivingTest))
-                throw new Exception("This driving test already exists");
+            if (GetTester(drivingTest.Tester_ID) == null)
+                throw new Exception("This tester doesn't exist");
+            if (GetTrainee(drivingTest.Trainee_ID) == null)
+                throw new Exception("This trainee doesn't exist");
             if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
                 throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
             if (testedRecently(drivingTest)) // if he took a test in the last 7 days
-                throw new Exception("The trainee cannot take the test since he was tested recently");
+                throw new Exception("The trainee cannot have 2 tests in the same week");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
-                throw new Exception("Tester and trainee do not use the same type of car");
+                throw new Exception("Tester and trainee have to use the same type of car");
             if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester does more tests in week than the max he can do
                 throw new Exception("Tester reached his maximum number of tests");
-            if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date))//If the tester is available then you can set a test but if he is not available then you cant
-                throw new Exception("The tester is not available during these hours");
+            string suggestTesterHour = testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date);
+            if (suggestTesterHour != "Tester is available")//If the tester is available then you can set a test but if he is not available then you cant
+                throw new Exception("The tester is not available during these hours\n"+suggestTesterHour);
 
             dal.AddDrivingTest(drivingTest);
         }
         public bool RemoveDrivingTest(DrivingTest drivingTest)
         {
-            if  (DrivingTestExist(drivingTest))
+            if (DrivingTestExist(drivingTest))
             {
                 dal.RemoveDrivingTest(drivingTest);
                 return true;
@@ -205,8 +208,9 @@ namespace BL
                 throw new Exception("Tester and trainee do not use the same type of car");
             if (testerMaxTestWeekly(drivingTest.Tester_ID))
                 throw new Exception("Tester reached his maximum number of tests");
-            if (!testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date)) //drivingtest.Date - is it the hour that Trainee want to set?
-                throw new Exception("The tester is not available during these hours");
+            string suggestTesterHour = testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date);
+            if (suggestTesterHour != "Tester is available")//If the tester is available then you can set a test but if he is not available then you cant
+                throw new Exception("The tester is not available during these hours\n" + suggestTesterHour);
 
             dal.UpdateDrivingTest(drivingTest);
         }
@@ -306,36 +310,38 @@ namespace BL
             }
         }
 
-
-
-
-
         //------------------------------------------------------------Test requirments--------------------------------------------------------------------
-        private bool testerAvailableTesting(string tester_ID, DateTime date)
+        enum DAYS { Sunday, Monday, Tuesday, Wednesday, Thursday };
+        //it always returns false!!!!
+        private string testerAvailableTesting(string tester_ID, DateTime date)
         {
-            if (date.Hour > 14 || date.Hour < 9)
-                return false;
-            List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
-            IEnumerable<DrivingTest> result = null;
-            if (res == null)//if there's no tester with that id it means that the tester we are trying to add to the test is available because he has no tests at all
-                return true;
-            else
-            {
-                result = from t in res
-                         where (date.Subtract(t.Date).Hours >= 1) //Checks that the difference between the time the Trainee wants to set the test at, and the time the tester is working at. and makes sure it is at least an hour
-                         select t;
-                if (result == null) //result==null => found that this tester is not available in any hour
-                {
-                    return false;
-                }
-                return true; // if we found that the tester is avaiable for least 1 hour, we can set a test with this tester!!
-            }
 
-            //-------------------------------IMPORTANT--------------------------------
-            /// The project instructions stipulate, among other things,
-            /// that if the tester is not available, an option should be given to another 
-            /// tester from the list of testers that is available
-            //------------------------------------------------------------------------
+            Tester tester = GetTester(tester_ID);
+            string AvailableTesterHours = "Your Tester is Available on:\n";
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    if ((tester.Schedule.Data[i][j] == true))
+                    {
+                        AvailableTesterHours += "--" + Enum.GetName(typeof(DAYS), i) + " " + (j + 9) + ":00\n";
+                        if (((int)date.DayOfWeek == i + 1) && (date.Hour == (j + 9)))
+                        {
+                            var res = GetDrivingTests(dt => (dt.Tester_ID == tester_ID) && (dt.Date == date));//creates a new list of "all" the tests who have that tester id and the same time
+                            if (res == null)
+                                return "Tester is available";//true
+                            else
+                                return AvailableTesterHours;//false
+                        }
+                    }
+                }
+            }
+            //if there's no hour available return false
+            if (AvailableTesterHours == "Your Tester is Available on:\n")
+                return "Tester is not available at all";
+            else
+                return AvailableTesterHours;//false
         }
         private bool AreFallingInSameWeek(DateTime date1, DateTime date2) // check if 2 dates are in the same week
         {
@@ -345,7 +351,7 @@ namespace BL
         {
             List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
             IEnumerable<DrivingTest> result = null;
-            if (res == null)
+            if (res.Count == 0)
                 return false;
             else
             {
@@ -358,7 +364,7 @@ namespace BL
                 }
                 else
                 {
-                    if (result.Count() > GetTester(tester_ID).MaxTestWeekly)
+                    if (result.Count() >= GetTester(tester_ID).MaxTestWeekly)
                     {
                         return true;
                     }

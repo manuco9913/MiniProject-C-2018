@@ -32,20 +32,13 @@ namespace PL_WpfApp
             MainFrame.NavigationService.Navigate(new FirstPage());
         }
 
-
-
-        private void ShowPersons_Click(object sender, RoutedEventArgs e)
-        {
-            // datagrid.ItemsSource = new ObservableCollection<Person>(myBl.GetAllPersons());
-        }
-
         private void Go_BackPage(object sender, RoutedEventArgs e)
         {
             if (MainFrame.CanGoBack)
                 MainFrame.GoBack();
             else
             {
-                //this.Button_back.Visibility =Visibility.Hidden;
+                //this.Button_back.Visibility = Visibility.Hidden;
                 MessageBox.Show("Cannot go back from here", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

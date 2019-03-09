@@ -15,5 +15,6 @@ namespace BE
         public static int MIN_GAP_TEST = 7;
         public static int TIME_BETWEEN_TESTS = 1;
         public static int NUMBER_OF_TEST = 0;
+        public static int NUMBER_OF_REQUIREMENTS = 5;
     } 
 }

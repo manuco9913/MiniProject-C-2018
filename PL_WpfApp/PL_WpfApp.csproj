@@ -143,6 +143,7 @@
     <None Include="BE.DataSource\BE.Schedule.datasource" />
     <None Include="BE.DataSource\BE.Tester.datasource" />
     <None Include="BE.DataSource\BE.Trainee.datasource" />
+    <None Include="BE.TestProp.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -13,22 +13,12 @@ namespace BE
     /// </summary>
     public class DrivingTest
     {
-        //
-        //public TestProp requirments { get; set; } // what do with this ?
-
-        //
         private DateTime _date = new DateTime();
         private List<string> _requirements = new List<string>();
         //  private ArrayList _requirements = new ArrayList();
-        /// <summary>
-        /// get set the Trainee ID
-        /// </summary>
         public string ID { get; set; }
-        public String Trainee_ID { get; set; }
-        /// <summary>
-        /// get set the Tester ID
-        /// </summary>
-        public String Tester_ID { get; set; }
+        public string Trainee_ID { get; set; }
+        public string Tester_ID { get; set; }
 
         public DateTime Date
         {
@@ -36,9 +26,9 @@ namespace BE
             set { _date = value; }
         }
         public Address StartingPoint { get; set; }
-        //public List<String> Requirements { get => _requirements; set => _requirements = value; }
         public bool Success { get; set; }
-        public String Comment { get; set; }
+        public string Comment { get; set; }
+        public bool[] Requirements { get; set; }
 
       
         public override string ToString()

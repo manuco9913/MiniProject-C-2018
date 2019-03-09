@@ -98,10 +98,10 @@ namespace PL_WpfApp
                 tester.Address.Number = Convert.ToInt32(this.numberTextBox.Text);
                 tester.DayOfBirth = this.dayOfBirthDatePicker.DisplayDate;
                 tester.Gender = (BE.Gender)this.genderComboBox.SelectedValue;
-                tester.Experience =Convert.ToInt32(this.experienceTextBox.Text);
+                tester.Experience = Convert.ToInt32(this.experienceTextBox.Text);
                 tester.MaxDistance = Convert.ToInt32(this.maxDistanceTextBox.Text);
                 tester.MaxTestWeekly = Convert.ToInt32(this.maxTestWeeklyTextBox.Text);
-                //--------------------------------------------------------------------
+
                 if (tester.Schedule != null)
                 {
                     int i, j;
@@ -113,7 +113,6 @@ namespace PL_WpfApp
                         tester.Schedule.Data[i][j] = (checkbox.IsChecked == true);
                     }
                 }
-                //-----------------------------------------------------------------------------------------
                 if (bl.TesterExist(tester))
                     throw new Exception("This tester already exists...");
                 if (DateTime.Now.Year - tester.DayOfBirth.Year < BE.Configuration.MIN_TESTER_AGE)

@@ -31,7 +31,6 @@ namespace DS
                 Experience = 10,
                 Expertise = CarType.Truck_Heavy,
                 MaxDistance = 2,
-                //todo: take example for Schedule in XML
                 Schedule = new Schedule
                 {
                     Data = new bool[5][]
@@ -89,7 +88,6 @@ namespace DS
                 CarTrained = CarType.Truck_Heavy,
                 DrivingSchool = SchoolName.MAOF,
                 GearType = GearType.Manual,
-                Instructor = "jojo chalass",
                 LessonsNb = 134
             }
             );
@@ -109,7 +107,6 @@ namespace DS
                 CarTrained = CarType.Private,
                 DrivingSchool = SchoolName.OR_YAROK,
                 GearType = GearType.Manual,
-                Instructor = "jojo chalass",
                 LessonsNb = 12
             }
             );

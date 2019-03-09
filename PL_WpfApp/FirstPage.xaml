@@ -12,6 +12,7 @@
     <Page.Resources>
         <CollectionViewSource x:Key="traineeViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Trainee}, CreateList=True}"/>
         <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
+        <CollectionViewSource x:Key="drivingTestViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:DrivingTest}, CreateList=True}"/>
     </Page.Resources>
 
     <Grid>
@@ -59,16 +60,16 @@
                         </ComboBox>
                         <DataGrid x:Name="traineeDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Grid.ColumnSpan="3" EnableRowVirtualization="True" ItemsSource="{Binding traineesList}" Margin="0,5,90,10" RowDetailsVisibilityMode="VisibleWhenSelected">
                             <DataGrid.Columns>
-                                <DataGridTextColumn x:Name="carTrainedColumn" Binding="{Binding CarTrained}" Header="Car Trained" Width="SizeToCells"/>
-                                <DataGridTextColumn x:Name="dayOfBirthColumn" Binding="{Binding DayOfBirth}" Header="Day Of Birth" Width="SizeToCells"/>
-                                <DataGridTextColumn x:Name="drivingSchoolColumn" Binding="{Binding DrivingSchool}" Header="Driving School" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" IsReadOnly="True" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="gearTypeColumn" Binding="{Binding GearType}" Header="Gear Type" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToCells"/>
-                                <DataGridTextColumn x:Name="instructorColumn" Binding="{Binding Instructor}" Header="Instructor" Width="SizeToCells"/>
+                                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" IsReadOnly="True" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" IsReadOnly="True" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="lessonsNbColumn" Binding="{Binding LessonsNb}" Header="Lessons Nb" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="dayOfBirthColumn" Binding="{Binding DayOfBirth}" Header="Day Of Birth" Width="SizeToCells"/>
+                                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="carTrainedColumn" Binding="{Binding CarTrained}" Header="Car Trained" Width="SizeToCells"/>
+                                <DataGridTextColumn x:Name="drivingSchoolColumn" Binding="{Binding DrivingSchool}" Header="Driving School" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="gearTypeColumn" Binding="{Binding GearType}" Header="Gear Type" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="instructorColumn" Binding="{Binding Instructor}" Header="Instructor" Width="SizeToCells"/>
+                                <DataGridTextColumn x:Name="lessonsNbColumn" Binding="{Binding LessonsNb}" Header="Lessons Number" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="succsessColumn" Binding="{Binding Succsess}" Header="Succsess" Width="SizeToHeader"/>
                             </DataGrid.Columns>
                         </DataGrid>
@@ -100,13 +101,13 @@
                         </ComboBox>
                         <DataGrid x:Name="testerDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Grid.ColumnSpan="3" EnableRowVirtualization="True" ItemsSource="{Binding testersList}" Margin="0,0,93,0" RowDetailsVisibilityMode="VisibleWhenSelected">
                             <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="iDColumn1" Binding="{Binding ID}" Header="ID" Width="SizeToCells"/>
+                                <DataGridTextColumn x:Name="firstNameColumn1" Binding="{Binding FirstName}" Header="First Name" IsReadOnly="True" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="lastNameColumn1" Binding="{Binding LastName}" Header="Last Name" IsReadOnly="True" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="dayOfBirthColumn1" Binding="{Binding DayOfBirth}" Header="Day Of Birth" Width="SizeToCells"/>
                                 <DataGridTextColumn x:Name="experienceColumn" Binding="{Binding Experience}" Header="Experience" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="expertiseColumn" Binding="{Binding Expertise}" Header="Expertise" Width="SizeToCells"/>
-                                <DataGridTextColumn x:Name="firstNameColumn1" Binding="{Binding FirstName}" Header="First Name" IsReadOnly="True" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="genderColumn1" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="iDColumn1" Binding="{Binding ID}" Header="ID" Width="SizeToCells"/>
-                                <DataGridTextColumn x:Name="lastNameColumn1" Binding="{Binding LastName}" Header="Last Name" IsReadOnly="True" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="maxDistanceColumn" Binding="{Binding MaxDistance}" Header="Max Distance" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="maxTestWeeklyColumn" Binding="{Binding MaxTestWeekly}" Header="Max Test Weekly" Width="SizeToHeader"/>
                             </DataGrid.Columns>
@@ -114,7 +115,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Test">
-                    <Grid Background="#FFE5E5E5">
+                    <Grid Background="#FFE5E5E5" DataContext="{StaticResource drivingTestViewSource}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="14*"/>
                             <ColumnDefinition Width="39*"/>
@@ -134,6 +135,20 @@
                         <Grid Grid.Column="3" Grid.Row="1" Margin="10.4,10.2,10.4,10.4">
                             <Button Content="Remove Test" FontSize="30" Click="Click_RemoveTest"/>
                         </Grid>
+                        <DataGrid x:Name="drivingTestDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Grid.ColumnSpan="3" EnableRowVirtualization="True" ItemsSource="{Binding testsList}" Margin="0,1,0,0" RowDetailsVisibilityMode="VisibleWhenSelected">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="iDColumn2" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="tester_IDColumn" Binding="{Binding Tester_ID}" Header="Tester ID" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="trainee_IDColumn" Binding="{Binding Trainee_ID}" Header="Trainee ID" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="dateColumn" Binding="{Binding Date}" Header="Date" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="successColumn" Binding="{Binding Success}" Header="Success" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="commentColumn" Binding="{Binding Comment}" Header="Comment" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <ComboBox Grid.Column="3" HorizontalAlignment="Left" Margin="176,10,0,0" VerticalAlignment="Top" Width="78"  SelectionChanged="TestComboBox_SelectionChanged">
+                            <ComboBoxItem x:Name="traineeIDItem" Content="Trainee ID"/>
+                            <ComboBoxItem x:Name="testerIDIItem" Content="Tester ID"/>
+                        </ComboBox>
                     </Grid>
                 </TabItem>
             </TabControl>
