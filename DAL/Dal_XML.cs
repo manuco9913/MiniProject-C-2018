@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using BE;
+using DS;
 
 namespace DAL
 {
@@ -305,10 +306,8 @@ namespace DAL
         }
         public void UpdateTester(Tester tester)
         {
-            Tester result = (from item1 in DS.DataSource.TestersList
-                             where item1.ID == tester.ID
-                             select item1).FirstOrDefault();
-            result = tester;
+            int index = DataSource.TestersList.FindIndex(T => tester.ID == T.ID);
+            DataSource.TestersList[index] = tester;
             SaveTestersList();
         }
         public bool TesterExist(Tester tester)
@@ -355,10 +354,8 @@ namespace DAL
         }
         public void UpdateTrainee(Trainee trainee)
         {
-            var result = (from item in GetTrainees()
-                          where item.ID == trainee.ID
-                          select item).FirstOrDefault();
-            result = trainee;
+            int index = DataSource.TraineesList.FindIndex(T => trainee.ID == T.ID);
+            DataSource.TraineesList[index] = trainee;
             SaveTraineesList();
         }
         public bool TraineeExist(Trainee trainee)
@@ -412,10 +409,8 @@ namespace DAL
         }
         public void UpdateDrivingTest(DrivingTest drivingTest)
         {
-            var result = (from item in DS.DataSource.DrivingtestsList
-                          where item.ID == drivingTest.ID
-                          select item).FirstOrDefault();
-            result = drivingTest;
+            int index = DataSource.DrivingtestsList.FindIndex(T => drivingTest.ID == T.ID);
+            DataSource.DrivingtestsList[index] = drivingTest;
             SaveTestsList();
         }
         public bool DrivingTestExist(DrivingTest test)

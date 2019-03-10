@@ -18,7 +18,8 @@ using System.ComponentModel;
 using System.Data;
 
 namespace PL_WpfApp
-{//todo:doubleclick on the line of an entity that navigates to pageUpdate-entity
+{
+    //todo: make project nicer: datagrids of the same size, add grouping, doubleclick on the line of an entity that navigates to pageUpdate-entity
     /// <summary>
     /// Interaction logic for FirstPage.xaml
     /// </summary>
@@ -47,7 +48,12 @@ namespace PL_WpfApp
             drivingTestDataGrid.ItemsSource = testsList;
         }
         
-
+        //todo: add checking if all the requirments are true, then bl.GetTrainee(Trainee_ID).success=true;
+        //todo: updateTest doesnt work
+        //todo: remove/add test has to show messagebox of deletion
+        //todo: grouping in tester dont work
+        //todo: addtest doesnt control the maxtestweekly with the tester
+        
         private void Click_AddTrainee(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new PageAddTrainee());
@@ -62,6 +68,7 @@ namespace PL_WpfApp
                     if (bl.GetTrainee(id) != null) // if pressed "אישור"
                     {
                         this.NavigationService.Navigate(new PageUpdateTraineeAccount(bl.GetTrainee(id)));
+                        
                     }
                     else
                         MessageBox.Show("The Trainee doesn't exist");
@@ -82,7 +89,7 @@ namespace PL_WpfApp
                     if (bl.TraineeExist(bl.GetTrainee(id))) // if press "אישור" so if ge goes to if.
                     {
                         bl.RemoveTrainee(bl.GetTrainee(id));
-                        List<Trainee> traineesList = BL.FactorySingletonBL.getInstance().GetTrainees();
+                        List<Trainee> traineesList = bl.GetTrainees();
                         traineeDataGrid.ItemsSource = traineesList;
                         MessageBox.Show("Deleted successfully");
                     }
@@ -108,7 +115,7 @@ namespace PL_WpfApp
                 if (id != null)
                 {
                     BE.Tester tester = bl.GetTester(id);
-                    if (bl.TesterExist(tester)) // if pressed "אישור"
+                    if (tester != null) // if pressed "אישור"
                     {
                         this.NavigationService.Navigate(new PageUpdateTesterAccount(tester));
                     }
@@ -131,7 +138,8 @@ namespace PL_WpfApp
                     if (bl.TesterExist(bl.GetTester(id))) // if press "אישור" so if ge goes to if.
                     {
                         bl.RemoveTester(bl.GetTester(id));
-
+                        List<Tester> testersList = bl.GetTesters();
+                        testerDataGrid.ItemsSource = testersList;
                         MessageBox.Show("Delete successful");
                     }
                     else
@@ -179,7 +187,8 @@ namespace PL_WpfApp
                     if (bl.DrivingTestExist(bl.GetDrivingTest(id))) // if press "אישור" so if ge goes to if.
                     {
                         bl.RemoveDrivingTest(bl.GetDrivingTest(id));
-
+                        List<DrivingTest> testsList = bl.GetDrivingTests();
+                        drivingTestDataGrid.ItemsSource = testsList;
                         MessageBox.Show("Delete successful");
                     }
                     else

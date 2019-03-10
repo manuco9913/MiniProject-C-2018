@@ -50,7 +50,6 @@
             <TextBox x:Name="maxTestWeeklyTextBox" Width="120" VerticalAlignment="Center" Grid.Row="8" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="9" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Max Distance:"/>
             <TextBox x:Name="maxDistanceTextBox" Width="120" VerticalAlignment="Center"  Grid.Row="9" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-
             <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="2" Content="Experience:"/>
             <TextBox x:Name="experienceTextBox" Width="120" VerticalAlignment="Center"  Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="3"/>
             <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="2" Content="Expertise:"/>

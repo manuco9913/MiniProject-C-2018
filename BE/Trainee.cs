@@ -12,7 +12,6 @@ namespace BE
         public CarType CarTrained { get; set; }
         public GearType GearType { get; set; }
         public SchoolName DrivingSchool { get; set; }
-        //todo: instructor? not tester?
         public int LessonsNb { get; set; }
         public bool Succsess { get; set; }// Past or Failed test
         public override string ToString()

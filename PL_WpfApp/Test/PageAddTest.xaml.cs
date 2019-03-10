@@ -78,11 +78,15 @@ namespace PL_WpfApp
                     throw new Exception("The street number can only contain numbers");
                 if (String.IsNullOrEmpty(this.timeTextBox.Text))
                     throw new Exception("You have to fill the time field");
+                Trainee newTrainee = bl.GetTrainee(this.trainee_IDTextBox.Text);//todo: check if it works
+                if (newTrainee.Succsess && bl.GetDrivingTests(test => bl.GetTrainee(test.Trainee_ID).Succsess == true &&
+                        bl.GetTrainee(test.Trainee_ID).CarTrained == newTrainee.CarTrained) != null)//if the trainee is already tested on this type of car
+                    throw new Exception("Trainee has already been tested on this car");
                 #endregion
 
                 drivingTest = new BE.DrivingTest();
                 drivingTest.StartingPoint = new BE.Address();
-                drivingTest.Requirements = new bool[Configuration.NUMBER_OF_REQUIREMENTS];
+                drivingTest.Requirements = new bool[9];
                 drivingTest.Tester_ID = this.tester_IDTextBox.Text;
                 drivingTest.Trainee_ID = this.trainee_IDTextBox.Text;
                 TimeSpan tempTime = TimeSpan.FromHours(Convert.ToDouble(this.timeTextBox.Text));
@@ -90,17 +94,45 @@ namespace PL_WpfApp
                 drivingTest.StartingPoint.City = this.cityTextBox.Text;
                 drivingTest.StartingPoint.StreetName = this.streetNameTextBox.Text;
                 drivingTest.StartingPoint.Number = Convert.ToInt32(this.numberTextBox.Text);
+                drivingTest.Requirements[0] = one_blinkersUsedCheckBox.IsChecked == true;
+                drivingTest.Requirements[1] = two_distanceKeepingCheckBox.IsChecked == true;
+                drivingTest.Requirements[2] = three_gearsUsageCheckBox.IsChecked == true;
+                drivingTest.Requirements[3] = four_priorityToCheckBox.IsChecked == true;
+                drivingTest.Requirements[4] = five_mirrorLookingCheckBox.IsChecked == true;
+                drivingTest.Requirements[5] = six_obeyedToSignsCheckBox.IsChecked == true;
+                drivingTest.Requirements[6] = seven_regularParkingCheckBox.IsChecked == true;
+                drivingTest.Requirements[7] = eight_reverseParkingCheckBox.IsChecked == true;
+                drivingTest.Requirements[8] = nine_speedKeepingCheckBox.IsChecked == true;
 
+                int countRequirements = 0;
+                for (int i = 0; i < 8; i++)
+                {
+                    if (drivingTest.Requirements[i] == true)
+                        countRequirements++;
+                }
                 if (bl.DrivingTestExist(drivingTest))
                     throw new Exception("This test already exists");
                 if (bl.GetTester(drivingTest.Tester_ID).Expertise != bl.GetTrainee(drivingTest.Trainee_ID).CarTrained)
                     throw new Exception("Cannot be tested on a different car");
+                if (testerMaxTestWeekly(drivingTest))// if tester does more tests in week than the max he can do
+                    throw new Exception("Tester reached his maximum number of tests");
 
                 if (isLoading)
                     throw new Exception("Checking distance...");
                 else
                 {
                     bl.AddDrivingTest(drivingTest);
+                    if (countRequirements > Configuration.MIN_NUMBER_OF_REQUIREMENTS)
+                    {
+                        bl.GetTrainee(drivingTest.Trainee_ID).Succsess = true;
+                        drivingTest.Success = true;
+                    }
+                    else
+                    {
+                        bl.GetTrainee(drivingTest.Trainee_ID).Succsess = false;
+                        drivingTest.Success = false;
+                    }
+                    MessageBox.Show("Test Added succesfully");
                     this.NavigationService.Navigate(new FirstPage());
                 }
             }
@@ -109,20 +141,46 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
+        //todo: doesnt always work: if i update the tester maxtestweekly to 1 , it still lets me add more than one test
+        private bool testerMaxTestWeekly(DrivingTest drivingTestToAdd)
+        {
+            List<DrivingTest> res = bl.GetDrivingTests(temp_dt => temp_dt.Tester_ID == drivingTestToAdd.Tester_ID);//creates a new list of "all" the testers who have that id
+            if (res.Count != 0)
+            {
+                int testsInThisWeek = 0;
+                foreach (DrivingTest test in res)
+                {
+                    if (AreFallingInSameWeek(test.Date, drivingTestToAdd.Date))
+                        testsInThisWeek++;
+                }
+                if (testsInThisWeek > bl.GetTester(drivingTest.Tester_ID).MaxTestWeekly)
+                    return true;
+            }
+            else if (res.Count == 0 && bl.GetTester(drivingTest.Tester_ID).MaxTestWeekly == 0)
+                return true;
+            return false;
+
+        }
+        private bool AreFallingInSameWeek(DateTime date1, DateTime date2) // check if 2 dates are in the same week
+        {
+            return date1.AddDays(-(int)date1.DayOfWeek) == date2.AddDays(-(int)date2.DayOfWeek);
+        }
+
+
+        //Distance Function
         private void CityTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             Address address = new Address() { StreetName = streetNameTextBox.Text, City = cityTextBox.Text, Number = Convert.ToInt32(numberTextBox.Text) };
-            Thread thread = new Thread(() => IsTesterCloseEnough(bl.GetTester(this.tester_IDTextBox.Text), address));
+            var x = bl.GetTester(this.tester_IDTextBox.Text);
+            Thread thread = new Thread(() => CheckDistance(x,address));
             thread.Start();
         }
-
-            public void CheckDistance(Tester tester, Address address)
+        public void CheckDistance(Tester tester, Address address)
         {
             isLoading = true;
             isCloseEnough = IsTesterCloseEnough(tester, address);
             isLoading = false;
         }
-        //Distance Function
         public bool IsTesterCloseEnough(Tester tester, Address address)
         {
             string origin = tester.Address.StreetName + " " + tester.Address.Number + " st." + tester.Address.City;  //"pisga 45 st. jerusalem"; //

@@ -42,8 +42,6 @@ namespace BL
         }
         public void UpdateTester(Tester tester)
         {
-            if (DateTime.Now.Year - tester.DayOfBirth.Year < 40)
-                throw new Exception("Tester under 40 years");
             if (TesterExist(tester))
                 dal.UpdateTester(tester);
             else
@@ -97,9 +95,6 @@ namespace BL
         }
         public void UpdateTrainee(Trainee trainee)
         {
-            if (DateTime.Now.Year - trainee.DayOfBirth.Year < 18)
-                throw new Exception("Trainee under 18 years");
-
             dal.UpdateTrainee(trainee);
         }
         public bool TraineeExist(Trainee trainee)
@@ -130,16 +125,16 @@ namespace BL
             }
         }
         private bool CheckIfHasLicense(Trainee trainee)     //-----------check if he has a License
-        {
-            List<Trainee> res = GetTrainees(tra => tra.ID == trainee.ID && tra.CarTrained == trainee.CarTrained);
+        {//todo: decide what to do with this
+            //List<Trainee> res = GetTrainees(tra => tra.ID == trainee.ID && tra.CarTrained == trainee.CarTrained);
 
-            if (res == null)
-                return false;
-            else
-            {
-                if (trainee.Succsess == true)
-                    return true;
-            }
+            //if (res == null)
+            //    return false;
+            //else
+            //{
+            //    if (trainee.Succsess == true)
+            //        return true;
+            //}
             return false;
         }
         /*public bool succsessInTest(Trainee trainee)        //--------pass or field int test-------
@@ -178,11 +173,9 @@ namespace BL
                 throw new Exception("The trainee cannot have 2 tests in the same week");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
                 throw new Exception("Tester and trainee have to use the same type of car");
-            if (testerMaxTestWeekly(drivingTest.Tester_ID))// if tester does more tests in week than the max he can do
-                throw new Exception("Tester reached his maximum number of tests");
-            string suggestTesterHour = testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date);
+             string suggestTesterHour = testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date);
             if (suggestTesterHour != "Tester is available")//If the tester is available then you can set a test but if he is not available then you cant
-                throw new Exception("The tester is not available during these hours\n"+suggestTesterHour);
+                throw new Exception("The tester is not available during these hours\n" + suggestTesterHour);
 
             dal.AddDrivingTest(drivingTest);
         }
@@ -198,16 +191,16 @@ namespace BL
         }
         public void UpdateDrivingTest(DrivingTest drivingTest)
         {
-            if (!DrivingTestExist(drivingTest))
-                throw new Exception("This driving test doesn't exist");
-            if (!overMinLessonsTrainee(drivingTest.Trainee_ID))
+            if (GetTester(drivingTest.Tester_ID) == null)
+                throw new Exception("This tester doesn't exist");
+            if (GetTrainee(drivingTest.Trainee_ID) == null)
+                throw new Exception("This trainee doesn't exist");
+            if (!overMinLessonsTrainee(drivingTest.Trainee_ID)) // Done
                 throw new Exception("The trainee cannot take the test, because he has done less than the minimum number of lessons");
-            if (testedRecently(drivingTest))
-                throw new Exception("The trainee cannot take the test since he was tested recently");
-            if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID))
-                throw new Exception("Tester and trainee do not use the same type of car");
-            if (testerMaxTestWeekly(drivingTest.Tester_ID))
-                throw new Exception("Tester reached his maximum number of tests");
+            if (testedRecently(drivingTest)) // if he took a test in the last 7 days
+                throw new Exception("The trainee cannot have 2 tests in the same week");
+            if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
+                throw new Exception("Tester and trainee have to use the same type of car");
             string suggestTesterHour = testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date);
             if (suggestTesterHour != "Tester is available")//If the tester is available then you can set a test but if he is not available then you cant
                 throw new Exception("The tester is not available during these hours\n" + suggestTesterHour);
@@ -312,7 +305,6 @@ namespace BL
 
         //------------------------------------------------------------Test requirments--------------------------------------------------------------------
         enum DAYS { Sunday, Monday, Tuesday, Wednesday, Thursday };
-        //it always returns false!!!!
         private string testerAvailableTesting(string tester_ID, DateTime date)
         {
 
@@ -326,10 +318,10 @@ namespace BL
                     if ((tester.Schedule.Data[i][j] == true))
                     {
                         AvailableTesterHours += "--" + Enum.GetName(typeof(DAYS), i) + " " + (j + 9) + ":00\n";
-                        if (((int)date.DayOfWeek == i + 1) && (date.Hour == (j + 9)))
+                        if (((int)date.DayOfWeek == i) && (date.Hour == (j + 9)))
                         {
                             var res = GetDrivingTests(dt => (dt.Tester_ID == tester_ID) && (dt.Date == date));//creates a new list of "all" the tests who have that tester id and the same time
-                            if (res == null)
+                            if (res.Count == 0)
                                 return "Tester is available";//true
                             else
                                 return AvailableTesterHours;//false
@@ -342,35 +334,6 @@ namespace BL
                 return "Tester is not available at all";
             else
                 return AvailableTesterHours;//false
-        }
-        private bool AreFallingInSameWeek(DateTime date1, DateTime date2) // check if 2 dates are in the same week
-        {
-            return date1.AddDays(-(int)date1.DayOfWeek) == date2.AddDays(-(int)date2.DayOfWeek);
-        }
-        private bool testerMaxTestWeekly(string tester_ID)
-        {
-            List<DrivingTest> res = GetDrivingTests(temp_dt => temp_dt.Tester_ID == tester_ID);//creates a new list of "all" the testers who have that id (there will be only one
-            IEnumerable<DrivingTest> result = null;
-            if (res.Count == 0)
-                return false;
-            else
-            {
-                result = from t in res
-                         where (AreFallingInSameWeek(t.Date, DateTime.Now))
-                         select t;
-                if (result == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    if (result.Count() >= GetTester(tester_ID).MaxTestWeekly)
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-            }
         }
         private bool testerAndTraineeUseSameCarType(string tester_ID, string trainee_ID)
         {

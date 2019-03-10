@@ -95,6 +95,13 @@ namespace PL_WpfApp
                 tempTester = new BE.Tester();
                 tempTester.Address = new BE.Address();
                 tempTester.Name = new BE.Name();
+                tempTester.Schedule = new BE.Schedule();
+                tempTester.Schedule.Data = new bool[5][];
+                for (int i = 0; i < tempTester.Schedule.Data.Length; i++)
+                {
+                    tempTester.Schedule.Data[i] = new bool[6];
+                }
+
                 tempTester.ID = tester.ID;//the ID CANNOT change so it takes the id from before
                 tempTester.Name.FirstName = this.firstNameTextBox.Text;
                 tempTester.Name.LastName = this.lastNameTextBox.Text;
@@ -104,7 +111,10 @@ namespace PL_WpfApp
                 tempTester.DayOfBirth = tester.DayOfBirth;//the DayOfBirth CANNOT change so we take the old one
                 tempTester.Gender = (BE.Gender)this.genderComboBox.SelectedValue;
                 tempTester.Expertise = (BE.CarType)this.expertiseComboBox.SelectedValue;
-                if (tester.Schedule != null)
+                tempTester.MaxTestWeekly = Convert.ToInt32(maxTestWeeklyTextBox.Text);
+                tempTester.MaxDistance = Convert.ToInt32(maxDistanceTextBox.Text);
+                tempTester.Experience = Convert.ToInt32(experienceTextBox.Text);
+                if (tempTester.Schedule != null)
                 {
                     int i, j;
                     foreach (var item in this.boolgrid.Children)
@@ -112,7 +122,7 @@ namespace PL_WpfApp
                         CheckBox checkbox = item as CheckBox;
                         i = Grid.GetRow(checkbox);
                         j = Grid.GetColumn(checkbox);
-                        tester.Schedule.Data[i][j] = (checkbox.IsChecked == true);
+                        tempTester.Schedule.Data[i][j] = (checkbox.IsChecked == true);
                     }
                 }
 
