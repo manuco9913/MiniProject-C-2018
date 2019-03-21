@@ -64,6 +64,10 @@ namespace PL_WpfApp
         {
             try
             {
+                //to avoid the problem that if we have an error and we have to change a parameter, and only then, click the finish button again, the SUCCESS is already updated to be true so its like he passed
+                Trainee newTrainee = bl.GetTrainee(this.trainee_IDTextBox.Text);
+                newTrainee.Succsess = false;
+
                 #region if text boxes are null or if the input format is wrong
                 if (String.IsNullOrEmpty(this.tester_IDTextBox.Text))
                     throw new Exception("You have to fill the tester id field");
@@ -85,6 +89,9 @@ namespace PL_WpfApp
                     throw new Exception("You have to fill the time field");
                 if (dateDatePicker.SelectedDate == null)
                     throw new Exception("You have to select a date");
+                if (newTrainee.Succsess && bl.GetDrivingTests(test => bl.GetTrainee(test.Trainee_ID).Succsess == true &&
+                        bl.GetTrainee(test.Trainee_ID).CarTrained == newTrainee.CarTrained) != null)//if the trainee is already tested on this type of car
+                    throw new Exception("Trainee has already been tested on this car");
                 #endregion
 
                 drivingTest.Tester_ID = this.tester_IDTextBox.Text;
@@ -118,7 +125,6 @@ namespace PL_WpfApp
                     throw new Exception("Checking distance...");
                 else
                 {
-                    bl.UpdateDrivingTest(drivingTest);
                     if (countRequirements > Configuration.MIN_NUMBER_OF_REQUIREMENTS)
                     {
                         bl.GetTrainee(drivingTest.Trainee_ID).Succsess = true;
@@ -129,6 +135,8 @@ namespace PL_WpfApp
                         bl.GetTrainee(drivingTest.Trainee_ID).Succsess = false;
                         drivingTest.Success = false;
                     }
+                    if (!isCloseEnough) throw new Exception("The test is too far from the tester");
+                    bl.UpdateDrivingTest(drivingTest);
                     MessageBox.Show("Test updated succesfully");
                     this.NavigationService.Navigate(new FirstPage());
                 }
@@ -138,10 +146,10 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
 
         //Distance Function
-        private void CityTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void CityTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Address address = new Address() { StreetName = streetNameTextBox.Text, City = cityTextBox.Text, Number = Convert.ToInt32(numberTextBox.Text) };
             var x = bl.GetTester(this.tester_IDTextBox.Text);
@@ -192,5 +200,6 @@ namespace PL_WpfApp
             return true;
         }
 
+        
     }
 }

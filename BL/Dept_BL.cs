@@ -16,6 +16,7 @@ namespace BL
     {
 
         private static DAL.Idal dal = DAL.FactorySingletonDal.getInstance(); // instance its like dal in the exam.
+        
 
         //--------------Tester---------------
         public void AddTester(Tester tester)
@@ -124,42 +125,7 @@ namespace BL
                 return count;
             }
         }
-        private bool CheckIfHasLicense(Trainee trainee)     //-----------check if he has a License
-        {//todo: decide what to do with this
-            //List<Trainee> res = GetTrainees(tra => tra.ID == trainee.ID && tra.CarTrained == trainee.CarTrained);
-
-            //if (res == null)
-            //    return false;
-            //else
-            //{
-            //    if (trainee.Succsess == true)
-            //        return true;
-            //}
-            return false;
-        }
-        /*public bool succsessInTest(Trainee trainee)        //--------pass or field int test-------
-
-        {
-
-            DrivingTest dr = GetDrivingTest(trainee.ID);
-            bool a = dr.requirments._gradeBlinkersUsed = false;
-            bool b = dr.requirments._gradeDistanceKeepping = false;
-            bool c = dr.requirments._gradeGearsUsage = false;
-            bool d = dr.requirments._gradeGivingPriorityToPedestrians = false;
-            bool e = dr.requirments._gradeMirrorLooking = false;
-            bool f = dr.requirments._gradeObeyedToSigns = false;
-            bool g = dr.requirments._gradeRegularParking = false;
-            bool h = dr.requirments._gradeReverseParking = false;
-            bool i = dr.requirments._gradeSpeedKeeping = false;
-            if ((a && b && c && d && e && f && g && h && i) == true)
-            {
-                trainee.Succsess = true;
-                return true;
-            }
-            else
-                return false;
-        }*/
-
+        
         //--------------DrivingTest---------------
         public void AddDrivingTest(DrivingTest drivingTest)
         {
@@ -173,7 +139,7 @@ namespace BL
                 throw new Exception("The trainee cannot have 2 tests in the same week");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
                 throw new Exception("Tester and trainee have to use the same type of car");
-             string suggestTesterHour = testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date);
+            string suggestTesterHour = testerAvailableTesting_ADDTEST(drivingTest.Tester_ID, drivingTest.Date);
             if (suggestTesterHour != "Tester is available")//If the tester is available then you can set a test but if he is not available then you cant
                 throw new Exception("The tester is not available during these hours\n" + suggestTesterHour);
 
@@ -201,9 +167,9 @@ namespace BL
                 throw new Exception("The trainee cannot have 2 tests in the same week");
             if (!testerAndTraineeUseSameCarType(drivingTest.Tester_ID, drivingTest.Trainee_ID)) // Done
                 throw new Exception("Tester and trainee have to use the same type of car");
-            string suggestTesterHour = testerAvailableTesting(drivingTest.Tester_ID, drivingTest.Date);
-            if (suggestTesterHour != "Tester is available")//If the tester is available then you can set a test but if he is not available then you cant
-                throw new Exception("The tester is not available during these hours\n" + suggestTesterHour);
+            string suggestTesterHour1 = testerAvailableTesting_UPDATETEST(drivingTest.Tester_ID, drivingTest.Date);
+            if (suggestTesterHour1 != "Tester is available")//If the tester is available then you can set a test but if he is not available then you cant
+                throw new Exception("The tester is not available during these hours\n" + suggestTesterHour1);
 
             dal.UpdateDrivingTest(drivingTest);
         }
@@ -243,8 +209,7 @@ namespace BL
             }
         }
 
-
-
+        
         //We need to implement this
         public List<Tester> printAllAvailableTestersAt(/*Some date or time, suggest: DateTime*/) { return null; }
         public IEnumerable<Person> GetAllPersons()
@@ -257,55 +222,9 @@ namespace BL
 
         }
 
-        public void distance_Calculate(Tester tester, Trainee trainee) // what this func need get?
-        {
-
-            string origin = "pisga 45 st. jerusalem"; //or "תקווה פתח 100 העם אחד "etc.
-            string destination = "gilgal 78 st. ramat-gan";//or "גן רמת 10 בוטינסקי'ז "etc.
-            string KEY = @"<Y8pDqGNymiQ8h8oxs4uaS9CMv5lZXcb6>";
-            string url = @"https://www.mapquestapi.com/directions/v2/route" +
-             @"?key=" + KEY +
-             @"&from=" + origin +
-             @"&to=" + destination +
-             @"&outFormat=xml" +
-             @"&ambiguities=ignore&routeType=fastest&doReverseGeocode=false" +
-             @"&enhancedNarrative=false&avoidTimedConditions=false";
-            //request from MapQuest service the distance between the 2 addresses
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            Stream dataStream = response.GetResponseStream();
-            StreamReader sreader = new StreamReader(dataStream);
-            string responsereader = sreader.ReadToEnd();
-            response.Close();
-            //the response is given in an XML format
-            XmlDocument xmldoc = new XmlDocument();
-            xmldoc.LoadXml(responsereader);
-            if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "0")
-            //we have the expected answer
-            {
-                //display the returned distance
-                XmlNodeList distance = xmldoc.GetElementsByTagName("distance");
-                double distInMiles = Convert.ToDouble(distance[0].ChildNodes[0].InnerText);
-                Console.WriteLine("Distance In KM: " + distInMiles * 1.609344);
-                //display the returned driving time
-                XmlNodeList formattedTime = xmldoc.GetElementsByTagName("formattedTime");
-                string fTime = formattedTime[0].ChildNodes[0].InnerText;
-                Console.WriteLine("Driving Time: " + fTime);
-            }
-            else if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "402")
-            //we have an answer that an error occurred, one of the addresses is not found
-            {
-                Console.WriteLine("an error occurred, one of the addresses is not found. try again.");
-            }
-            else //busy network or other error...
-            {
-                Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
-            }
-        }
-
         //------------------------------------------------------------Test requirments--------------------------------------------------------------------
         enum DAYS { Sunday, Monday, Tuesday, Wednesday, Thursday };
-        private string testerAvailableTesting(string tester_ID, DateTime date)
+        private string testerAvailableTesting_ADDTEST(string tester_ID, DateTime date)
         {
 
             Tester tester = GetTester(tester_ID);
@@ -322,6 +241,36 @@ namespace BL
                         {
                             var res = GetDrivingTests(dt => (dt.Tester_ID == tester_ID) && (dt.Date == date));//creates a new list of "all" the tests who have that tester id and the same time
                             if (res.Count == 0)
+                                return "Tester is available";//true
+                            else
+                                return AvailableTesterHours;//false
+                        }
+                    }
+                }
+            }
+            //if there's no hour available return false
+            if (AvailableTesterHours == "Your Tester is Available on:\n")
+                return "Tester is not available at all";
+            else
+                return AvailableTesterHours;//false
+        }
+        private string testerAvailableTesting_UPDATETEST(string tester_ID, DateTime date)
+        {
+
+            Tester tester = GetTester(tester_ID);
+            string AvailableTesterHours = "Your Tester is Available on:\n";
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    if ((tester.Schedule.Data[i][j] == true))
+                    {
+                        AvailableTesterHours += "--" + Enum.GetName(typeof(DAYS), i) + " " + (j + 9) + ":00\n";
+                        if (((int)date.DayOfWeek == i) && (date.Hour == (j + 9)))
+                        {
+                            var res = GetDrivingTests(dt => (dt.Tester_ID == tester_ID) && (dt.Date == date));//creates a new list of "all" the tests who have that tester id and the same time
+                            if (res.Count == 1)
                                 return "Tester is available";//true
                             else
                                 return AvailableTesterHours;//false

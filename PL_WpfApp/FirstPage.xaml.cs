@@ -48,12 +48,6 @@ namespace PL_WpfApp
             drivingTestDataGrid.ItemsSource = testsList;
         }
         
-        //todo: add checking if all the requirments are true, then bl.GetTrainee(Trainee_ID).success=true;
-        //todo: updateTest doesnt work
-        //todo: remove/add test has to show messagebox of deletion
-        //todo: grouping in tester dont work
-        //todo: addtest doesnt control the maxtestweekly with the tester
-        
         private void Click_AddTrainee(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new PageAddTrainee());
@@ -68,7 +62,6 @@ namespace PL_WpfApp
                     if (bl.GetTrainee(id) != null) // if pressed "אישור"
                     {
                         this.NavigationService.Navigate(new PageUpdateTraineeAccount(bl.GetTrainee(id)));
-                        
                     }
                     else
                         MessageBox.Show("The Trainee doesn't exist");
@@ -201,28 +194,6 @@ namespace PL_WpfApp
             }
         }
 
-        private void TesterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
-
-            testersList = bl.GetTesters();
-            testerCollectionView = CollectionViewSource.GetDefaultView(testersList);
-            groupedTesters = new ListCollectionView(testersList);
-
-            switch (item)
-            {
-                case "Car Expertise":
-                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Expertise"));
-                    break;
-                case "Experience":
-                    groupedTrainees.GroupDescriptions.Add(new PropertyGroupDescription("Experience"));
-                    break;
-                default:
-                    break;
-            }
-
-            testerDataGrid.ItemsSource = groupedTesters;
-        }
         private void TraineeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
@@ -247,6 +218,28 @@ namespace PL_WpfApp
             }
 
             traineeDataGrid.ItemsSource = groupedTrainees;
+        }
+        private void TesterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string item = (e.AddedItems[0] as ComboBoxItem).Content as string;
+
+            testersList = bl.GetTesters();
+            testerCollectionView = CollectionViewSource.GetDefaultView(testersList);
+            groupedTesters = new ListCollectionView(testersList);
+
+            switch (item)
+            {
+                case "Car Expertise":
+                    groupedTesters.GroupDescriptions.Add(new PropertyGroupDescription("Expertise"));
+                    break;
+                case "Experience":
+                    groupedTesters.GroupDescriptions.Add(new PropertyGroupDescription("Experience"));
+                    break;
+                default:
+                    break;
+            }
+
+            testerDataGrid.ItemsSource = groupedTesters;
         }
         private void TestComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

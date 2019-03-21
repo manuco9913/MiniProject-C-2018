@@ -99,6 +99,7 @@ namespace PL_WpfApp
                 tester.DayOfBirth = this.dayOfBirthDatePicker.DisplayDate;
                 tester.Gender = (BE.Gender)this.genderComboBox.SelectedValue;
                 tester.Experience = Convert.ToInt32(this.experienceTextBox.Text);
+                tester.Expertise = (BE.CarType)this.expertiseComboBox.SelectedValue;
                 tester.MaxDistance = Convert.ToInt32(this.maxDistanceTextBox.Text);
                 tester.MaxTestWeekly = Convert.ToInt32(this.maxTestWeeklyTextBox.Text);
 
@@ -126,6 +127,21 @@ namespace PL_WpfApp
             {
                 MessageBox.Show(exp.Message);
             }
+        }
+
+        private void Click_Fill(object sender, RoutedEventArgs e)
+        {
+            iDTextBox.Text = "987654321";
+            firstNameTextBox.Text = "jojo";
+            lastNameTextBox.Text = "chalass";
+            cityTextBox.Text = "jerusalem";
+            streetNameTextBox.Text = "hapalmach";
+            numberTextBox.Text = "15";
+            genderComboBox.SelectedIndex = 0;
+            maxTestWeeklyTextBox.Text = "10";
+            maxDistanceTextBox.Text = "10";
+            experienceTextBox.Text = "5";
+            expertiseComboBox.SelectedIndex = 0;
         }
     }
 }

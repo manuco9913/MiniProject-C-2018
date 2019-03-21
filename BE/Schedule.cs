@@ -8,9 +8,18 @@ namespace BE
 {
     public class Schedule
     {
-        public bool[][] Data { get; set; } = new bool[5][];
+        public bool[][] Data { get; set; }
+        
+        public Schedule()
+        {
+            Data = new bool[5][];
+            for (int i = 0; i < Data.Length; i++)
+            {
+                Data[i] = new bool[6];
+            }
+        }
 
-        public override string ToString()
+    public override string ToString()
         {
             int starttime = 9;
             bool oved = false;

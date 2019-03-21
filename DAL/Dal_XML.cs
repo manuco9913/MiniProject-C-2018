@@ -11,7 +11,7 @@ using DS;
 
 namespace DAL
 {
-    internal class Dal_XML: Idal
+    internal class Dal_XML : Idal
     {
         XElement testersRoot;
         XElement traineesRoot;
@@ -29,7 +29,7 @@ namespace DAL
                 string dayString = "";
                 for (int j = 0; j < 6; j++)
                     dayString += tester.Schedule.Data[i][j] + ",";
-                DayList.Add(new XElement("day"+ i.ToString(), dayString.Substring(0,dayString.Length - 1)));
+                DayList.Add(new XElement("day" + i.ToString(), dayString.Substring(0, dayString.Length - 1)));
             }
             return DayList;
         }
@@ -40,13 +40,38 @@ namespace DAL
             foreach (var i in array)
             {
                 var s = i.Value.Split(',');
-                for(int j = 0; j<6; j++)
+                for (int j = 0; j < 6; j++)
                 {
-                    toReturn.Data[int.Parse(i.Name.ToString().Substring(3))][j] = bool.Parse(s[j]);
+                    int x = int.Parse(i.Name.ToString().Substring(3));
+                    bool b = bool.Parse(s[j]);
+                    toReturn.Data[x][j] = b;
                 }
             }
             return toReturn;
         }
+        private XElement requirementsElement(DrivingTest test)
+        {
+            string reqsString = "";
+            for (int i = 0; i < 9; i++)
+            {
+                reqsString += test.Requirements[i] + ",";
+            }
+            return new XElement("Requirements", reqsString);
+
+        }
+        private bool[] ElementToRequirements(XElement req)
+        {
+            bool[] toReturn = new bool[9];
+            string[] str = req.Value.Split(',');
+            var elems = str;
+            for (int i = 0; i < 9; i++)
+            {
+                bool b = Convert.ToBoolean(elems[i]);
+                toReturn[i] = b;
+            }
+            return toReturn;
+        }
+
         private void CreateTestersFile()
         {
             testersRoot = new XElement("Testers");
@@ -88,24 +113,27 @@ namespace DAL
                            select new Tester()
                            {
                                ID = tester.Element("Id").Value,
-                               Name = {
-                                        FirstName = tester.Element("Name").Element("FirstName").Value,
-                                        LastName = tester.Element("Name").Element("LastName").Value
-                                      },
+
+                               Name = new Name() {
+                                   FirstName = tester.Element("Name").Element("FirstName").Value,
+                                   LastName = tester.Element("Name").Element("LastName").Value
+                               },
                                DayOfBirth = Convert.ToDateTime(tester.Element("DayOfBirth").Value),
                                Gender = (Gender)Enum.Parse(typeof(Gender), tester.Element("Gender").Value),
-                               Address = {
-                                            StreetName = tester.Element("Address").Element("StreetName").Value,
-                                            Number = Convert.ToInt32(tester.Element("Address").Element("Number").Value),
-                                            City = tester.Element("Address").Element("City").Value
-                                         },
+                               Address = new Address()
+                               {
+                                   StreetName = tester.Element("Address").Element("StreetName").Value,
+                                   Number = Convert.ToInt32(tester.Element("Address").Element("Number").Value),
+                                   City = tester.Element("Address").Element("City").Value
+                               },
                                Expertise = (CarType)Enum.Parse(typeof(CarType), tester.Element("Expertise").Value),
                                Experience = Convert.ToInt32(tester.Element("Experience").Value),
                                MaxTestWeekly = Convert.ToInt32(tester.Element("MaxTestWeekly").Value),
-                               MaxDistance = Convert.ToInt32(tester.Element("Distance").Value),
+                               MaxDistance = Convert.ToInt32(tester.Element("MaxDistance").Value),
                                Schedule = ElementToSchedule(tester.Element("Schedule"))
-                           }).ToList();
 
+                           }).ToList();
+                               
             DS.DataSource.TestersList = testersList;
         }
 
@@ -151,14 +179,14 @@ namespace DAL
                             select new Trainee()
                             {
                                 ID = trainee.Element("Id").Value,
-                                Name =
+                                Name = new Name()
                                 {
                                     FirstName=trainee.Element("Name").Element("FirstName").Value,
-                                    LastName=trainee.Element("Name").Element("FirstName").Value
+                                    LastName=trainee.Element("Name").Element("LastName").Value
                                 },
                                 DayOfBirth = Convert.ToDateTime(trainee.Element("DayOfBirth").Value),
                                 Gender = (Gender)Enum.Parse(typeof(Gender), trainee.Element("Gender").Value),
-                                Address = {
+                                Address = new Address() {
                                               StreetName = trainee.Element("Address").Element("StreetName").Value,
                                               Number = Convert.ToInt32(trainee.Element("Address").Element("Number").Value),
                                               City = trainee.Element("Address").Element("City").Value
@@ -192,7 +220,8 @@ namespace DAL
                                                                     new XElement("Number",test.StartingPoint.Number.ToString()),
                                                                     new XElement("City", test.StartingPoint.City)),
                                                             new XElement("Success",test.Success.ToString()),
-                                                            new XElement("Comment",test.Comment)
+                                                            new XElement("Comment",test.Comment),
+                                                            new XElement("Requirements", requirementsElement(test))
                                                             ));
             testsRoot.Save(testsPath);
         }
@@ -211,13 +240,14 @@ namespace DAL
                              Trainee_ID = test.Element("TraineeId").Value,
                              Tester_ID = test.Element("TesterId").Value,
                              Date = Convert.ToDateTime(test.Element("Date").Value),
-                             StartingPoint = {
+                             StartingPoint = new Address(){
                                                 StreetName = test.Element("StartingPoint").Element("StreetName").Value,
                                                 Number =Convert.ToInt32(test.Element("StartingPoint").Element("Number").Value),
                                                 City = test.Element("StartingPoint").Element("City").Value
                                              },
                              Success = Convert.ToBoolean(test.Element("Success").Value),
-                             Comment = test.Element("Comment").Value
+                             Comment = test.Element("Comment").Value,
+                             Requirements = ElementToRequirements(test.Element("Requirements"))
                          }).ToList();
 
             DS.DataSource.DrivingtestsList = testsList;
@@ -282,12 +312,13 @@ namespace DAL
 
         public Dal_XML()
         {
-            //initTester();
             LoadFiles();
-            DS.DataSource.init();
-            SaveTestersList();
-            SaveTestsList();
-            SaveTraineesList();
+            LoadLists();//todo: or not?
+
+            //DS.DataSource.init();
+            //SaveTestersList();
+            //SaveTestsList();
+            //SaveTraineesList();
         }
 
         #region Tester

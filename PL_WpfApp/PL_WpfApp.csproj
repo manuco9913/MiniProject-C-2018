@@ -135,14 +135,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="BE.DataSource\BE.Address.datasource" />
-    <None Include="BE.DataSource\BE.Configuration.datasource" />
-    <None Include="BE.DataSource\BE.DrivingTest.datasource" />
-    <None Include="BE.DataSource\BE.Name.datasource" />
-    <None Include="BE.DataSource\BE.Person.datasource" />
-    <None Include="BE.DataSource\BE.Schedule.datasource" />
-    <None Include="BE.DataSource\BE.Tester.datasource" />
-    <None Include="BE.DataSource\BE.Trainee.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

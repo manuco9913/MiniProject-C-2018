@@ -103,14 +103,14 @@ namespace PL_WpfApp
 
         private void Click_Fill(object sender, RoutedEventArgs e)
         {
-            this.iDTextBox.Text = "987654333";
-            this.firstNameTextBox1.Text = "fhgj";
-            this.lastNameTextBox.Text = "jbn";
-            this.cityTextBox.Text = "kk";
-            this.streetNameTextBox.Text = "knk";
-            this.numberTextBox.Text = 12.ToString();
+            this.iDTextBox.Text = "123456789";
+            this.firstNameTextBox1.Text = "manu";
+            this.lastNameTextBox.Text = "cohenca";
+            this.cityTextBox.Text = "jerusalem";
+            this.streetNameTextBox.Text = "havaad haleumi";
+            this.numberTextBox.Text = 21.ToString();
             this.genderComboBox.SelectedIndex = 0;
-            this.lessonsNbTextBox.Text = "134";
+            this.lessonsNbTextBox.Text = "30";
             this.carTrainedComboBox.SelectedIndex = 0;
             this.gearTypeComboBox.SelectedIndex = 1;
             this.drivingSchoolComboBox.SelectedIndex = 3;

@@ -23,15 +23,21 @@ namespace PL_WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        //todo: check if all the add/remove/update work
-        IBL myBl; 
+        IBL myBl;
         public MainWindow()
         {
-            InitializeComponent();
-            myBl = BL.FactorySingletonBL.getInstance();
-            MainFrame.NavigationService.Navigate(new FirstPage());
+            try
+            {
+                InitializeComponent();
+                myBl = BL.FactorySingletonBL.getInstance();
+                MainFrame.NavigationService.Navigate(new FirstPage());
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+                MainFrame.NavigationService.Navigate(new FirstPage());
+            }
         }
-
         private void Go_BackPage(object sender, RoutedEventArgs e)
         {
             if (MainFrame.CanGoBack)

@@ -72,18 +72,7 @@ namespace Tools.Tests
                 Experience = 10,
                 Expertise = CarType.Truck_Heavy,
                 MaxDistance = 2,
-                MaxTestWeekly = 1,
-                Luz = new Schedule
-                {
-                    Data = new bool[5][]
-                     {
-                         new bool[]{ false, false, true, false, false, false},
-                         new bool[]{ false, false, false, false, false, false},
-                         new bool[]{ false, false, false, false, false, false},
-                         new bool[]{ false, false, true, false, false, false},
-                         new bool[]{ false, false, false, false, false, false}
-                     }
-                }
+                MaxTestWeekly = 1
             };
             string printed = tester.ToString();
             Console.WriteLine(tester);

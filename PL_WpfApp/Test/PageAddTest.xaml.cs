@@ -38,23 +38,28 @@ namespace PL_WpfApp
             this.dateDatePicker.DisplayDateStart = DateTime.Now;
         }
 
-        //todo: delete this function FILL-CLICK
         private void Fill_Click(object sender, RoutedEventArgs e)
         {
-            
-            tester_IDTextBox.Text = "123456789";
-            trainee_IDTextBox.Text = "987654321";
+
+            tester_IDTextBox.Text = "987654321";
+            trainee_IDTextBox.Text = "123456789";
             timeTextBox.Text = "12";
             dateDatePicker.DisplayDate = DateTime.Now;
-            streetNameTextBox.Text = "av";
-            cityTextBox.Text = "sdf";
-            numberTextBox.Text = "1";
+            streetNameTextBox.Text = "bayt vagan";
+            cityTextBox.Text = "jerusalem";
+            numberTextBox.Text = "10";
         }
 
         private void Click_AddTest(object sender, RoutedEventArgs e)
         {
             try
             {
+                //to avoid the problem that if we have an error and we have to change a parameter, and only then, click the finish button again, the SUCCESS is already updated to be true so its like he passed
+                Trainee newTrainee = bl.GetTrainee(this.trainee_IDTextBox.Text);
+                if (newTrainee == null)
+                    throw new Exception("This trainee doesn't exist");
+                newTrainee.Succsess = false;
+
                 #region if text boxes are null or if the input format is wrong
                 if (String.IsNullOrEmpty(this.tester_IDTextBox.Text))
                     throw new Exception("You have to fill the tester id field");
@@ -78,7 +83,6 @@ namespace PL_WpfApp
                     throw new Exception("The street number can only contain numbers");
                 if (String.IsNullOrEmpty(this.timeTextBox.Text))
                     throw new Exception("You have to fill the time field");
-                Trainee newTrainee = bl.GetTrainee(this.trainee_IDTextBox.Text);//todo: check if it works
                 if (newTrainee.Succsess && bl.GetDrivingTests(test => bl.GetTrainee(test.Trainee_ID).Succsess == true &&
                         bl.GetTrainee(test.Trainee_ID).CarTrained == newTrainee.CarTrained) != null)//if the trainee is already tested on this type of car
                     throw new Exception("Trainee has already been tested on this car");
@@ -121,7 +125,6 @@ namespace PL_WpfApp
                     throw new Exception("Checking distance...");
                 else
                 {
-                    bl.AddDrivingTest(drivingTest);
                     if (countRequirements > Configuration.MIN_NUMBER_OF_REQUIREMENTS)
                     {
                         bl.GetTrainee(drivingTest.Trainee_ID).Succsess = true;
@@ -132,6 +135,8 @@ namespace PL_WpfApp
                         bl.GetTrainee(drivingTest.Trainee_ID).Succsess = false;
                         drivingTest.Success = false;
                     }
+                    if (!isCloseEnough) throw new Exception("The test is too far from the tester");
+                    bl.AddDrivingTest(drivingTest);
                     MessageBox.Show("Test Added succesfully");
                     this.NavigationService.Navigate(new FirstPage());
                 }
@@ -141,7 +146,6 @@ namespace PL_WpfApp
                 MessageBox.Show(ex.Message);
             }
         }
-        //todo: doesnt always work: if i update the tester maxtestweekly to 1 , it still lets me add more than one test
         private bool testerMaxTestWeekly(DrivingTest drivingTestToAdd)
         {
             List<DrivingTest> res = bl.GetDrivingTests(temp_dt => temp_dt.Tester_ID == drivingTestToAdd.Tester_ID);//creates a new list of "all" the testers who have that id
@@ -153,7 +157,7 @@ namespace PL_WpfApp
                     if (AreFallingInSameWeek(test.Date, drivingTestToAdd.Date))
                         testsInThisWeek++;
                 }
-                if (testsInThisWeek > bl.GetTester(drivingTest.Tester_ID).MaxTestWeekly)
+                if (testsInThisWeek >= bl.GetTester(drivingTest.Tester_ID).MaxTestWeekly)
                     return true;
             }
             else if (res.Count == 0 && bl.GetTester(drivingTest.Tester_ID).MaxTestWeekly == 0)
@@ -163,17 +167,35 @@ namespace PL_WpfApp
         }
         private bool AreFallingInSameWeek(DateTime date1, DateTime date2) // check if 2 dates are in the same week
         {
-            return date1.AddDays(-(int)date1.DayOfWeek) == date2.AddDays(-(int)date2.DayOfWeek);
+            //return date1.AddDays(-(int)date1.DayOfWeek) == date2.AddDays(-(int)date2.DayOfWeek);
+            var cal = System.Globalization.DateTimeFormatInfo.CurrentInfo.Calendar;
+            var d1 = date1.Date.AddDays(-1 * (int)cal.GetDayOfWeek(date1));
+            var d2 = date2.Date.AddDays(-1 * (int)cal.GetDayOfWeek(date2));
+
+            return d1 == d2;
+
         }
 
 
         //Distance Function
-        private void CityTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void CityTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Address address = new Address() { StreetName = streetNameTextBox.Text, City = cityTextBox.Text, Number = Convert.ToInt32(numberTextBox.Text) };
-            var x = bl.GetTester(this.tester_IDTextBox.Text);
-            Thread thread = new Thread(() => CheckDistance(x,address));
-            thread.Start();
+            try
+            {
+                Address address = new Address() { StreetName = streetNameTextBox.Text, City = cityTextBox.Text, Number = Convert.ToInt32(numberTextBox.Text) };
+                var x = bl.GetTester(this.tester_IDTextBox.Text);
+                if (x == null)
+                    MessageBox.Show("This tester doesn't exist");
+                else
+                {
+                    Thread thread = new Thread(() => CheckDistance(x, address));
+                    thread.Start();
+                }
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         public void CheckDistance(Tester tester, Address address)
         {
@@ -218,6 +240,5 @@ namespace PL_WpfApp
             }
             return true;
         }
-        
     }
 }
