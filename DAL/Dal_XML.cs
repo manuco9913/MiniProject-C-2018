@@ -313,7 +313,7 @@ namespace DAL
         public Dal_XML()
         {
             LoadFiles();
-            LoadLists();//todo: or not?
+            LoadLists();
 
             //DS.DataSource.init();
             //SaveTestersList();
